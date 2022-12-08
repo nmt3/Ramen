@@ -31,13 +31,8 @@
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to root_path, class: "nav-link text-dark" do %>
+                  <%= link_to customer_path(current_customer), class: "nav-link text-dark" do %>
                     MY PAGE
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to root_path, method: :delete, class: "nav-link text-dark" do  %>
-                    ログアウト
                   <% end %>
                 </li>
                 <li>
@@ -45,15 +40,25 @@
                     絞り込み検索
                   <% end %>
                 </li>
+                <li>
+                  <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-dark" do  %>
+                    ログアウト
+                  <% end %>
+                </li>
 
                 <% elsif admin_signed_in? %>
                 <li>
                   <%= link_to root_path, class: "nav-link text-dark" do %>
-                    商品一覧
+                    投稿一覧
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to root_path, method: :delete, class: "nav-link text-dark" do  %>
+                  <%= link_to root_path, class: "nav-link text-dark" do %>
+                    会員一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-dark" do  %>
                     ログアウト
                   <% end %>
                 </li>
@@ -61,16 +66,16 @@
                 <% else %>
                 <li>
                   <%= link_to root_path, class: "nav-link text-dark" do %>
-                    About
+                    HOME
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to root_path, class: "nav-link text-dark" do %>
+                  <%= link_to new_customer_registration_path, class: "nav-link text-dark" do %>
                     新規登録
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to root_path, class: "nav-link text-dark" do  %>
+                  <%= link_to new_customer_session_path, class: "nav-link text-dark" do  %>
                     ログイン
                   <% end %>
                 </li>
