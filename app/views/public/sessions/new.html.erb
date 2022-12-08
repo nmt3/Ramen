@@ -23,7 +23,9 @@
 
   <div class="actions">
     <%= f.submit "ログイン" %>
+    <%= link_to 'ゲストログイン（閲覧用）', customer_guest_sign_in_path, method: :post, class: "login" %>
   </div>
+
 <% end %>
 
 <%#= render "publics/shared/links" %>

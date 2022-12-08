@@ -3,6 +3,13 @@
 class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  # before_action :ensure_normal_customer, only: %i[update destroy]
+
+  # def ensure_normal_customer
+  #   if resource.email == "guest@example.com"
+  #     redirect_to posts_path, alert: "ゲストユーザーは編集・退会はできません"
+  #   end
+  # end
 
   # GET /resource/sign_up
   # def new
