@@ -5,13 +5,24 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :customer_id, null: false
       t.string :store_name, null: false
       t.string :business_day
-      t.string :business_hours
-      t.string :regular_holiday
+      t.string :opening_time
+      t.string :closing_time
+      t.string :holiday
       t.string :address
+      t.string :other
       t.float :latitude
       t.float :longitude
       t.string :telephone_number
       t.timestamps
+
+      t.boolean :activity_monday
+      t.boolean :activity_tuesday
+      t.boolean :activity_wednesday
+      t.boolean :activity_thursday
+      t.boolean :activity_friday
+      t.boolean :activity_staurday
+      t.boolean :activity_sanday
+
     end
   end
 end

@@ -3,8 +3,12 @@
     <div class="col-md-12">
       <p class="text-center">
         らーめん街道へようこそ!<br>
-        あなたのお気に入りのラーメンをシェアしたり<br>
-        みんなのおすすめを見てみよう
+        美味しいラーメン情報をゲットしよう！<br>
+        <% if customer_signed_in? %>
+          <%= link_to "覗いてみる👀", posts_path, class: "btn btn-success" %>
+        <% else %>
+          <%= link_to "ログイン画面へ", new_customer_session_path %>
+        <% end %>
       </p>
     </div>
   </div>

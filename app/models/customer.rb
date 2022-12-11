@@ -2,7 +2,15 @@ class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :timeoutable
+
+  has_many :posts
+  has_many :reviews
+
+
+  validates :email, presence: true
+  validates :name, presence: true
+
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |customer|

@@ -1,2 +1,45 @@
-<h1>Admin::Posts#edit</h1>
-<p>Find me in app/views/admin/posts/edit.html.erb</p>
+<h3>投稿編集画面</h3>
+  <div class="edit_post">
+    <%= form_with model: @post do |f| %>
+      <table class="post">
+        <tr>
+          <td><%= f.label "画像" %></td>
+          <td><%= f.file_field :image, accept: "image/*" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label "店舗名" %></td>
+          <td><%= f.text_field :store_name %></td>
+        </tr>
+        <tr>
+          <td><%= f.label "営業日" %></td>
+          <td>
+            <span class="checkbox-inline">
+              <% weekly_columns.each_with_index do |day,i| %>
+                <%= f.check_box day.to_sym, {}, "true", "false" %>
+                <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
+              <% end %>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.label "営業時間" %></td>
+          <td><%= f.text_field :business_hours %></td>
+        </tr>
+        <tr>
+          <td><%= f.label "定休日" %></td>
+          <td><%= f.text_field :regular_holiday %></td>
+        </tr>
+        <tr>
+          <td><%= f.label "住所" %></td>
+          <td><%= f.text_field :address %></td>
+        </tr>
+        <tr>
+          <td><%= f.label "電話番号" %></td>
+          <td><%= f.text_field :telephone_number %></td>
+        </tr>
+        <td>
+          <%= f.submit "投稿する", class: "btn btn-success" %>
+        </td>
+      </table>
+    <% end %>
+</div>
