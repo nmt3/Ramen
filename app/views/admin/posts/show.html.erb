@@ -1,0 +1,43 @@
+<h3>投稿詳細</h3>
+<%= link_to "投稿編集・削除", edit_admin_post_path(@post.id) %>
+<p>
+  画像
+  <% if @post.image.attached? %>
+    <%= image_tag @post.image, size: "150x150" %>
+  <% else %>
+    <%= image_tag "no_image", size: "150x150" %>
+  <% end %>
+</p>
+<p>
+  店名
+  <%= @post.store_name %>
+</p>
+<p>
+  営業日
+  <%= @post.business_day %>
+</p>
+<p>
+  営業時間
+  <%= @post.opening_time %>~<%= @post.closing_time %>
+</p>
+<p>
+  定休日
+  <%= @post.holiday %>
+</p>
+<p>
+  その他
+  <%= @post.other %>
+</p>
+<!--<p>-->
+<!--  電話番号-->
+<!--  <%= @post.address %>-->
+<!--</p>-->
+
+<%= form_with model: @review, local: :true do |f| %>
+  <%= f.label "評価" %>
+
+  <%= f.label "コメント" %>
+  <%= f.text_field :comment %>
+  <%= f.submit "送信" %>
+<% end %>
+

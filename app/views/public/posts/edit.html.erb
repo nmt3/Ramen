@@ -1,0 +1,45 @@
+<h3>投稿編集</h3>
+<div class="new_post">
+  <%= form_with model: @post, local: :true do |f| %>
+    <table class="post">
+      <tr>
+        <td><%= f.label "画像" %></td>
+        <td><%= f.file_field :image, accept: "image/*" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "店舗名" %></td>
+        <td><%= f.text_field :store_name%></td>
+      </tr>
+      <tr>
+        <td><%= f.label "営業日" %></td>
+        <td>
+          <span class="checkbox-inline">
+            <% weekly_columns.each_with_index do |day,i| %>
+              <%= f.check_box day.to_sym, {}, "true", "false" %>
+              <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
+            <% end %>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td><%= f.label "営業時間" %></td>
+        <td><%= f.text_field :opening_time %>~<%= f.text_field :closing_time %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "定休日" %></td>
+        <td><%= f.text_field :holiday %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "その他情報" %></td>
+        <td><%= f.text_area :other, value: "#電話番号
+                                            #住所
+                                            #店舗ホームページ
+                                            #その他" %></td>
+      </tr>
+      <tr>
+        <td><%= f.submit "変更する", method: :update, class: "btn btn-success" %></td>
+        <td><%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-danger" %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_customer!
   def new
     @post = Post.new
   end
@@ -9,6 +10,8 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @review = Review.new
+    @reviews = Review.all
   end
 
   def edit
@@ -29,13 +32,17 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
   end
 
 
   private
 
   def post_params
-    params.require(:post).permit(:image, :store_name, :business_day, :business_hours,
-      :regular_holiday, :address, :latitude, :longitude, :telephone_number)
+    params.require(:post).permit(:customer_id, :image, :store_name, :business_day,
+    :opening_time, :closing_time, :holiday, :address, :other, :latitude,
+    :longitude, :telephone_number)
   end
 end

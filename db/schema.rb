@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2022_12_09_075422) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.string "store_name", null: false
+    t.string "store_name"
     t.string "business_day"
     t.string "opening_time"
     t.string "closing_time"

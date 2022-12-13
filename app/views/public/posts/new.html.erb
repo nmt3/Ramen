@@ -1,4 +1,4 @@
-<h3>情報提供</h3>
+<h3>新規投稿</h3>
 <div class="new_post">
   <%= form_with model: @post, local: :true do |f| %>
     <table class="post">
@@ -8,7 +8,7 @@
       </tr>
       <tr>
         <td><%= f.label "店舗名" %></td>
-        <td><%= f.text_field :store_name%></td>
+        <td><%= f.text_field :store_name %></td>
       </tr>
       <tr>
         <td><%= f.label "営業日" %></td>

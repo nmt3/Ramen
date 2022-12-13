@@ -1,4 +1,7 @@
-<h3>情報提供完了画面</h3>
+<h3>投稿詳細</h3>
+<% if @post.customer == current_customer %>
+  <%= link_to "投稿編集", edit_post_path(@post.id) %>
+<% end %>
 <p>
   画像
   <% if @post.image.attached? %>
@@ -25,10 +28,19 @@
   <%= @post.holiday %>
 </p>
 <p>
-  住所
-  <%= @post.address %>
+  その他
+  <%= @post.other %>
 </p>
-<p>
-  電話番号
-  <%= @post.address %>
-</p>
+<!--<p>-->
+<!--  電話番号-->
+<!--  <%= @post.address %>-->
+<!--</p>-->
+
+<%= form_with model: @review, local: :true do |f| %>
+  <%= f.label "評価" %>
+
+  <%= f.label "コメント" %>
+  <%= f.text_field :comment %>
+  <%= f.submit "送信" %>
+<% end %>
+

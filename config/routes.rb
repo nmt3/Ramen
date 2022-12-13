@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     resources :bookmarks, only: [:index]
+    resources :stores, only: [:index, :show]
   end
 
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
     get 'homes/show'
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :reviews, only: [:destroy]
+    resources :reviews, only: [:index, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -21,25 +21,25 @@
             </span>
           </td>
         </tr>
-        <tr>
-          <td><%= f.label "営業時間" %></td>
-          <td><%= f.text_field :business_hours %></td>
-        </tr>
-        <tr>
-          <td><%= f.label "定休日" %></td>
-          <td><%= f.text_field :regular_holiday %></td>
-        </tr>
-        <tr>
-          <td><%= f.label "住所" %></td>
-          <td><%= f.text_field :address %></td>
-        </tr>
-        <tr>
-          <td><%= f.label "電話番号" %></td>
-          <td><%= f.text_field :telephone_number %></td>
-        </tr>
-        <td>
-          <%= f.submit "投稿する", class: "btn btn-success" %>
-        </td>
-      </table>
-    <% end %>
+     <tr>
+        <td><%= f.label "営業時間" %></td>
+        <td><%= f.text_field :opening_time %>~<%= f.text_field :closing_time %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "定休日" %></td>
+        <td><%= f.text_field :holiday %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "その他情報" %></td>
+        <td><%= f.text_area :other, value: "#電話番号
+                                            #住所
+                                            #店舗ホームページ
+                                            #その他" %></td>
+      </tr>
+      <tr>
+        <td><%= f.submit "変更する", method: :update, class: "btn btn-success" %></td>
+        <td><%= link_to "削除する", admin_post_path(@post.id), method: :delete, class: "btn btn-danger" %></td>
+      </tr>
+    </table>
+  <% end %>
 </div>
