@@ -4,6 +4,8 @@ class Admin::CustomersController < ApplicationController
   end
 
   def show
+    @customer = Customer.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def edit

@@ -17,8 +17,10 @@ Rails.application.routes.draw do
         patch :out
       end
     end
-    resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
-    resources :bookmarks, only: [:index]
+    resources :posts, except: [:new, :index, :edit, :create, :update, :destroy]
+    resources :posts, except: [:show] do
+      resources :bookmarks, only: [:create, :index, :destroy]
+    end
     resources :stores, only: [:index, :show]
   end
 

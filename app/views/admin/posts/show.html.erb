@@ -14,15 +14,23 @@
 </p>
 <p>
   営業日
-  <%= @post.business_day %>
+  <%  weekly_columns.each_with_index do |day,i| %>
+    <% if @post[day] == true %>
+     <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+    <% end %>
+  <% end %>
 </p>
 <p>
   営業時間
-  <%= @post.opening_time %>~<%= @post.closing_time %>
+  <%= @post.open %>~<%= @post.close %>
 </p>
 <p>
   定休日
-  <%= @post.holiday %>
+  <%  holiday_weekly_columns.each_with_index do |day,i| %>
+    <% if @post[day] == true %>
+     <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+    <% end %>
+  <% end %>
 </p>
 <p>
   その他
@@ -33,11 +41,4 @@
 <!--  <%= @post.address %>-->
 <!--</p>-->
 
-<%= form_with model: @review, local: :true do |f| %>
-  <%= f.label "評価" %>
-
-  <%= f.label "コメント" %>
-  <%= f.text_field :comment %>
-  <%= f.submit "送信" %>
-<% end %>
 

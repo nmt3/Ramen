@@ -2,6 +2,11 @@
 <% if @post.customer == current_customer %>
   <%= link_to "投稿編集", edit_post_path(@post.id) %>
 <% end %>
+<% if @post.bookmarked_by?(current_customer) %>
+  <td><%= link_to "ブックマークを外す", post_bookmark_path(@post.id), method: :delete %></td>
+<% else %>
+  <td><%= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %></td>
+<% end %>
 <p>
   画像
   <% if @post.image.attached? %>
@@ -16,16 +21,23 @@
 </p>
 <p>
   営業日
-  <%= @post.business_day %>
+  <%  weekly_columns.each_with_index do |day,i| %>
+    <% if @post[day] == true %>
+     <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+    <% end %>
+  <% end %>
 </p>
 <p>
   営業時間
-  <%= @post.opening_time %>
-  <%= @post.closing_time %>
+  <%= @post.open %>~<%= @post.close %>
 </p>
 <p>
   定休日
-  <%= @post.holiday %>
+  <%  holiday_weekly_columns.each_with_index do |day,i| %>
+    <% if @post[day] == true %>
+     <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+    <% end %>
+  <% end %>
 </p>
 <p>
   その他
@@ -37,10 +49,24 @@
 <!--</p>-->
 
 <%= form_with model: @review, local: :true do |f| %>
-  <%= f.label "評価" %>
+<!--ここからが星レビュー機能-->
+  <div class="form-group row" id="star">
+    <%= f.label :star,'評価 ', class: 'col-form-label' %>
+    <%= f.hidden_field :star, id: :review_star %>
+  </div>
+  <script>
+    $('#star').empty();
+    $('#star').raty({
+      size : 36,
+      starOff: "<%= asset_path('star-off.png') %>",
+      starON: "<%= asset_path('star-on.png') %>",
+      scoreName: 'review[star]',
+      half: false,
+    });
+  </script>
+<!--ここまでが星レビュー機能-->
 
-  <%= f.label "コメント" %>
-  <%= f.text_field :comment %>
+  <%= f.label :comment, "口コミ内容" %>
+  <%= f.text_area :comment %>
   <%= f.submit "送信" %>
 <% end %>
-

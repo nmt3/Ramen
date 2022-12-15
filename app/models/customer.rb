@@ -6,7 +6,7 @@ class Customer < ApplicationRecord
 
   has_many :posts
   has_many :reviews
-
+  has_many :bookmarks, dependent: :destroy
 
   validates :email, presence: true
   validates :name, presence: true

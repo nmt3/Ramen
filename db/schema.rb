@@ -53,9 +53,12 @@ ActiveRecord::Schema.define(version: 2022_12_09_075422) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
+    t.integer "customer_id", null: false
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_bookmarks_on_customer_id"
+    t.index ["post_id"], name: "index_bookmarks_on_post_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -74,11 +77,23 @@ ActiveRecord::Schema.define(version: 2022_12_09_075422) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.string "store_name"
-    t.string "business_day"
-    t.string "opening_time"
-    t.string "closing_time"
-    t.string "holiday"
+    t.string "store_name", null: false
+    t.boolean "activity_monday", null: false
+    t.boolean "activity_tuesday", null: false
+    t.boolean "activity_wednesday", null: false
+    t.boolean "activity_thursday", null: false
+    t.boolean "activity_friday", null: false
+    t.boolean "activity_saturday", null: false
+    t.boolean "activity_sunday", null: false
+    t.boolean "holiday_monday", null: false
+    t.boolean "holiday_tuesday", null: false
+    t.boolean "holiday_wednesday", null: false
+    t.boolean "holiday_thursday", null: false
+    t.boolean "holiday_friday", null: false
+    t.boolean "holiday_saturday", null: false
+    t.boolean "holiday_sunday", null: false
+    t.time "open", null: false
+    t.time "close", null: false
     t.string "address"
     t.string "other"
     t.float "latitude"
@@ -86,19 +101,12 @@ ActiveRecord::Schema.define(version: 2022_12_09_075422) do
     t.string "telephone_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "activity_monday"
-    t.boolean "activity_tuesday"
-    t.boolean "activity_wednesday"
-    t.boolean "activity_thursday"
-    t.boolean "activity_friday"
-    t.boolean "activity_staurday"
-    t.boolean "activity_sanday"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "post_id", null: false
-    t.integer "evaluation", null: false
+    t.integer "star"
     t.text "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -106,4 +114,6 @@ ActiveRecord::Schema.define(version: 2022_12_09_075422) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookmarks", "customers"
+  add_foreign_key "bookmarks", "posts"
 end

@@ -38,8 +38,8 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
-  config.timeout_in = 1.minutes
-  # 
+  config.timeout_in = 10.minutes
+  #
 
 
   # ==> Configuration for any authentication mechanism

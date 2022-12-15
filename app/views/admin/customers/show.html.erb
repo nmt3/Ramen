@@ -1,2 +1,11 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<%= @customer.name %>
+
+<%= link_to admin_post_path(@post.id) do %>
+<% if @post.image.attached? %>
+  <%= image_tag @post.image, size: "150x150" %>
+<% else %>
+  <%= image_tag "no_image", size: "150x150" %>
+<% end %><br>
+
+<%= @post.store_name %>
+<% end %>

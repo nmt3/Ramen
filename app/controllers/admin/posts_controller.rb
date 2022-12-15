@@ -31,7 +31,7 @@ class Admin::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:customer_id, :image, :store_name, :business_day,
-      :opening_time, :closing_time, :holiday, :address, :latitude, :longitude,
+      :open, :close, :holiday, :address, :latitude, :longitude,
       :other, :telephone_number)
   end
 end
