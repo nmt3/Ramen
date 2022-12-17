@@ -1,11 +1,19 @@
-<h3>投稿詳細</h3>
+<h3>投稿者：<%= @post.customer.name %>さん</h3>
 <% if @post.customer == current_customer %>
   <%= link_to "投稿編集", edit_post_path(@post.id) %>
 <% end %>
 <% if @post.bookmarked_by?(current_customer) %>
-  <td><%= link_to "ブックマークを外す", post_bookmark_path(@post.id), method: :delete %></td>
+  <td>
+    <%= link_to post_bookmark_path(@post), method: :delete do %>
+     <i class="fas fa-heart unlike-btn"></i>
+    <% end %>
+  </td>
 <% else %>
-  <td><%= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %></td>
+  <td>
+    <%= link_to post_bookmarks_path(@post), method: :post do %>
+      <i class="far fa-heart like-btn" ></i>
+    <% end %>
+  </td>
 <% end %>
 <p>
   画像
@@ -39,14 +47,23 @@
     <% end %>
   <% end %>
 </p>
-<p>
-  その他
-  <%= @post.other %>
-</p>
-<!--<p>-->
-<!--  電話番号-->
-<!--  <%= @post.address %>-->
-<!--</p>-->
+<div class="map">
+  <div id="map">
+  </div>
+</div>
+
+<!--ここから地図機能表示-->
+<div type="text/javascript">
+  <script>
+    function initMap(){
+      let map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+      zoom: 15
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+  <!--ここまで地図機能-->
 
 <%= form_with model: @review, local: :true do |f| %>
 <!--ここからが星レビュー機能-->

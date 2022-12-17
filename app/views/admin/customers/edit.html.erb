@@ -1,2 +1,39 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-7 col-lg-7 px-5 px-sm-0 mx-auto">
+      <%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
+      <h3><%= @customer.name %>さんの会員情報編集</h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>会員ID</td>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "ニックネーム" %></td>
+            <td><%= f.text_field :name %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "メールアドレス" %></td>
+            <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "会員ステータス" %></td>
+            <td>
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, "有効" %>
+
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, "退会" %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>

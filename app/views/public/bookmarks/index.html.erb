@@ -10,10 +10,10 @@
   <tbody>
     <% @bookmarks.each do |bookmark| %>
       <tr>
-        <td><%= bookmark.post.name %></td>
+        <td><%= bookmark.post.image %></td>
         <td>
-          <%= link_to post_path(bookmark.post) do %>
-            <%= bookmark.post.title %>
+          <%= link_to post_path(post.id) do %>
+            <%= bookmark.stor_name %>
           <% end %>
         </td>
         <td><%= bookmark.post.body %></td>

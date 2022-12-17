@@ -35,8 +35,12 @@
             <% end %>
           </span>
         </td>
-        <td><%= f.text_field :latitude %></td>
-        <td><%= f.text_field :longitude %></td>
+        <td>
+          <div class="form-group">
+           <%= f.label :address, '場所' %>
+           <%= f.text_field :address, class: 'form-control' %>
+           </div>
+          </td>
       </tr>
       <tr>
         <td><%= f.label "コメント" %></td>

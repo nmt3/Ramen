@@ -17,11 +17,9 @@ Rails.application.routes.draw do
         patch :out
       end
     end
-    resources :posts, except: [:new, :index, :edit, :create, :update, :destroy]
-    resources :posts, except: [:show] do
+    resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resources :bookmarks, only: [:create, :index, :destroy]
     end
-    resources :stores, only: [:index, :show]
   end
 
   devise_for :admin,skip: [:registrations, :passwords], controllers: {

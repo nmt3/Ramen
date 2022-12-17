@@ -1,4 +1,4 @@
-<h3>投稿詳細</h3>
+<h3>投稿者：<%= @post.customer.name %>さん</h3>
 <%= link_to "投稿編集・削除", edit_admin_post_path(@post.id) %>
 <p>
   画像
@@ -36,9 +36,4 @@
   その他
   <%= @post.other %>
 </p>
-<!--<p>-->
-<!--  電話番号-->
-<!--  <%= @post.address %>-->
-<!--</p>-->
-
 
