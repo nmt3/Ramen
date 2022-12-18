@@ -12,6 +12,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @review = Review.new
     @reviews = Review.all
+    @bookmarks_count = Bookmark.where(post_id: @post.id).count
   end
 
   def edit
@@ -44,8 +45,9 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,
     :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
     :activity_saturday, :activity_sunday,:holiday_monday, :holiday_tuesday,
-    :holiday_wednesday, :holiday_thursday, :holiday_friday,:holiday_saturday,
-    :holiday_sunday, :open, :close, :holiday,:other, :latitude,:longitude, :telephone_number)
+    :holiday_wednesday, :holiday_thursday, :holiday_friday, :holiday_saturday,
+    :holiday_sunday, :public_holiday, :open, :close, :holiday, :post_comment,
+    :latitude, :longitude)
   end
 
   def review_params

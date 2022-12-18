@@ -5,7 +5,7 @@ class Admin::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @post = Post.find(params[:id])
+    # @posts = Post.find_by(params[:customer_id])
     # @posts.customer_id = Customer.id
   end
 

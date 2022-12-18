@@ -1,7 +1,7 @@
 class Admin::HomesController < ApplicationController
   before_action :authenticate_admin!
   def top
-    @post = Post.all
+    @posts = Post.all
   end
 
   def show

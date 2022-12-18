@@ -18,14 +18,15 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.boolean :holiday_friday, null: false
       t.boolean :holiday_saturday, null: false
       t.boolean :holiday_sunday, null: false
+      t.boolean :public_holiday, null: false
 
       t.time :open, null: false
       t.time :close, null: false
       t.string :address
-      t.string :other
+      t.string :genre
+      t.string :post_comment
       t.float :latitude
       t.float :longitude
-      t.string :telephone_number
       t.timestamps
 
 

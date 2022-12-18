@@ -10,9 +10,4 @@ class Public::ReviewsControllerTest < ActionDispatch::IntegrationTest
     get public_reviews_show_url
     assert_response :success
   end
-
-  test "should get edit" do
-    get public_reviews_edit_url
-    assert_response :success
-  end
 end

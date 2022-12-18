@@ -23,7 +23,9 @@
       </tr>
       <tr>
         <td><%= f.label "営業時間" %></td>
-        <td><%= f.time_select :open %>~<%= f.time_select :close %></td>
+        <td>
+          <%= f.time_select :open %>~<%= f.time_select :close %>
+        </td>
       </tr>
       <tr>
         <td><%= f.label "定休日" %></td>
@@ -31,7 +33,7 @@
           <span class="checkbox-inline">
             <% holiday_weekly_columns.each_with_index do |day,i| %>
               <%= f.check_box day.to_sym, {}, "true", "false" %>
-              <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
+              <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日","祝日"][i] %>
             <% end %>
           </span>
         </td>
@@ -44,7 +46,7 @@
       </tr>
       <tr>
         <td><%= f.label "コメント" %></td>
-        <td><%= f.text_area :other %></td>
+        <td><%= f.text_area :post_comment %></td>
       </tr>
       <tr>
         <td><%= f.submit "投稿する", class: "btn btn-success" %></td>

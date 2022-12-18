@@ -6,6 +6,6 @@ module Public::PostsHelper
 
   def holiday_weekly_columns
         ['holiday_monday', 'holiday_tuesday', 'holiday_wednesday',\
-        'holiday_thursday', 'holiday_friday', 'holiday_saturday', 'holiday_sunday']
+        'holiday_thursday', 'holiday_friday', 'holiday_saturday', 'holiday_sunday', 'public_holiday']
   end
 end

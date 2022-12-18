@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_09_075422) do
+ActiveRecord::Schema.define(version: 2022_12_18_083637) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,13 +92,14 @@ ActiveRecord::Schema.define(version: 2022_12_09_075422) do
     t.boolean "holiday_friday", null: false
     t.boolean "holiday_saturday", null: false
     t.boolean "holiday_sunday", null: false
+    t.boolean "public_holiday", null: false
     t.time "open", null: false
     t.time "close", null: false
     t.string "address"
-    t.string "other"
+    t.string "genre"
+    t.string "post_comment"
     t.float "latitude"
     t.float "longitude"
-    t.string "telephone_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -106,8 +107,8 @@ ActiveRecord::Schema.define(version: 2022_12_09_075422) do
   create_table "reviews", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "post_id", null: false
-    t.integer "star"
-    t.text "comment", null: false
+    t.integer "star", null: false
+    t.text "review_comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

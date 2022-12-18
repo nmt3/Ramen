@@ -2,19 +2,22 @@
 <% if @post.customer == current_customer %>
   <%= link_to "投稿編集", edit_post_path(@post.id) %>
 <% end %>
-<% if @post.bookmarked_by?(current_customer) %>
-  <td>
-    <%= link_to post_bookmark_path(@post), method: :delete do %>
-     <i class="fas fa-heart unlike-btn"></i>
-    <% end %>
-  </td>
-<% else %>
-  <td>
-    <%= link_to post_bookmarks_path(@post), method: :post do %>
-      <i class="far fa-heart like-btn" ></i>
-    <% end %>
-  </td>
-<% end %>
+<div class="bookmark">
+  <% if @post.bookmarked_by?(current_customer) %>
+    <td>
+      <%= link_to post_bookmark_path(@post), method: :delete do %>
+       <i class="fas fa-heart unlike-btn"></i>
+      <% end %>
+    </td>
+  <% else %>
+    <td>
+      <%= link_to post_bookmarks_path(@post), method: :post do %>
+        <i class="far fa-heart like-btn" ></i>
+      <% end %>
+    </td>
+  <% end %>
+  <%= @bookmarks_count %>件のいいね！
+  </div>
 <p>
   画像
   <% if @post.image.attached? %>
@@ -43,47 +46,62 @@
   定休日
   <%  holiday_weekly_columns.each_with_index do |day,i| %>
     <% if @post[day] == true %>
-     <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+     <a><%= ["月","火","水","木","金","土","日","祝日"][i] %></a>
     <% end %>
   <% end %>
+</p>
+<p>
+  コメント
+  <%= @post.post_comment %>
 </p>
 <div class="map">
   <div id="map">
   </div>
 </div>
 
-<!--ここから地図機能表示-->
+<!--ここから地図機能表示(開発途中)-->
 <div type="text/javascript">
   <script>
     function initMap(){
       let map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
+      center: {lat: 100, lng: 50 },
+      // center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
       zoom: 15
       });
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
-  <!--ここまで地図機能-->
+</div>
+<!--ここまで地図機能-->
 
 <%= form_with model: @review, local: :true do |f| %>
 <!--ここからが星レビュー機能-->
-  <div class="form-group row" id="star">
-    <%= f.label :star,'評価 ', class: 'col-form-label' %>
+  <%= f.label :star, "評価" %>
+  <div class="form-group" id="star">
     <%= f.hidden_field :star, id: :review_star %>
   </div>
   <script>
     $('#star').empty();
-    $('#star').raty({
+    var elem = document.getElementById("star");
+    var opt = {
       size : 36,
       starOff: "<%= asset_path('star-off.png') %>",
-      starON: "<%= asset_path('star-on.png') %>",
+      starOn: "<%= asset_path('star-on.png') %>",
       scoreName: 'review[star]',
       half: false,
-    });
+    };
+    raty(elem, opt)
   </script>
 <!--ここまでが星レビュー機能-->
 
-  <%= f.label :comment, "口コミ内容" %>
-  <%= f.text_area :comment %>
+  <%= f.label :review_comment, "口コミ内容" %>
+  <%= f.text_area :review_comment %>
   <%= f.submit "送信" %>
 <% end %>
+
+
+<!--<% @reviews.each do |review| %>-->
+<!--  <%= review.customer.name %>-->
+<!--  <%= review.star %>-->
+<!--  <%= review.review_comment %>-->
+<!--<% end %>-->
