@@ -8,3 +8,16 @@
 
 
 Admin.create(email: "admin@admin.com", password: "PortfolioAdmin")
+
+
+Tag.create([
+    { genre: '醤油' },
+    { genre: 'とんこつ' },
+    { genre: 'みそ' },
+    { genre: '塩' },
+    { genre: '魚介' },
+    { genre: '家系' },
+    { genre: '二郎系' },
+    { genre: '中村屋系' },
+    { genre: 'チェーン系' },
+    ])

@@ -1,10 +1,8 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
-  def new
-  end
-
   def index
-    @posts = Post.where(customer_id: id)
+    # binding.pry
+    @posts = Post.where(customer_id: params[:format])
   end
 
   def show
@@ -15,16 +13,16 @@ class Admin::PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def create
-  end
-
   def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to admin_post_path(@post.id)
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to admin_posts_path
+    redirect_to admin_path
   end
 
   private

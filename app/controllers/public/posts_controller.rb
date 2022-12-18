@@ -47,7 +47,7 @@ class Public::PostsController < ApplicationController
     :activity_saturday, :activity_sunday,:holiday_monday, :holiday_tuesday,
     :holiday_wednesday, :holiday_thursday, :holiday_friday, :holiday_saturday,
     :holiday_sunday, :public_holiday, :open, :close, :holiday, :post_comment,
-    :latitude, :longitude)
+    :latitude, :longitude, tag_ids: [])
   end
 
   def review_params
