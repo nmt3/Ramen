@@ -11,12 +11,36 @@
             <td><%= @customer.id %></td>
           </tr>
           <tr>
+              <td>プロフィール画像</td>
+              <td>
+                <% if @customer.image.attached? %>
+                  <%= image_tag @customer.image %>
+                <% else %>
+                  <%= image_tag "no_image", size: "150x150" %>
+                <% end %>
+              </td>
+          <tr>
             <th>氏名</th>
             <td><%= @customer.name %></td>
           </tr>
           <tr>
             <th>メールアドレス</th>
             <td><%= @customer.email %></td>
+          </tr>
+            <td>年齢</td>
+            <td><%= @customer.age %></td>
+          </tr>
+          <tr>
+            <td>性別</td>
+            <td><%= @customer.sex_method_i18n %></td>
+          </tr>
+          <tr>
+            <td>居住地</td>
+            <td><%= @customer.residence %></td>
+          </tr>
+          <tr>
+            <td>コメント</td>
+            <td><%= @customer.comment %></td>
           </tr>
           <tr>
             <th>会員ステータス</th>

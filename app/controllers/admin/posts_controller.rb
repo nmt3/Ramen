@@ -2,7 +2,8 @@ class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
   def index
     # binding.pry
-    @posts = Post.where(customer_id: params[:format])
+    # @post.customer_id = Customer.find(params[:id])
+    @posts = Post.where(customer_id: params[:id])
   end
 
   def show

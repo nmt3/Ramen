@@ -1,18 +1,23 @@
 <%= notice %>
 
-<div class="post">
-  <h3>投稿一覧</h3>
-  <% @posts.each do |post| %>
-    <td>
-      <% if post.image.attached? %>
-        <%= image_tag post.image, size: "100x100" %>
-      <% else %>
-        <%= image_tag 'no_image', size: "100x100" %>
-      <% end %><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="post">
+        <h3>投稿一覧</h3>
+        <% @posts.each do |post| %>
+          <% if post.image.attached? %>
+            <%= image_tag post.image, size: "100x100" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "100x100" %>
+          <% end %><br>
 
-      <%= link_to post.store_name, admin_post_path(post.id) %>
-    </td>
-    <p>コメント</p>
-    <p>評価</p>
-  <% end %>
+          <%= link_to post.store_name, admin_post_path(post.id) %>
+          <p>コメント</p>
+          <p>評価</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+

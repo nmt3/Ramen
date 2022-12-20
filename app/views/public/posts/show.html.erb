@@ -1,4 +1,8 @@
-<h3>投稿者：<%= @post.customer.name %>さん</h3>
+<h3>投稿者：
+  <%= link_to list_customers_path do %>
+    <%= @post.customer.name  %>さん
+  <% end %>
+</h3>
 <% if @post.customer == current_customer %>
   <%= link_to "投稿編集", edit_post_path(@post.id) %>
 <% end %>
@@ -48,6 +52,12 @@
     <% if @post[day] == true %>
      <a><%= ["月","火","水","木","金","土","日","祝日"][i] %></a>
     <% end %>
+  <% end %>
+</p>
+<p>
+  ジャンル
+  <% @post.tags.each do |tag| %>
+    <%= tag.genre %>
   <% end %>
 </p>
 <p>

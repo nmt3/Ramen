@@ -9,6 +9,15 @@
       <table class="mypage" border="1">
         <tbody>
           <tr>
+            <td>プロフィール画像</td>
+            <td>
+              <% if @customer.image.attached? %>
+                <%= image_tag current_customer.image %>
+              <% else %>
+                <%= image_tag "no_image", size: "150x150" %>
+              <% end %>
+            </td>
+          <tr>
             <td>ニックネーム</td>
             <td>
               <%= current_customer.name %>
@@ -16,6 +25,22 @@
           <tr>
             <td>メールアドレス</td>
             <td><%= current_customer.email %></td>
+          </tr>
+          <tr>
+            <td>年齢</td>
+            <td><%= current_customer.age %></td>
+          </tr>
+          <tr>
+            <td>性別</td>
+            <td><%= current_customer.sex_method_i18n %></td>
+          </tr>
+          <tr>
+            <td>居住地</td>
+            <td><%= current_customer.residence %></td>
+          </tr>
+          <tr>
+            <td>コメント</td>
+            <td><%= current_customer.comment %></td>
           </tr>
         </tbody>
       </table>

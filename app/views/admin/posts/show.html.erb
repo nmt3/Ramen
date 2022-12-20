@@ -1,40 +1,57 @@
-<h3>投稿者：<%= @post.customer.name %>さん</h3>
+<h3>
+  投稿者：
+  <!--特定のユーザーの投稿一覧の表示ができない(コントローラの記述がわからない)-->
+  <%= link_to  admin_posts_path, class: "btb btn-success" do%>
+    <%= @post.customer.name %>
+  <% end %>
+</h3>
 <%= link_to "投稿編集・削除", edit_admin_post_path(@post.id) %>
-<p>
-  画像
-  <% if @post.image.attached? %>
-    <%= image_tag @post.image, size: "150x150" %>
-  <% else %>
-    <%= image_tag "no_image", size: "150x150" %>
-  <% end %>
-</p>
-<p>
-  店名
-  <%= @post.store_name %>
-</p>
-<p>
-  営業日
-  <%  weekly_columns.each_with_index do |day,i| %>
-    <% if @post[day] == true %>
-     <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-    <% end %>
-  <% end %>
-</p>
-<p>
-  営業時間
-  <%= @post.open %>~<%= @post.close %>
-</p>
-<p>
-  定休日
-  <%  holiday_weekly_columns.each_with_index do |day,i| %>
-    <% if @post[day] == true %>
-     <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-    <% end %>
-  <% end %>
-</p>
-<p>
-  その他
-  <%= @post.genre %>
-  <%= @post.address %>
-</p>
+<table class="post_format">
+  <tr>
+    <td>画像</td>
+    <td>
+      <% if @post.image.attached? %>
+        <%= image_tag @post.image, size: "150x150" %>
+      <% else %>
+        <%= image_tag "no_image", size: "150x150" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>店名</td>
+    <td><%= @post.store_name %></td>
+  </tr>
+  <tr>
+    <td>営業日</td>
+    <td>
+      <%  weekly_columns.each_with_index do |day,i| %>
+        <% if @post[day] == true %>
+         <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>営業時間</td>
+    <td><%= @post.open %>~<%= @post.close %></td>
+  </tr>
+  <tr>
+    <td>定休日</td>
+    <td>
+      <%  holiday_weekly_columns.each_with_index do |day,i| %>
+        <% if @post[day] == true %>
+         <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>ジャンル</td>
+    <td>
+      <% @post.tags.each do |tag| %>
+        <%= tag.genre %>
+      <% end %>
+    </td>
+  </tr>
+</table>
 

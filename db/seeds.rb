@@ -20,4 +20,6 @@ Tag.create([
     { genre: '二郎系' },
     { genre: '中村屋系' },
     { genre: 'チェーン系' },
+    { genre: '辛口' },
+    { genre: '濃厚' },
     ])

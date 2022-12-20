@@ -7,7 +7,7 @@
         <td><%= f.file_field :image, accept: "image/*" %></td>
       </tr>
       <tr>
-        <td><%= f.label "店舗名" %></td>
+        <td><%= f.label "店名" %></td>
         <td><%= f.text_field :store_name %></td>
       </tr>
       <tr>
@@ -53,7 +53,7 @@
         <td>
           <%= f.text_field :genre %>
           <div class="check_box">
-            <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
              <div>
                 <%= tag.label do %>
                   <%= tag.check_box %>
