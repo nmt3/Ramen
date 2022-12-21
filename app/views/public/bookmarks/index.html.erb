@@ -1,20 +1,20 @@
+<caption>ブックマーク一覧</caption>
 <table>
-  <caption>ブックマーク一覧</caption>
   <thead>
     <tr>
       <th>投稿者名</th>
-      <th>タイトル</th>
-      <th>本文</th>
+      <th>店名</th>
+      <th>コメント</th>
     </tr>
   </thead>
   <tbody>
     <% @bookmarks.each do |bookmark| %>
       <tr>
-        <td><%= bookmark.post.image %></td>
+        <td><%= bookmark.post_id.customer.name %></td>
         <td>
-          <%= link_to post_path(post.id) do %>
-            <%= bookmark.stor_name %>
-          <% end %>
+          <%#= link_to post_path(bookmark.id) do %>
+            <%= bookmark.post.stor_name %>
+          <%# end %>
         </td>
         <td><%= bookmark.post.body %></td>
       </tr>

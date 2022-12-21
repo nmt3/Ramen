@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_12_18_224924) do
     t.string "encrypted_password", default: "", null: false
     t.string "name", null: false
     t.integer "age"
-    t.integer "sex"
+    t.integer "sex_method"
     t.integer "residence", default: 0, null: false
     t.string "comment"
     t.boolean "is_deleted", default: false

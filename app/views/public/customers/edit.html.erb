@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <td><%= f.label :"年齢" %></td>
-            <td></td>
+            <td><%= f.select :age, ["10代", "20代", "30代", "40代", "50代", "60代以上"] %></td>
           </tr>
           <tr>
             <td><%= f.label :"性別" %></td>
@@ -34,7 +34,7 @@
           <tr>
             <td><%= f.label :"居住地" %></td>
             <td>
-               <%= f.select :prefecture, Customer.residences.keys, {} %>
+               <%= f.select :residence, Customer.residences.keys, {} %>
             </td>
           </tr>
           <tr>

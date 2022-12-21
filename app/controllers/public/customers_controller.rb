@@ -16,6 +16,7 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
+    # byebug
     @customer.update(customer_params)
     redirect_to customer_path(current_customer)
   end
@@ -34,7 +35,7 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:image, :name, :email,
-    :name, :age, :sex, :residence, :comment)
+    :name, :age, :sex_method, :residence, :comment)
   end
 
 end
