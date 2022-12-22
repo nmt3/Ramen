@@ -44,7 +44,7 @@
 </p>
 <p>
   営業時間
-  <%= @post.open %>~<%= @post.close %>
+  <%= @post.open.strftime("%H:%M") %>~<%= @post.close.strftime("%H:%M") %>
 </p>
 <p>
   定休日

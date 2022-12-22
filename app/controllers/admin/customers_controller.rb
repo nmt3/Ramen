@@ -9,6 +9,12 @@ class Admin::CustomersController < ApplicationController
     # @posts.customer_id = Customer.id
   end
 
+  def list
+    # byebug
+    @customer = Customer.find(params[:id])
+    @posts = Post.where(customer_id: params[:id])
+  end
+
   def edit
     @customer = Customer.find(params[:id])
   end

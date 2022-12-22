@@ -1,8 +1,7 @@
 <h3>
   投稿者：
-  <!--特定のユーザーの投稿一覧の表示ができない(コントローラの記述がわからない)-->
-  <%= link_to  admin_posts_path, class: "btb btn-success" do%>
-    <%= @post.customer.name %>
+  <%= link_to list_admin_customer_path(@post.customer.id) do %>
+    <%= @post.customer.name  %>さん
   <% end %>
 </h3>
 <%= link_to "投稿編集・削除", edit_admin_post_path(@post.id) %>

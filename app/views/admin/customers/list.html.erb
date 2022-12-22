@@ -1,0 +1,18 @@
+<div class="post">
+  <h3><%= @customer.name %>さんの投稿一覧</h3>
+  <% @posts.each do |post| %>
+    <td>
+      <%= link_to post_path(post.id) do %>
+        <% if post.image.attached? %>
+          <%= image_tag post.image, size: "100x100" %>
+        <% else %>
+          <%= image_tag 'no_image', size: "100x100" %>
+        <% end %><br>
+
+        <%= post.store_name %>
+      <% end %>
+    </td>
+    <p>コメント</p>
+    <p>評価</p>
+  <% end %>
+</div>

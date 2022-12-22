@@ -24,7 +24,7 @@
       <tr>
         <td><%= f.label "営業時間" %></td>
         <td>
-          <%= f.time_select :open %>~<%= f.time_select :close %>
+          <%= f.time_select :open, {default: Date.today + 12.hour} %>~<%= f.time_select :close , {default: Date.today + 12.hour}%>
         </td>
       </tr>
       <tr>
