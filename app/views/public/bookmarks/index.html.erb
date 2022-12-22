@@ -10,7 +10,7 @@
   <tbody>
     <% @bookmarks.each do |bookmark| %>
       <tr>
-        <td><%= bookmark.post_id.customer.name %></td>
+        <td><%= bookmark.customer.name %></td>
         <td>
           <%#= link_to post_path(bookmark.id) do %>
             <%= bookmark.post.stor_name %>

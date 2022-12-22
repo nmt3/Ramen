@@ -20,8 +20,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.boolean :holiday_sunday, null: false
       t.boolean :public_holiday, null: false
 
-      t.time :open, null: false
-      t.time :close, null: false
+      t.datetime :open, null: false
+      t.datetime :close, null: false
       t.string :address
       t.string :genre
       t.string :post_comment

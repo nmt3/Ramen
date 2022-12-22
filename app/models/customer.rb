@@ -45,11 +45,6 @@ class Customer < ApplicationRecord
 
   enum sex_method: { men: 0, women: 1 }
 
-  # enum age: {
-  #   "---":0,
-  #   10代:1,20代:2,30代:3,40代:4,50代:5,60代以上:6
-  # }
-
   enum residence:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,

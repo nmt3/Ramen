@@ -6,7 +6,8 @@ class Public::CustomersController < ApplicationController
   end
 
   def list
-    # binding.pry
+    # byebug
+    @customer = Customer.find(params[:id])
     @posts = Post.where(customer_id: params[:id])
   end
 

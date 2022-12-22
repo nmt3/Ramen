@@ -1,8 +1,6 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
   def index
-    # binding.pry
-    # @post.customer_id = Customer.find(params[:id])
     @posts = Post.where(customer_id: params[:id])
   end
 
@@ -33,7 +31,7 @@ class Admin::PostsController < ApplicationController
     :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
     :activity_saturday, :activity_sunday,:holiday_monday, :holiday_tuesday,
     :holiday_wednesday, :holiday_thursday, :holiday_friday,:holiday_saturday,
-    :holiday_sunday, :public_holiday, :open, :close, :holiday, :genre,
+    :holiday_sunday, :public_holiday, :open_hour, :open, :close, :holiday, :genre,
     :post_comment, :latitude,:longitude)
   end
 
