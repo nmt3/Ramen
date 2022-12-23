@@ -32,7 +32,7 @@
   </tr>
   <tr>
     <td>営業時間</td>
-    <td><%= @post.open %>~<%= @post.close %></td>
+    <td><%= @post.open.strftime("%H:%M") %>~<%= @post.close.strftime("%H:%M") %></td>
   </tr>
   <tr>
     <td>定休日</td>

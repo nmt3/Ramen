@@ -11,7 +11,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @review = Review.new
-    @reviews = Review.all
+    @reviews = Review.where(post_id: @review.id)
     @bookmarks_count = Bookmark.where(post_id: @post.id).count
   end
 

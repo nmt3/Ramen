@@ -3,13 +3,12 @@
 <%= link_to "新規投稿", new_post_path %>
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <div class="post">
+    <div class="col-md-12">
         <h3>投稿一覧</h3>
-          <table class="post_list">
-            <% @posts.each do |post| %>
-            <tr>
-              <td>
+        <div class="row">
+          <% @posts.each do |post| %>
+            <div class="col-md-4">
+              <div class="post">
                 <%= link_to post_path(post.id) do %>
                   <% if post.image.attached? %>
                     <%= image_tag post.image, size: "100x100" %>
@@ -18,30 +17,22 @@
                   <% end %><br>
                   <%= post.store_name %>
                 <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-              <!--ジャンル-->
-                <p>ジャンル
-                <% post.tags.each do |tag| %>
-                    <%= tag.genre %>
-                <% end %>
-                </p>
                 <!--ジャンル-->
-              </td>
-            </tr>
-            <tr>
-              <td>
+                <p>ジャンル
+                  <% post.tags.each do |tag| %>
+                    <%= tag.genre %>
+                  <% end %>
+                </p>
+                  <!--ジャンル-->
+                <p>都道府県</p>
                 <p>
                   コメント
                   <%= post.post_comment %>
                 </p>
                 <p>評価</p>
-              </td>
-            </tr>
-            <% end %>
-          </table>
+              </div>
+            </div>
+          <% end %>
       </div>
     </div>
   </div>

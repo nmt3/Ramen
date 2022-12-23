@@ -11,6 +11,15 @@ class Public::CustomersController < ApplicationController
     @posts = Post.where(customer_id: params[:id])
   end
 
+  def bookmark
+  # byebug
+    @customer = Customer.find(params[:id])
+    @posts = @customer.posts
+
+    bookmarks = Bookmark.where(customer_id: current_customer.id).pluck(:post_id)
+    @bookmark_list = Post.find(bookmarks)
+  end
+
   def edit
     @customer = Customer.find(params[:id])
   end
