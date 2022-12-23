@@ -1,0 +1,30 @@
+<h3>フォロー一覧</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ユーザーネーム</th>
+          <th>投稿数</th>
+          <th>フォロー数</th>
+          <th>フォロワー数</th>
+        </tr>
+      </thead>
+      <% if customers.exists? %>
+        <% customers.each do |customer| %>
+          <tbody>
+            <tr>
+              <td><%#= link_to customer.name,  %>
+                <%= link_to list_customer_path(customer.id) do %>
+                  <%= customer.name  %>
+                <% end %>
+                さん
+              </td>
+              <td><%= customer.posts.count %>件</td>
+              <td><%= customer.followings.count %></td>
+              <td><%= customer.followers.count %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
+    </table>

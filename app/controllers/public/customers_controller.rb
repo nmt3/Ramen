@@ -12,7 +12,6 @@ class Public::CustomersController < ApplicationController
   end
 
   def bookmark
-  # byebug
     @customer = Customer.find(params[:id])
     @posts = @customer.posts
 
