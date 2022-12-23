@@ -1,23 +1,23 @@
 <caption>ブックマーク一覧</caption>
-<% if @bookmark_list.present? %>
-  <% @bookmark_list.each do |b| %>
-    <table>
-      <thead>
-        <tr>
-          <th>投稿者名</th>
-          <th>画像</th>
-          <th>店名</th>
-          <th>コメント</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= b.customer.name %>さん</td>
-          <td><%= image_tag b.image, size: "150x150" %></td>
-          <td><%= b.store_name %></td>
-          <td><%= b.post_comment %></td>
-        </tr>
-      </tbody>
+  <table>
+    <thead>
+      <tr>
+        <th>投稿者名</th>
+        <th>画像</th>
+        <th>店名</th>
+        <th>コメント</th>
+      </tr>
+    </thead>
+    <% if @bookmark_list.present? %>
+      <% @bookmark_list.each do |b| %>
+        <tbody>
+          <tr>
+            <td><%= b.customer.name %>さん</td>
+            <td><%= image_tag b.image, size: "150x150" %></td>
+            <td><%= b.store_name %></td>
+            <td><%= b.post_comment %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    <% end %>
     </table>
-  <% end %>
-<% end %>
