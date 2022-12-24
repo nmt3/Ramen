@@ -5,6 +5,15 @@
   <div class="row">
     <div class="col-md-12">
         <h3>投稿一覧</h3>
+        <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
+          <%= select_tag :tag_id,
+              options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
+              {
+                prompt: "タグで絞り込み検索",
+                onchange: 'submit(this.form);'
+              }
+          %>
+        <% end %>
         <div class="row">
           <% @posts.each do |post| %>
             <div class="col-md-4">
