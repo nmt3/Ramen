@@ -25,6 +25,6 @@ class Public::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:post_id, :star, :review_comment)
+    params.require(:review).permit(:post_id, :image, :star, :review_comment)
   end
 end

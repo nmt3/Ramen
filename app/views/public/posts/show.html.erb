@@ -88,8 +88,11 @@
     </div>
 
     <div class="col-md-9">
+      <h5>レビュー投稿</h5>
       <%= form_with model: @review, local: :true do |f| %>
       <!--ここからが星レビュー機能-->
+        <%= f.label "写真を追加" %>
+        <%= f.file_field :image, accept: "image/*" %><br>
         <%= f.label :star, "評価" %>
         <div class="form-group" id="star">
           <%= f.hidden_field :star, id: :review_star %>
@@ -118,6 +121,7 @@
           <tr>
             <!--<th>レビューID</th>-->
             <th>名前</th>
+            <th>イメージ</th>
             <th>評価</th>
             <th>口コミ</th>
             <th></th>
@@ -127,8 +131,19 @@
         <tbody>
           <tr>
             <!--<td><%= r.id %></td>-->
-            <td><%= r.customer.name %></td>
-            <td><%= r.star %></td>
+            <td>
+              <%= link_to list_customer_path(r.customer.id) do %>
+                <%= r.customer.name %>
+              <% end %>
+            </td>
+            <td>
+              <% if r.image.attached? %>
+                <%= image_tag r.image, size: "80x80" %>
+              <% else %>
+                <%= image_tag "no_image", size: "80x80" %>
+              <% end %>
+            </td>
+            <td>星<%= r.star %>つ</td>
             <td><%= r.review_comment %></td>
             <td>
               <% if r.customer == current_customer %>
@@ -137,8 +152,8 @@
             </td>
           </tr>
         </tbody>
-      </table>
       <% end %>
+      </table>
     </div>
   </div>
 </div>

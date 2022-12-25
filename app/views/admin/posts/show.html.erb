@@ -1,56 +1,88 @@
-<h3>
-  投稿者：
-  <%= link_to list_admin_customer_path(@post.customer.id) do %>
-    <%= @post.customer.name  %>さん
-  <% end %>
-</h3>
-<%= link_to "投稿編集・削除", edit_admin_post_path(@post.id) %>
-<table class="post_format">
-  <tr>
-    <td>画像</td>
-    <td>
-      <% if @post.image.attached? %>
-        <%= image_tag @post.image, size: "150x150" %>
-      <% else %>
-        <%= image_tag "no_image", size: "150x150" %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td>店名</td>
-    <td><%= @post.store_name %></td>
-  </tr>
-  <tr>
-    <td>営業日</td>
-    <td>
-      <%  weekly_columns.each_with_index do |day,i| %>
-        <% if @post[day] == true %>
-         <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h4>
+        投稿者：
+        <%= link_to list_admin_customer_path(@post.customer.id) do %>
+          <%= @post.customer.name  %>さん
         <% end %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td>営業時間</td>
-    <td><%= @post.open.strftime("%H:%M") %>~<%= @post.close.strftime("%H:%M") %></td>
-  </tr>
-  <tr>
-    <td>定休日</td>
-    <td>
-      <%  holiday_weekly_columns.each_with_index do |day,i| %>
-        <% if @post[day] == true %>
-         <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+      </h4>
+      <%= link_to "投稿編集・削除", edit_admin_post_path(@post.id), class: "btn btn-success" %>
+      <table class="post_format">
+        <% if @post.image.attached? %>
+          <%= image_tag @post.image, size: "150x150" %>
+        <% else %>
+          <%= image_tag "no_image", size: "150x150" %>
         <% end %>
+        <tr>
+          <td>店名</td>
+          <td><%= @post.store_name %></td>
+        </tr>
+        <tr>
+          <td>営業日</td>
+          <td>
+            <%  weekly_columns.each_with_index do |day,i| %>
+              <% if @post[day] == true %>
+               <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>営業時間</td>
+          <td><%= @post.open.strftime("%H:%M") %>~<%= @post.close.strftime("%H:%M") %></td>
+        </tr>
+        <tr>
+          <td>定休日</td>
+          <td>
+            <%  holiday_weekly_columns.each_with_index do |day,i| %>
+              <% if @post[day] == true %>
+               <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>ジャンル</td>
+          <td>
+            <% @post.tags.each do |tag| %>
+              <%= tag.genre %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>投稿日時</td>
+          <td><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-9">
+      <table class="review">
+        <thead>
+          <tr>
+            <!--<th>レビューID</th>-->
+            <th>名前</th>
+            <th>評価</th>
+            <th>口コミ</th>
+            <th></th>
+          </tr>
+        </thead>
+      <% @reviews.each do |r| %>
+        <tbody>
+          <tr>
+            <!--<td><%= r.id %></td>-->
+            <td><%= r.customer.name %></td>
+            <td>星<%= r.star %>つ</td>
+            <td><%= r.review_comment %></td>
+            <td>
+               <%= link_to "削除", admin_review_path(r.id), method: :delete, class: "btn btn-danger" %>
+            </td>
+          </tr>
+        </tbody>
       <% end %>
-    </td>
-  </tr>
-  <tr>
-    <td>ジャンル</td>
-    <td>
-      <% @post.tags.each do |tag| %>
-        <%= tag.genre %>
-      <% end %>
-    </td>
-  </tr>
-</table>
+      </table>
+    </div>
+  </div>
+</div>
+
 

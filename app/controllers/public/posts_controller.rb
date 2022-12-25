@@ -52,7 +52,7 @@ class Public::PostsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:customer_id, :post_id, :star, :review_comment)
+    params.require(:review).permit(:customer_id, :post_id, :image, :star, :review_comment)
   end
 
 end
