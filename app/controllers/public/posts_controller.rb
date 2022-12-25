@@ -12,7 +12,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @review = Review.new
-    @reviews = Review.where(post_id: @review.id)
+    @reviews = @post.reviews
     @bookmarks_count = Bookmark.where(post_id: @post.id).count
   end
 
@@ -52,7 +52,7 @@ class Public::PostsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:post_id, :star, :comment)
+    params.require(:review).permit(:customer_id, :post_id, :star, :review_comment)
   end
 
 end

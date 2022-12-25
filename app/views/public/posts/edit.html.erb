@@ -38,24 +38,7 @@
           </span>
         </td>
       </tr>
-      <tr>
-        <td>
-          <%= f.label 'ジャンル' %>
-        </td>
-        <td>
-          <%= f.text_field :genre %>
-          <div class="check_box">
-            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
-             <div>
-                <%= tag.label do %>
-                  <%= tag.check_box %>
-                  <%= tag.text %>
-                <% end %>
-              </div>
-             <% end %>
-           </div>
-        </td>
-      </tr>
+
       <tr>
         <td><%= f.label "その他情報" %></td>
         <td><%= f.text_area :post_comment %></td>

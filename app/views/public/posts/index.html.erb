@@ -1,45 +1,67 @@
 <%= notice %>
 
-<%= link_to "新規投稿", new_post_path %>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-        <h3>投稿一覧</h3>
-        <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
-          <%= select_tag :tag_id,
-              options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
-              {
-                prompt: "タグで絞り込み検索",
-                onchange: 'submit(this.form);'
-              }
-          %>
-        <% end %>
+    <div class="col-md-2">
+      <%= link_to "新規投稿", new_post_path %>
+      <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
+        <%= select_tag :tag_id,
+            options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
+            {
+              prompt: "ジャンルで絞り込み",
+              onchange: 'submit(this.form);'
+            }
+        %>
+      <% end %>
+    </div>
+    <div class="col-md-10">
+      <h3>投稿一覧</h3>
         <div class="row">
           <% @posts.each do |post| %>
-            <div class="col-md-4">
+            <div class="col-md-2">
+              <p></p>
               <div class="post">
                 <%= link_to post_path(post.id) do %>
                   <% if post.image.attached? %>
-                    <%= image_tag post.image, size: "100x100" %>
+                    <%= image_tag post.image, size: "140x140" %>
                   <% else %>
-                    <%= image_tag 'no_image', size: "100x100" %>
-                  <% end %><br>
-                  <%= post.store_name %>
-                <% end %>
-                <!--ジャンル-->
-                <p>ジャンル
-                  <% post.tags.each do |tag| %>
-                    <%= tag.genre %>
+                    <%= image_tag 'no_image', size: "140x140" %>
                   <% end %>
-                </p>
-                  <!--ジャンル-->
-                <p>都道府県</p>
-                <p>
-                  コメント
-                  <%= post.post_comment %>
-                </p>
-                <p>評価</p>
+                <% end %>
               </div>
+            </div>
+            <div class="col-md-9">
+              <p></p>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>店名:</th>
+                    <td><%= post.store_name %></td>
+                  </tr>
+                  <tr>
+                    <th>ジャンル:</th>
+                    <td>
+                      <!--ジャンル-->
+                      <% post.tags.each do |tag| %>
+                        <%= tag.genre %>
+                      <% end %>
+                      <!--ジャンル-->
+                    <td>
+                  </tr>
+                  <tr>
+                    <th>都道府県:</th>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>評価:</th>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>コメント:</th>
+                    <td><%= post.post_comment %></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           <% end %>
       </div>
