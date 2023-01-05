@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <%= link_to "新規投稿", new_post_path %>
+      <h5><%= link_to "新規投稿", new_post_path, class: "fa-solid fa-square-plus" %></h5>
       <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
         <%= select_tag :tag_id,
             options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
@@ -13,6 +13,22 @@
             }
         %>
       <% end %>
+
+      <div class="search_form">
+        <%= form_with(scope: :search, url: posts_path, method: :get, local: true) do |f| %>
+          <div class="field">
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
+             <div class="tag_search">
+                <%= tag.label do %>
+                  <%= tag.check_box %>
+                  <%= tag.text %>
+                <% end %>
+              </div>
+            <% end %>
+            <%= f.submit "絞り込み検索", class: "search-btn" %>
+          </div>
+        <% end %>
+      </div>
     </div>
     <div class="col-md-10">
       <h3>投稿一覧</h3>
@@ -51,10 +67,6 @@
                   <tr>
                     <th>所在地:</th>
                     <td></td>
-                  </tr>
-                  <tr>
-                    <th>コメント:</th>
-                    <td><%= post.post_comment %></td>
                   </tr>
                   <tr>
                     <th>評価平均:</th>

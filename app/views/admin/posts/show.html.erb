@@ -1,18 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-5">
       <h4>
         投稿者：
-        <%= link_to list_admin_customer_path(@post.customer.id) do %>
+        <%= link_to admin_customer_path(@post.id) do %>
           <%= @post.customer.name  %>さん
         <% end %>
       </h4>
-      <%= link_to "投稿編集・削除", edit_admin_post_path(@post.id), class: "btn btn-success" %>
+      <p><%= link_to "投稿編集・削除", edit_admin_post_path(@post.id), class: "btn btn-success" %></p>
       <table class="post_format">
         <% if @post.image.attached? %>
-          <%= image_tag @post.image, size: "150x150" %>
+          <%= image_tag @post.image, size: "140x140" %>
         <% else %>
-          <%= image_tag "no_image", size: "150x150" %>
+          <%= image_tag "no_image", size: "140x140" %>
         <% end %>
         <tr>
           <td>店名</td>
@@ -56,7 +56,7 @@
         </tr>
       </table>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
       <table class="review">
         <thead>
           <tr>

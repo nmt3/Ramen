@@ -27,7 +27,9 @@ Rails.application.routes.draw do
 
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resources :bookmarks, only: [:create, :destroy]
-      # resources :reviews, only: [:create, :update, :destroy]
+      collection do
+        get 'search'
+      end
     end
   end
 
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/" => "homes#top"
     get 'homes/show'
+    get "search"
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     resources :customers, only: [:index, :show, :edit, :update] do
       member do

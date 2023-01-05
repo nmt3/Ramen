@@ -6,7 +6,8 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    # @posts = Post.all
+    # @search_params = post_search_params
+    # @post = Post.search(@search_params)
   end
 
   def show
@@ -45,14 +46,18 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,
     :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
-    :activity_saturday, :activity_sunday,:holiday_monday, :holiday_tuesday,
-    :holiday_wednesday, :holiday_thursday, :holiday_friday, :holiday_saturday,
-    :holiday_sunday, :public_holiday, :open, :close, :holiday, :post_comment,
+    :activity_saturday, :activity_sunday, :holiday, :business_time, :post_comment,
     :latitude, :longitude, tag_ids: [])
   end
 
   def review_params
     params.require(:review).permit(:customer_id, :post_id, :image, :star, :review_comment)
+  end
+
+  def post_search_params
+    params.fetch(:search, {}).permit(:store_name, :activity_monday,
+    :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
+    :activity_saturday, :activity_sunday, :business_time, :latitude, :longitude, tag_ids: [] )
   end
 
 end

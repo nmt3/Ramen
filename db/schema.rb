@@ -98,16 +98,8 @@ ActiveRecord::Schema.define(version: 2022_12_18_224924) do
     t.boolean "activity_friday", null: false
     t.boolean "activity_saturday", null: false
     t.boolean "activity_sunday", null: false
-    t.boolean "holiday_monday", null: false
-    t.boolean "holiday_tuesday", null: false
-    t.boolean "holiday_wednesday", null: false
-    t.boolean "holiday_thursday", null: false
-    t.boolean "holiday_friday", null: false
-    t.boolean "holiday_saturday", null: false
-    t.boolean "holiday_sunday", null: false
-    t.boolean "public_holiday", null: false
-    t.datetime "open", null: false
-    t.datetime "close", null: false
+    t.string "holiday"
+    t.string "business_time"
     t.string "address"
     t.string "genre"
     t.string "post_comment"

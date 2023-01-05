@@ -2,7 +2,7 @@
   <div class="row">
     <div class="mx-auto">
 
-      <h3>会員情報編集</h3>
+      <h3 class="text-center">会員情報編集</h3>
       <%= form_with model: @customer do |f| %>
       <table class="table">
         <tbody>
@@ -41,10 +41,12 @@
             <td><%= f.label :"コメント" %></td>
             <td><%= f.text_area :comment, autofocus: true %></td>
           </tr>
+          <tr>
+            <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
+            <td><%= link_to "退会する", quit_customers_path, class: "btn btn-danger" %></td>
+          </tr>
         </tbody>
       </table>
-      <%= f.submit "編集内容を保存", class: "btn btn-success" %>
-      <%= link_to "退会する", quit_customers_path, class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>

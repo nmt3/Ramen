@@ -5,15 +5,13 @@ class Admin::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    # @posts = Post.find_by(params[:customer_id])
-    # @posts.customer_id = Customer.id
-  end
-
-  def list
-    # byebug
-    @customer = Customer.find(params[:id])
     @posts = Post.where(customer_id: params[:id])
   end
+
+  # def list
+  #   # byebug
+  #   @customer = Customer.find(params[:id])
+  # end
 
   def edit
     @customer = Customer.find(params[:id])

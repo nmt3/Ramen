@@ -3,6 +3,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @posts = current_customer.posts
   end
 
   def list

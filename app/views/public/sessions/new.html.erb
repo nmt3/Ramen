@@ -1,44 +1,38 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h3 class="title_name">ログイン</h3>
+<div class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="title_name">ログイン</h3>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="field">
+              <%= f.label :email %><br>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+            <div class="field">
+              <%= f.label :password %><br>
+              <%= f.password_field :password, autocomplete: "current-password" %>
+            </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+            <% if devise_mapping.rememberable? %>
+              <div class="field">
+                <%= f.check_box :remember_me %>
+                <%= f.label "パスワードを保存" %>
+              </div>
+            <% end %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label "パスワードを保存" %>
-    </div>
-  <% end %>
+            <div class="actions">
+              <%= f.submit "ログイン", class: "btn btn-success" %><br><br>
+              <%= link_to 'ゲストログイン', customer_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
+            </div>
+          <% end %>
+  <%#= render "publics/shared/links" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-    <%= link_to 'ゲストログイン（閲覧用）', customer_guest_sign_in_path, method: :post, class: "login" %>
-  </div>
-
-<% end %>
-
-<%#= render "publics/shared/links" %>
-
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-        <h5 class="headline">会員登録がお済みでない方</h5><br>
-        <p><%= link_to "こちら", new_customer_registration_path %>　から新規登録を行なってください</p>
+      <div class="col-md-6">
+          <h3 class="subtitle">会員登録がお済みでない方</h3><br>
+          <p><%= link_to "こちら", new_customer_registration_path, class: "btn btn-primary" %>　から新規登録を行なってください</p>
+      </div>
     </div>
   </div>
 </div>

@@ -1,31 +1,78 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-2">
+      <%= form_tag admin_path, method: :get, class: "boards_searchForm" do %>
+        <%= select_tag :tag_id,
+            options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
+            {
+              prompt: "ジャンルで絞り込み",
+              onchange: 'submit(this.form);'
+            }
+        %>
+      <% end %>
+
+      <div class="search_form">
+        <%= form_with(scope: :search, url: admin_path, method: :get, local: true) do |f| %>
+          <div class="field">
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
+             <div class="tag_search">
+                <%= tag.label do %>
+                  <%= tag.check_box %>
+                  <%= tag.text %>
+                <% end %>
+              </div>
+            <% end %>
+            <%= f.submit "絞り込み検索", class: "search-btn" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-10">
       <h3 class="title">投稿一覧</h3>
       <div class="row">
         <% @posts.each do |post| %>
-          <div class="col-md-3">
-            <div class="post">
+          <div class="col-md-2">
+            <div class="post_list">
               <%= link_to admin_post_path(post.id) do %>
                 <% if post.image.attached? %>
-                  <%= image_tag post.image, size: "180x180" %>
+                  <%= image_tag post.image, size: "140x140" %>
                 <% else %>
-                  <%= image_tag 'no_image', size: "180x180" %>
-                <% end %><br>
-                <%= post.store_name %>
-              <% end %>
-              <p>
-                ジャンル:
-                <% post.tags.each do |tag| %>
-                  <%= tag.genre %>
+                  <%= image_tag 'no_image', size: "140x140" %>
                 <% end %>
-              </p>
-              <p>コメント</p>
-              <p>評価</p>
-              <p>投稿日時<%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+              <% end %>
+              </div>
             </div>
-          </div>
-        <% end %>
+            <div class="col-md-9">
+              <div class="post_list">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th>店名:</th>
+                      <td><%= post.store_name %></td>
+                    </tr>
+                    <tr>
+                      <th>ジャンル:</th>
+                      <td>
+                        <!--ジャンル-->
+                        <% post.tags.each do |tag| %>
+                          <%= tag.genre %>
+                        <% end %>
+                        <!--ジャンル-->
+                      <td>
+                    </tr>
+                    <tr>
+                      <th>所在地:</th>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th>評価平均:</th>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% end %>
       </div>
     </div>
   </div>
