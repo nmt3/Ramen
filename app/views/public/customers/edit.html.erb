@@ -7,20 +7,20 @@
       <table class="table">
         <tbody>
           <tr>
-            <td><%= f.label :"画像" %></td>
+            <td><%= f.label :"プロフィール画像" %></td>
             <td><%= f.file_field :image, accept: 'image/*' %></td>
           </tr>
           <tr>
             <td><%= f.label :"ニックネーム" %></td>
-            <td><%= f.text_field :name %></td>
+            <td><%= f.text_field :name, :size=>"60" %></td>
           </tr>
           <tr>
             <td><%= f.label :"メールアドレス" %></td>
-            <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+            <td><%= f.email_field :email, autofocus: true, autocomplete: "email", :size=>"60" %></td>
           </tr>
           <tr>
             <td><%= f.label :"年齢" %></td>
-            <td><%= f.select :age, ["10代", "20代", "30代", "40代", "50代", "60代以上"] %></td>
+            <td><%= f.select :age, Customer.ages.keys, {} %></td>
           </tr>
           <tr>
             <td><%= f.label :"性別" %></td>
@@ -39,14 +39,14 @@
           </tr>
           <tr>
             <td><%= f.label :"コメント" %></td>
-            <td><%= f.text_area :comment, autofocus: true %></td>
-          </tr>
-          <tr>
-            <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
-            <td><%= link_to "退会する", quit_customers_path, class: "btn btn-danger" %></td>
+            <td><%= f.text_area :comment, autofocus: true, placeholder: "毎週日曜日はラーメン食べてます。", :size=>"60x7" %></td>
           </tr>
         </tbody>
       </table>
+      <div class="text-center">
+        <%= f.submit "編集内容を保存", class: "btn btn-success" %>
+        <%= link_to "退会する", quit_customers_path, class: "btn btn-danger" %>
+      </div>
       <% end %>
     </div>
   </div>

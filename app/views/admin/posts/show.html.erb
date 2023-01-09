@@ -1,8 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5">
-      <h4>
-        投稿者：
+    <div class="col-md-4">
+      <h4>投稿者：
         <%= link_to admin_customer_path(@post.id) do %>
           <%= @post.customer.name  %>さん
         <% end %>
@@ -10,9 +9,11 @@
       <p><%= link_to "投稿編集・削除", edit_admin_post_path(@post.id), class: "btn btn-success" %></p>
       <table class="post_format">
         <% if @post.image.attached? %>
-          <%= image_tag @post.image, size: "140x140" %>
+          <%=link_to @post.image,  "data-lightbox": @post.image do %>
+            <%= image_tag @post.image, size: "150x150" %>
+          <% end %>
         <% else %>
-          <%= image_tag "no_image", size: "140x140" %>
+          <%= image_tag "no_image", size: "150x150" %>
         <% end %>
         <tr>
           <td>店名</td>
@@ -30,16 +31,12 @@
         </tr>
         <tr>
           <td>営業時間</td>
-          <td><%= @post.open.strftime("%H:%M") %>~<%= @post.close.strftime("%H:%M") %></td>
+          <td><%= @post.business_time %></td>
         </tr>
         <tr>
           <td>定休日</td>
           <td>
-            <%  holiday_weekly_columns.each_with_index do |day,i| %>
-              <% if @post[day] == true %>
-               <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-              <% end %>
-            <% end %>
+            <%= @post.holiday %>
           </td>
         </tr>
         <tr>
@@ -51,34 +48,89 @@
           </td>
         </tr>
         <tr>
+          <td>コメント</td>
+          <td><%= @post.post_comment %></td>
+        </tr>
+        <tr>
           <td>投稿日時</td>
           <td><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></td>
         </tr>
       </table>
+            <p>
+        所在地
+        <%= @post.address %>
+      </p>
+      <div id='map'></div>
+
+      <style>
+      #map {
+        height: 250px;
+        width: 80%;
+      }
+      </style>
+
+      <!-- js部分 -->
+      <script>
+      //初期マップの設定
+      let map
+      let marker
+      function initMap(){
+        geocoder = new google.maps.Geocoder()
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          zoom: 15,
+        });
+
+         marker = new google.maps.Marker({
+          position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          map: map
+        });
+      }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
+
     </div>
-    <div class="col-md-7">
-      <table class="review">
-        <thead>
-          <tr>
-            <!--<th>レビューID</th>-->
-            <th>名前</th>
-            <th>評価</th>
-            <th>口コミ</th>
-            <th></th>
-          </tr>
-        </thead>
+    <div class="col-md-8">
+      <div class="title">
+        <h4>レビュー一覧</h4>
+      </div>
       <% @reviews.each do |r| %>
-        <tbody>
-          <tr>
-            <!--<td><%= r.id %></td>-->
-            <td><%= r.customer.name %></td>
-            <td>星<%= r.star %>つ</td>
-            <td><%= r.review_comment %></td>
-            <td>
-               <%= link_to "削除", admin_review_path(r.id), method: :delete, class: "btn btn-danger" %>
-            </td>
-          </tr>
-        </tbody>
+      <div class="border border-dark">
+        投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
+        <% if r.customer.image.attached? %>
+          <%= image_tag r.customer.image, size: "50x50" %>
+        <% else %>
+          <%= image_tag "no_image", size: "50x50" %>
+        <% end %>
+        <%= link_to list_customer_path(r.customer.id) do %>
+          <%= r.customer.name %>
+        <% end %>
+
+        <script>
+          $('#star').empty();
+          var elem = document.getElementById("star");
+          var opt = {
+            size: 36,
+            starOff: "<%= asset_path('star-off.png') %>",
+            starOn: "<%= asset_path('star-on.png') %>",
+            readOnly: true,   # 読み取り専用
+            score: <%= r.star %>,   # 星評価の表示
+          });
+        </script>
+        <%= r.star %>
+
+        <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %><br>
+
+        <% if r.image.attached? %>
+          <%= link_to r.image, "data-lightbox": r.image do %>
+            <%= image_tag r.image, size: "80x80" %>
+          <% end %>
+        <% else %>
+          <%= image_tag "no_image", size: "80x80" %>
+        <% end %>
+        <%= r.review_comment %>
+      </div>
       <% end %>
       </table>
     </div>

@@ -16,8 +16,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :address
       t.string :genre
       t.string :post_comment
-      t.float :latitude
-      t.float :longitude
+      t.float :lat
+      t.float :lng
       t.timestamps
 
 

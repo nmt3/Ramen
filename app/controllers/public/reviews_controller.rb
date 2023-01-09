@@ -4,7 +4,6 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.customer_id = current_customer.id
     @review.save
-    # @review.customer_id = current_customer.id
     redirect_to post_path(@review.post_id)
   end
 

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
       <h3>マイページ</h3>
       <p>
         登録情報
@@ -27,7 +27,7 @@
           </tr>
           <tr>
             <td>年齢</td>
-            <td><%= current_customer.age %>代</td>
+            <td><%= current_customer.age %></td>
           </tr>
           <tr>
             <td>性別</td>
@@ -46,7 +46,7 @@
       <%= link_to "ブックマーク一覧", bookmark_customer_path(@customer.id), class: "btn btn-link" %><br>
       <%= link_to "フォロー一覧", customer_followings_path(@customer.id), class: "btn btn-link" %>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-8">
       <h3>投稿一覧</h3>
         <div class="row">
           <% @posts.each do |post| %>

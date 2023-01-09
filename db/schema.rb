@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 2022_12_18_224924) do
     t.string "address"
     t.string "genre"
     t.string "post_comment"
-    t.float "latitude"
-    t.float "longitude"
+    t.float "lat"
+    t.float "lng"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

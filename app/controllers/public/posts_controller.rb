@@ -24,8 +24,11 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    @post.save
-    redirect_to post_path(@post.id)
+    if @post.save
+      redirect_to post_path(@post.id)
+    else
+      render :new
+    end
   end
 
   def update
@@ -47,7 +50,7 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,
     :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
     :activity_saturday, :activity_sunday, :holiday, :business_time, :post_comment,
-    :latitude, :longitude, tag_ids: [])
+    :address, :lat, :lng, :genre, tag_ids: [])
   end
 
   def review_params
@@ -57,7 +60,7 @@ class Public::PostsController < ApplicationController
   def post_search_params
     params.fetch(:search, {}).permit(:store_name, :activity_monday,
     :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
-    :activity_saturday, :activity_sunday, :business_time, :latitude, :longitude, tag_ids: [] )
+    :activity_saturday, :activity_sunday, :business_time, :address, tag_ids: [] )
   end
 
 end

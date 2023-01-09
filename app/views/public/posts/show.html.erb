@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
       <h4>投稿者：
         <%= link_to list_customer_path(@post.customer.id) do %>
           <%= @post.customer.name  %>さん
@@ -34,52 +34,91 @@
           <%= image_tag "no_image", size: "150x150" %>
         <% end %>
       </p>
-      <p>
-        店名
-        <%= @post.store_name %>
-      </p>
-      <p>
-        営業日
-        <%  weekly_columns.each_with_index do |day,i| %>
-          <% if @post[day] == true %>
-           <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+      <table class="post_show">
+        <tbody>
+          <tr>
+            <td>店名</td>
+            <td><%= @post.store_name %></td>
+          </tr>
+          <tr>
+            <td>営業日</td>
+            <td>
+              <%  weekly_columns.each_with_index do |day,i| %>
+                <% if @post[day] == true %>
+                 <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>営業時間</td>
+            <td><%= @post.business_time %></td>
+          </tr>
+          <tr>
+            <td>定休日</td>
+            <td><%= @post.holiday %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td>
+              <% @post.tags.each do |tag| %>
+                <%= tag.genre %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>コメント</td>
+            <td><%= @post.post_comment %></td>
+          </tr>
+          <tr>
+            <td>所在地</td>
+            <td><%= @post.address %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id='map'></div>
+
+      <style>
+      #map {
+        height: 250px;
+        width: 80%;
+      }
+      </style>
+
+      <!-- js部分 -->
+      <script>
+      //初期マップの設定
+      let map
+      let marker
+      function initMap(){
+        geocoder = new google.maps.Geocoder()
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          zoom: 15,
+        });
+
+         marker = new google.maps.Marker({
+          position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          map: map
+        });
+      }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
+
+    </div>
+
+    <div class="col-md-8">
+      <% if @review.errors.any? %>
+        <%= @review.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @review.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
           <% end %>
-        <% end %>
-      </p>
-      <p>
-        営業時間
-        <%= @post.business_time %>
-      </p>
-      <p>
-        定休日
-        <%= @post.holiday %>
-      </p>
-      <p>
-        ジャンル
-        <% @post.tags.each do |tag| %>
-          <%= tag.genre %>
-        <% end %>
-      </p>
-      <p>
-        コメント
-        <%= @post.post_comment %>
-      </p>
-      <!--ここから地図機能表示(開発途中)-->
-      <div type="text/javascript">
-        <script>
-          function initMap(){
-            let map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 100, lng: 50 },
-            // center: {lat: <%= @post.latitude %>, lng: <%= @post.longitude %> },
-            zoom: 15
-            });
-          }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js"></script>
-        <!--<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>-->
-      </div>
-      <!--ここまで地図機能-->
-      <h5>レビュー投稿</h5>
+        </ul>
+      <% end %>
+      <h4>レビュー投稿</h4>
       <%= form_with model: @review, local: :true do |f| %>
       <!--ここからが星レビュー機能-->
         <%= f.label "写真を追加" %>
@@ -106,9 +145,6 @@
         <%= f.hidden_field :post_id, value: @post.id %>
         <%= f.submit "送信" %>
       <% end %>
-    </div>
-
-    <div class="col-md-7">
       <div class="title">
         <h4>レビュー一覧</h4>
       </div>

@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     get "/" => "homes#top"
     get 'homes/show'
     get "search"
-    resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
+    resources :posts, only: [:show, :edit, :create, :update, :destroy]
     resources :customers, only: [:index, :show, :edit, :update] do
       member do
         get :list

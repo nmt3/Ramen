@@ -3,8 +3,7 @@
     <thead>
       <tr>
         <th>投稿者名</th>
-        <th>画像</th>
-        <th>店名</th>
+        <th>投稿情報</th>
         <th>コメント</th>
       </tr>
     </thead>
@@ -13,9 +12,15 @@
         <tbody>
           <tr>
             <td><%= b.customer.name %>さん</td>
-            <td><%= image_tag b.image, size: "150x150" %></td>
-            <td><%= b.store_name %></td>
-            <td><%= b.post_comment %></td>
+            <td>
+              <%= link_to post_path(b.id) do %>
+                <%= image_tag b.image, size: "150x150" %>
+                <%= b.store_name %>
+              <% end %>
+            </td>
+            <td>
+              <%= b.post_comment %>
+            </td>
           </tr>
         </tbody>
       <% end %>

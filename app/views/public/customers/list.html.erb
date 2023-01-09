@@ -16,11 +16,26 @@
               <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post, class: "btn btn-primary" %>
             <% end %>
           <% end %><br>
-
-          <%= @customer.age %>代<br>
-          <%= @customer.sex_method_i18n %><br>
-          <%= @customer.residence %><br>
-          <%= @customer.comment %>
+          <table class="post_customer">
+            <tbody>
+              <tr>
+                <td>年齢</td>
+                <td><%= @customer.age %></td>
+              </tr>
+              <tr>
+                <td>性別</td>
+                <td><%= @customer.sex_method_i18n %></td>
+              </tr>
+              <tr>
+                <td>居住地</td>
+                <td><%= @customer.residence %></td>
+              </tr>
+              <tr>
+                <td>コメント</td>
+                <td><%= @customer.comment %></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     <div class="col-md-9">
@@ -28,10 +43,8 @@
       <table class="customer_post">
         <thead>
           <tr>
-            <th>image</th>
             <th>店名</th>
             <th>ジャンル</th>
-            <th>所在地</th>
             <th>コメント</th>
             <th>評価平均</th>
           </tr>
@@ -46,15 +59,14 @@
                 <% else %>
                   <%= image_tag 'no_image', size: "100x100" %>
                 <% end %>
-              <% end %>
+              <% end %><br>
+              <%= post.store_name %>
             </td>
-            <td><%= post.store_name %></td>
             <td>
               <% post.tags.each do |tag| %>
                 <%= tag.genre %>
               <% end %>
             </td>
-            <td></td>
             <td><%= post.post_comment %></td>
             <td></td>
           </tr>
