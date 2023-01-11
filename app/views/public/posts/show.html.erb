@@ -141,7 +141,7 @@
         </script>
       <!--ここまでが星レビュー機能-->
         <%= f.label :review_comment, "口コミ内容" %><br>
-        <%= f.text_area :review_comment %>
+        <%= f.text_area :review_comment, size: "60x2" %>
         <%= f.hidden_field :post_id, value: @post.id %>
         <%= f.submit "送信" %>
       <% end %>

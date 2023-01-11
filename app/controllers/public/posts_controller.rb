@@ -1,13 +1,15 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_customer!
+  before_action :set_q, only: [:index, :search]
   def new
     @post = Post.new
   end
 
   def index
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    # @search_params = post_search_params
-    # @post = Post.search(@search_params)
+
+    @q = Post.ransack(params[:q])
+    @post = @q.result(distinct: true)
   end
 
   def show
@@ -43,8 +45,15 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def search
+    @results = @q.result
+  end
 
   private
+
+  def set_q
+    @p = Post.ransack(params[:q])
+  end
 
   def post_params
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,
@@ -55,12 +64,6 @@ class Public::PostsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:customer_id, :post_id, :image, :star, :review_comment)
-  end
-
-  def post_search_params
-    params.fetch(:search, {}).permit(:store_name, :activity_monday,
-    :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
-    :activity_saturday, :activity_sunday, :business_time, :address, tag_ids: [] )
   end
 
 end
