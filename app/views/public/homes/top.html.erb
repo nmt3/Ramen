@@ -1,11 +1,11 @@
-<div class="image">
-  <h3 class="top-text">
-    らーめん街道へようこそ!<br>
+<h3 class="top-text">
+  <p class="welcome">
+    Welcome to Ramen Kaido<br>
     美味しいラーメン情報をゲットしよう！<br>
     <% if customer_signed_in? %>
       <%= link_to "投稿一覧へ", posts_path, class: "btn btn-success" %>
     <% else %>
       <%= link_to "ログイン画面へ", new_customer_session_path, class: "btn btn-primary" %>
     <% end %>
-  </h3>
-</div>
+  </p>
+</h3>

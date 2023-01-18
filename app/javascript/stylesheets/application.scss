@@ -1,7 +1,23 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+.shadow { //ヘッダー
+  background-color: black;
+  color: yellow;
+}
+
+.footer {
+  background-color: black;
+  color: yellow;
+  font-family: Comic Sans MS;
+  margin-top: auto
+}
+
 .container {
   padding-top: 30px;
+}
+
+.notice {
+  color: red;
 }
 
 .top-text {
@@ -9,9 +25,12 @@
   padding-top: 20%;
 }
 
-.registration {
-  text-align: center;
-  padding-top: 10%;
+.title_name {
+  font-size: 2em;
+}
+
+.collapse {
+  margin-right: 40%;
 }
 
 .tag_check {
@@ -20,7 +39,7 @@
 
 .login {
   text-align: center;
-  padding: 180px;
+  padding-top: 10%;
 }
 
 .subtitle {
@@ -32,7 +51,7 @@
 }
 
 .field {
-  text-align: center;
+  padding: 10px;
 }
 
 .post_list {

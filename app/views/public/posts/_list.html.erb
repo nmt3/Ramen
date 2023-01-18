@@ -1,0 +1,46 @@
+<div class="col-md-9">
+  <div class="post_list">
+    <% @posts.each do |post| %>
+      <table>
+        <tbody>
+          <tr>
+            <th>店名:</th>
+            <td><%= post.store_name %></td>
+          </tr>
+          <tr>
+            <th>営業日:</th>
+            <td>
+              <%  weekly_columns.each_with_index do |day,i| %>
+                <% if post[day] == true %>
+                 <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>営業時間</th>
+            <td><%= post.business_time %></td>
+          </tr>
+          <tr>
+            <th>ジャンル:</th>
+            <td>
+              <!--ジャンル-->
+              <% post.tags.each do |tag| %>
+                <%= tag.genre %>
+              <% end %>
+              <!--ジャンル-->
+            </td>
+          </tr>
+          <tr>
+            <th>所在地:</th>
+            <td><%= post.address %></td>
+          </tr>
+          <tr>
+            <th>評価平均:</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

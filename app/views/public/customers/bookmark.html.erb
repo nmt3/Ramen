@@ -1,28 +1,39 @@
-<h3>ブックマーク一覧</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>投稿者名</th>
-        <th>投稿情報</th>
-        <th>コメント</th>
-      </tr>
-    </thead>
-    <% if @bookmark_list.present? %>
-      <% @bookmark_list.each do |b| %>
-        <tbody>
-          <tr>
-            <td><%= b.customer.name %>さん</td>
-            <td>
-              <%= link_to post_path(b.id) do %>
-                <%= image_tag b.image, size: "150x150" %>
-                <%= b.store_name %>
-              <% end %>
-            </td>
-            <td>
-              <%= b.post_comment %>
-            </td>
-          </tr>
-        </tbody>
-      <% end %>
-    <% end %>
-    </table>
+<div class="container">
+  <di class="row">
+    <div class="col-md-12">
+      <h3>ブックマーク一覧</h3>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 20%">投稿者名</th>
+              <th style="width: 20%">投稿情報</th>
+              <th style="width: 20%">店舗名</th>
+              <th style="width: 20%">コメント</th>
+              <th style="width: 20%"></th>
+            </tr>
+          </thead>
+          <% if @bookmark_list.present? %>
+            <% @bookmark_list.each do |b| %>
+              <tbody>
+                <tr>
+                  <td><%= b.customer.name %>さん</td>
+                  <td>
+                    <% if b.image.attached? %>
+                      <%= image_tag b.image, size: "150x150" %>
+                    <% else %>
+                      <%= image_tag "no_image", size: "150x150" %>
+                    <% end %>
+                  </td>
+                  <td><%= b.store_name %></td>
+                  <td>
+                    <%= b.post_comment %>
+                  </td>
+                  <td><%= link_to "開く", post_path(b.id) %></td>
+                </tr>
+              </tbody>
+            <% end %>
+          <% end %>
+          </table>
+    </div>
+  </di>
+</div>

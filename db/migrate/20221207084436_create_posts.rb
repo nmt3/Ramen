@@ -14,7 +14,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :holiday
       t.string :business_time
       t.string :address
-      t.string :genre
+      # t.string :genre
       t.string :post_comment
       t.float :lat
       t.float :lng

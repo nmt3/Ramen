@@ -46,6 +46,27 @@
             </tr>
             <tr>
               <td>
+                <%= f.label 'ジャンル' %>
+              </td>
+              <td>
+                <div class="check_box">
+                  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
+                   <div class="tag_check">
+                      <%= tag.label do %>
+                        <%= tag.check_box %>
+                        <%= tag.text %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td><%= f.label "コメント" %></td>
+              <td><%= f.text_area :post_comment, :size=>"40x5" %></td>
+            </tr>
+            <tr>
+              <td>
                 <%= f.label '場所' %>
               </td>
               <td>
@@ -128,27 +149,7 @@
               </td>
             </tr>
             <tr>
-              <td>
-                <%= f.label 'ジャンル' %>
-              </td>
-              <td>
-                <div class="check_box">
-                  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
-                   <div class="tag_check">
-                      <%= tag.label do %>
-                        <%= tag.check_box %>
-                        <%= tag.text %>
-                      <% end %>
-                    </div>
-                  <% end %>
-                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td><%= f.label "コメント" %></td>
-              <td><%= f.text_area :post_comment, :size=>"40x5" %></td>
-            </tr>
-            <tr>
+              <td></td>
               <td>
                 <%= f.hidden_field :latitude %>
                 <%= f.hidden_field :longitude %>

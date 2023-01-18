@@ -1,5 +1,6 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_q, only: [:index, :search]
   def show
     @post = Post.find(params[:id])
     @reviews = @post.reviews
@@ -21,7 +22,18 @@ class Admin::PostsController < ApplicationController
     redirect_to admin_path
   end
 
+  def search
+    @q = Post.ransack(params[:q])
+    @results = @q.result
+
+  end
+
   private
+
+  def set_q
+    @q = Post.ransack(params[:q])
+    @results = @q.result
+  end
 
   def post_params
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,

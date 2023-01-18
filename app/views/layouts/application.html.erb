@@ -24,82 +24,95 @@
     <header class="shadow">
       <nav class="navbar navbar-expand-lg navbar-light">
         <!--<div class="container">-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav ml-auto">
-                <% if customer_signed_in? %>
-                <li>
-                  <%= link_to root_path, class: "nav-link text-dark" do %>
-                    <i class="fa-solid fa-house"></i>
-                    HOME
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to customer_path(current_customer), class: "nav-link text-dark" do %>
-                    <i class="fa-solid fa-user"></i>
-                    MY PAGE
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to posts_path, class: "nav-link text-dark" do  %>
-                    <i class="fa-solid fa-list-ul"></i>
-                    投稿一覧
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-dark" do  %>
-                    <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
-                    ログアウト
-                  <% end %>
-                </li>
-
-                <% elsif admin_signed_in? %>
-                <li>
-                  <%= link_to admin_path, class: "nav-link text-dark" do %>
-                    <i class="fa-solid fa-list-ul"></i>
-                    投稿一覧
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to admin_customers_path, class: "nav-link text-dark" do %>
-                    <i class="fa-solid fa-users"></i>
-                    会員一覧
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-dark" do  %>
-                    <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
-                    ログアウト
-                  <% end %>
-                </li>
-
-                <% else %>
-                <li>
-                  <%= link_to root_path, class: "nav-link text-dark" do %>
-                    <i class="fa-solid fa-house"></i>
-                    HOME
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to new_customer_registration_path, class: "nav-link text-dark" do %>
-                    <i class="fa-solid fa-user-plus"></i>
-                    新規登録
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to new_customer_session_path, class: "nav-link text-dark" do  %>
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                    ログイン
-                  <% end %>
-                </li>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if customer_signed_in? %>
+              <li>
+                <%= link_to root_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-house"></i>
+                  HOME
                 <% end %>
-              </ul>
-            </div>
-          <!--</div>-->
-    </header>
-    <%= yield %>
-  </body>
+              </li>
+              <li>
+                <%= link_to customer_path(current_customer), class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-user"></i>
+                  MY PAGE
+                <% end %>
+              </li>
+              <li>
+                <%= link_to posts_path, class: "nav-link text-light" do  %>
+                  <i class="fa-solid fa-list-ul"></i>
+                  投稿一覧
+                <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do  %>
+                  <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
+                  ログアウト
+                <% end %>
+              </li>
+
+              <% elsif admin_signed_in? %>
+              <li>
+                <%= link_to admin_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-list-ul"></i>
+                  投稿一覧
+                <% end %>
+              </li>
+              <li>
+                <%= link_to admin_customers_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-users"></i>
+                      会員一覧
+                    <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do  %>
+                  <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
+                  ログアウト
+                <% end %>
+              </li>
+
+              <% else %>
+              <li>
+                <%= link_to root_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-house"></i>
+                  HOME
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-user-plus"></i>
+                  新規登録
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_customer_session_path, class: "nav-link text-light" do  %>
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                  ログイン
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        <!--</div>-->
+      </header>
+      <%= yield %>
+    </body>
+      <footer class="footer">
+        <p class="text-center">Ramen_kaido</p>
+      </footer>
 </html>
+
+<style>
+.main {
+  background-image: url("<%= asset_path('23423604.jpg') %>");
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-color: rgba( 255, 255, 255, 1);
+}
+</style>

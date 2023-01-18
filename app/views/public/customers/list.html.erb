@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="post">
         <h4><%= @customer.name %>さんのプロフィール</h4>
           <% if @customer.image.attached? %>
@@ -19,7 +19,7 @@
           <table class="post_customer">
             <tbody>
               <tr>
-                <td>年齢</td>
+                <td style="width:30%">年齢</td>
                 <td><%= @customer.age %></td>
               </tr>
               <tr>
@@ -38,41 +38,24 @@
           </table>
         </div>
       </div>
-    <div class="col-md-9">
-      <h4>投稿一覧</h4>
-      <table class="customer_post">
-        <thead>
-          <tr>
-            <th>店名</th>
-            <th>ジャンル</th>
-            <th>コメント</th>
-            <th>評価平均</th>
-          </tr>
-        </thead>
-        <% @posts.each do |post| %>
-        <tbody>
-          <tr>
-            <td>
-              <%= link_to post_path(post.id) do %>
-                <% if post.image.attached? %>
-                  <%= image_tag post.image, size: "100x100" %>
-                <% else %>
-                  <%= image_tag 'no_image', size: "100x100" %>
+    <div class="col-md-8">
+      <h3 class="title">投稿一覧</h3>
+        <div class="row">
+          <% @posts.each do |post| %>
+            <div class="col-md-3">
+              <div class="post_list">
+                <%= link_to post_path(post.id) do %>
+                  <% if post.image.attached? %>
+                    <%= image_tag post.image, size: "140x140" %>
+                  <% else %>
+                    <%= image_tag 'no_image', size: "140x140" %>
+                  <% end %>
                 <% end %>
-              <% end %><br>
-              <%= post.store_name %>
-            </td>
-            <td>
-              <% post.tags.each do |tag| %>
-                <%= tag.genre %>
-              <% end %>
-            </td>
-            <td><%= post.post_comment %></td>
-            <td></td>
-          </tr>
-        </tbody>
-        <% end %>
-      </table>
+              </div>
+            </div>
+            <%= render 'public/posts/list', post: @post %>
+          <% end %>
+        </div>
     </div>
   </div>
 </div>

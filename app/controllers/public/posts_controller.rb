@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
 
     @q = Post.ransack(params[:q])
-    @post = @q.result(distinct: true)
+    # @posts = @q.result(distinct: true)
   end
 
   def show
@@ -46,20 +46,36 @@ class Public::PostsController < ApplicationController
   end
 
   def search
+    # group = {
+    #       "0" => {
+    #               m: "or",
+    #               activity_monday_eq: params[:q][:activity_monday],
+    #               activity_tuesday_eq: params[:q][:activity_tuesday],
+    #               activity_wednesday_eq: params[:q][:activity_wednesday],
+    #               activity_thursday_eq: params[:q][:activity_thursday],
+    #               activity_friday_eq: params[:q][:activity_friday],
+    #               activity_saturday_eq: params[:q][:activity_saturday],
+    #               activity_sunday_eq: params[:q][:activity_sunday],
+    #             }
+    #     }
+    # @q = Post.ransack(q: params[:q], g: group)
+    @q = Post.ransack(params[:q])
     @results = @q.result
+
   end
 
   private
 
   def set_q
-    @p = Post.ransack(params[:q])
+    @q = Post.ransack(params[:q])
+    @results = @q.result
   end
 
   def post_params
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,
     :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
     :activity_saturday, :activity_sunday, :holiday, :business_time, :post_comment,
-    :address, :lat, :lng, :genre, tag_ids: [])
+    :address, :lat, :lng, tag_ids: [])
   end
 
   def review_params

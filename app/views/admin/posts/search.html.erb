@@ -1,58 +1,56 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <h3>マイページ</h3>
+      <h5><%= link_to "新規投稿", new_post_path, class: "fa-solid fa-square-plus" %></h5>
       <p>
-        登録情報
-        <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-success" %>
+        ジャンルで絞り込む
+        <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
+          <%= select_tag :tag_id,
+              options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
+              {
+                prompt: "ジャンルで絞り込み",
+                onchange: 'submit(this.form);'
+              }
+          %>
+        <% end %>
       </p>
-      <table class="profile">
-        <tbody>
-          <tr>
-            <td>
-              <% if @customer.image.attached? %>
-                <%= image_tag current_customer.image %>
-              <% else %>
-                <%= image_tag "no_image", size: "150x150" %>
+
+<!--検索ふぉーむ実装中-->
+      <div class="search_form">
+        <%= search_form_for @q, url: search_admin_posts_path do |f| %>
+        <ul>
+          <li class="search-nav-content">
+            <p><%= f.label "営業日" %></p>
+            <span class="checkbox-inline">
+              <% weekly_columns.each_with_index do |day,i| %>
+                <%#= f.check_box "#{day}".to_sym, {checked: params[:q]["#{day}".to_sym] ? true : false}, "true", nil%>
+                <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
               <% end %>
-            </td>
-          <tr>
-            <td>ニックネーム</td>
-            <td>
-              <%= current_customer.name %>
-            </td>
-          <tr>
-            <td>メールアドレス</td>
-            <td><%= current_customer.email %></td>
-          </tr>
-          <tr>
-            <td>年齢</td>
-            <td><%= current_customer.age %></td>
-          </tr>
-          <tr>
-            <td>性別</td>
-            <td><%= current_customer.sex_method_i18n %></td>
-          </tr>
-          <tr>
-            <td>居住地</td>
-            <td><%= current_customer.residence %></td>
-          </tr>
-          <tr>
-            <td>コメント</td>
-            <td><%= current_customer.comment %></td>
-          </tr>
-        </tbody>
-      </table>
-      <%= link_to "ブックマーク一覧", bookmark_customer_path(@customer.id), class: "btn btn-link" %><br>
-      <%= link_to "フォロー一覧", customer_followings_path(@customer.id), class: "btn btn-link" %>
+            </span>
+          </li>
+          <li class="search-nav-content">
+            <p><%= f.label "ジャンル" %></p>
+            <%= f.collection_check_boxes :post_tags_tag_id_in, Tag.all, :id, :genre, {} do |c| %>
+              <%= c.label {c.check_box + c.text} %>
+            <% end %>
+          </li>
+          <li class="search-nav-content">
+            <p><%= f.label :address_start, "所在地" %></p>
+            <%= f.search_field :address_start, placeholder: "東京都" %>
+          </li>
+        </ul>
+          <%= f.submit '検索' %>
+        <% end %>
+      </div>
+<!--ここまで-->
+
     </div>
     <div class="col-md-8">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
-          <% @posts.each do |post| %>
+          <% @results.each do |post| %>
             <div class="col-md-3">
-              <p></p>
-              <div class="post">
+              <div class="post_list">
                 <%= link_to post_path(post.id) do %>
                   <% if post.image.attached? %>
                     <%= image_tag post.image, size: "140x140" %>
@@ -63,6 +61,7 @@
               </div>
             </div>
             <div class="col-md-9">
+              <div class="post_list">
                 <table>
                   <tbody>
                     <tr>
@@ -103,10 +102,11 @@
                     </tr>
                   </tbody>
                 </table>
+              </div>
             </div>
           <% end %>
       </div>
     </div>
-    </div>
   </div>
 </div>
+

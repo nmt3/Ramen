@@ -1,38 +1,60 @@
-<%= notice %>
-
 <div class="container">
+  <h3 class="notice"><%= notice %></h3>
   <div class="row">
-    <div class="col-xl-2 col-lg-2 col-md-2">
+    <div class="col-md-4">
       <h5><%= link_to "新規投稿", new_post_path, class: "fa-solid fa-square-plus" %></h5>
-      <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
-        <%= select_tag :tag_id,
-            options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
-            {
-              prompt: "ジャンルで絞り込み",
-              onchange: 'submit(this.form);'
-            }
-        %>
-      <% end %>
+      <p>
+        ジャンルで絞り込む
+        <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
+          <%= select_tag :tag_id,
+              options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
+              {
+                prompt: "ジャンルで絞り込み",
+                onchange: 'submit(this.form);'
+              }
+          %>
+        <% end %>
+      </p>
 
 <!--検索ふぉーむ実装中-->
       <div class="search_form">
-        <%= search_form_for @q, url: posts_path do |f| %>
-          <%= search_field_tag address_matches %>
-          <%= f.label :address_cont, "所在地" %>
-          <%= f.search_field :address_cont %><br>
+        <%= search_form_for @q, url: search_posts_path do |f| %>
+        <ul>
+          <!--<li class="search-nav-content">-->
+          <!--  <p><%#= f.label "営業日" %></p>-->
+          <!--  <span class="checkbox-inline">-->
+          <!--    <%# weekly_columns.each_with_index do |day,i| %>-->
+          <!--      <%#= f.select day.to_sym %>-->
+          <!--      <%#= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>-->
+          <!--    <%# end %>-->
+          <!--  </span>-->
+          <!--</li>-->
+          <li class="search-nav-content">
+            <p><%= f.label "ジャンル" %></p>
+            <% Tag.all.each do |label| %>
+              <%= f.check_box :post_tags_tag_id_in, { multiple: true,
+              checked: label[:checked], disabled: label[:disabled],
+              include_hidden: false }, label[:id] %>
+              <label><%= label.genre %></label>
+            <% end %>
+          </li>
+          <li class="search-nav-content">
+            <p><%= f.label :address_start, "所在地" %></p>
+            <%= f.search_field :address_start, placeholder: "東京都世田谷区" %>
+          </li>
           <%= f.submit '検索' %>
+        </ul>
         <% end %>
       </div>
 <!--ここまで-->
 
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
           <% @posts.each do |post| %>
-            <div class="col-md-2">
-              <p></p>
-              <div class="post">
+            <div class="col-md-3">
+              <div class="post_list">
                 <%= link_to post_path(post.id) do %>
                   <% if post.image.attached? %>
                     <%= image_tag post.image, size: "140x140" %>
@@ -42,50 +64,7 @@
                 <% end %>
               </div>
             </div>
-            <div class="col-md-9">
-              <div class="post_list">
-                <table>
-                  <tbody>
-                    <tr>
-                      <th>店名:</th>
-                      <td><%= post.store_name %></td>
-                    </tr>
-                    <tr>
-                      <th>営業日:</th>
-                      <td>
-                        <%  weekly_columns.each_with_index do |day,i| %>
-                          <% if post[day] == true %>
-                           <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-                          <% end %>
-                        <% end %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>営業時間</th>
-                      <td><%= post.business_time %></td>
-                    </tr>
-                    <tr>
-                      <th>ジャンル:</th>
-                      <td>
-                        <!--ジャンル-->
-                        <% post.tags.each do |tag| %>
-                          <%= tag.genre %>
-                        <% end %>
-                        <!--ジャンル-->
-                      <td>
-                    </tr>
-                    <tr>
-                      <th>所在地:</th>
-                      <td><%= post.address %></td>
-                    </tr>
-                    <tr>
-                      <th>評価平均:</th>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <%= render 'list', post: @post %>
           <% end %>
       </div>
     </div>

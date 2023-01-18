@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 2022_12_18_224924) do
     t.string "holiday"
     t.string "business_time"
     t.string "address"
-    t.string "genre"
     t.string "post_comment"
     t.float "lat"
     t.float "lng"
