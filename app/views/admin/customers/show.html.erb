@@ -50,50 +50,21 @@
       </table>
     </div>
     <div class="col-md-8">
-      <h4>投稿一覧</h4>
+      <h3 class="title">投稿一覧</h3>
       <div class="row">
         <% @posts.each do |post| %>
           <div class="col-md-3">
-            <p></p>
-            <div class="post">
-            <%= link_to admin_post_path(post.id) do %>
-              <% if post.image.attached? %>
-                <%= image_tag post.image, size: "140x140" %>
-              <% else %>
-                <%= image_tag 'no_image', size: "140x140" %>
+            <div class="post_list">
+              <%= link_to admin_post_path(post.id) do %>
+                <% if post.image.attached? %>
+                  <%= image_tag post.image, size: "140x140" %>
+                <% else %>
+                  <%= image_tag 'no_image', size: "140x140" %>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
-          </div>
-          <div class="col-md-9">
-            <p></p>
-            <table>
-              <tbody>
-                <tr>
-                  <td>店名:</td>
-                  <td><%= post.store_name %></td>
-                </tr>
-                <tr>
-                  <td>ジャンル:</td>
-                  <td>
-                    <!--ジャンル-->
-                    <% post.tags.each do |tag| %>
-                      <%= tag.genre %>
-                    <% end %>
-                    <!--ジャンル-->
-                  <td>
-                </tr>
-                <tr>
-                <td>所在地:</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>評価平均:</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              </div>
+            </div>
+            <%= render 'public/posts/list', post: @post %>
         <% end %>
       </div>
     </div>

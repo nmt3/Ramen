@@ -67,13 +67,13 @@
             </tr>
             <tr>
               <td>
-                <%= f.label '場所' %>
+                <%= f.label '住所' %>
               </td>
               <td>
                 <div class="actions">
                   <input id="address" type="textbox" value="">
                   <input type="button" value="検索" onclick="codeAddress()">
-                  <%= f.label :address,"店舗所在地" %>
+                  <%= f.label :address,"店舗住所" %>
                   <%= f.text_field :address %>
                   <%= f.label :lat,"緯度" %>
                   <%= f.text_field :lat,:value =>"緯度", id: :lat %>
@@ -151,8 +151,6 @@
             <tr>
               <td></td>
               <td>
-                <%= f.hidden_field :latitude %>
-                <%= f.hidden_field :longitude %>
                 <%= f.submit "投稿する", class: "btn btn-success mb-4", data: { turbo: false } %>
               </td>
             </tr>

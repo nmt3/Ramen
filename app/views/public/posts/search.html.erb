@@ -19,6 +19,7 @@
 
 <!--検索ふぉーむ実装中-->
       <div class="search_form">
+        <h4>複数項目で絞り込み</h4>
         <%= search_form_for @q, url: search_posts_path do |f| %>
         <ul>
           <!--<li class="search-nav-content">-->
@@ -37,7 +38,7 @@
             <% end %>
           </li>
           <li class="search-nav-content">
-            <p><%= f.label :address_start, "所在地" %></p>
+            <p><%= f.label :address_start, "住所" %></p>
             <%= f.search_field :address_start, placeholder: "東京都" %>
           </li>
         </ul>

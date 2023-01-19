@@ -4,7 +4,6 @@
     <div class="col-md-4">
       <h5><%= link_to "新規投稿", new_post_path, class: "fa-solid fa-square-plus" %></h5>
       <p>
-        ジャンルで絞り込む
         <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
           <%= select_tag :tag_id,
               options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
@@ -18,6 +17,7 @@
 
 <!--検索ふぉーむ実装中-->
       <div class="search_form">
+        <h4>複数項目で絞り込み</h4>
         <%= search_form_for @q, url: search_posts_path do |f| %>
         <ul>
           <!--<li class="search-nav-content">-->
@@ -39,7 +39,7 @@
             <% end %>
           </li>
           <li class="search-nav-content">
-            <p><%= f.label :address_start, "所在地" %></p>
+            <p><%= f.label :address_start, "住所" %></p>
             <%= f.search_field :address_start, placeholder: "東京都世田谷区" %>
           </li>
           <%= f.submit '検索' %>
@@ -52,9 +52,9 @@
     <div class="col-md-8">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
-          <% @posts.each do |post| %>
-            <div class="col-md-3">
-              <div class="post_list">
+          <div class="col-md-3">
+            <div class="post_list">
+              <% @posts.each do |post| %>
                 <%= link_to post_path(post.id) do %>
                   <% if post.image.attached? %>
                     <%= image_tag post.image, size: "140x140" %>
@@ -62,10 +62,10 @@
                     <%= image_tag 'no_image', size: "140x140" %>
                   <% end %>
                 <% end %>
-              </div>
+              <% end %>
             </div>
-            <%= render 'list', post: @post %>
-          <% end %>
+          </div>
+        <%= render 'list', post: @post %>
       </div>
     </div>
   </div>

@@ -141,7 +141,7 @@
         </script>
       <!--ここまでが星レビュー機能-->
         <%= f.label :review_comment, "口コミ内容" %><br>
-        <%= f.text_area :review_comment, size: "60x2" %>
+        <%= f.text_area :review_comment, size: "50%x2" %>
         <%= f.hidden_field :post_id, value: @post.id %>
         <%= f.submit "送信" %>
       <% end %>
@@ -160,18 +160,29 @@
             <%= r.customer.name %>
           <% end %>
 
+          <%#= r.star %>
+
+          <div id="star_<%= r.id %>"></div>
+
           <script>
-            $('#star').empty();
-            var elem = document.getElementById("star");
-            var opt = {
-              size: 36,
-              starOff: "<%= asset_path('star-off.png') %>",
-              starOn: "<%= asset_path('star-on.png') %>",
-              readOnly: true,   # 読み取り専用
-              score: <%= r.star %>,   # 星評価の表示
-            });
+            $('#star_<%= r.id %>').empty();
+            // var elem = document.getElementById("star_<%= r.id %>");
+            // var opt = {
+            //   // size: 36,
+            //   starOff: "<%= asset_path('star-off.png') %>",
+            //   starOn: "<%= asset_path('star-on.png') %>",
+            //   readOnly: true, // 読み知り専用
+            //   score: <%= r.star %>, // score
+            // };
+            raty(document.getElementById("star_<%= r.id %>"), // 表示する場所のid
+              {
+                starOff: "<%= asset_path('star-off.png') %>", // 星OFFの画像パス
+                starOn: "<%= asset_path('star-on.png') %>", // 星ONの画像パス
+                readOnly: true, // 読み知り専用
+                score: <%= r.star %>, // 表示する星の数
+              }
+            )
           </script>
-          <%= r.star %>
 
           <% if r.customer == current_customer %>
             <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %>

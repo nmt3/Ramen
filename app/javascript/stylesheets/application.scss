@@ -1,12 +1,33 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+body {
+  /* 画像ファイルの指定 */
+  background-image: url("../images/joshua-ryder-I51a7Yy7mQA-unsplash.jpg") !important;
+
+  /* 画像を常に天地左右の中央に配置 */
+  background-position: center center;
+
+  /* 画像をタイル状に繰り返し表示しない */
+  background-repeat: no-repeat;
+
+  /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
+  background-attachment: fixed;
+
+  /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+  background-size: cover;
+
+  /* 背景画像が読み込まれる前に表示される背景のカラー */
+  background-color: #464646;
+}
+
 .shadow { //ヘッダー
-  background-color: black;
+  background-color: rgba(86, 86, 86, 0.6);
   color: yellow;
 }
 
 .footer {
-  background-color: black;
+  background-color: rgba(86, 86, 86, 0.6);
   color: yellow;
   font-family: Comic Sans MS;
   margin-top: auto
@@ -17,7 +38,13 @@
 }
 
 .notice {
+  width: auto;
   color: red;
+  background-color: rgba(180, 180, 180, 15);
+}
+
+.welcome {
+  color: white;
 }
 
 .top-text {
@@ -55,7 +82,7 @@
 }
 
 .post_list {
-  padding-top: 10px;
+  margin-top: 10px;
 }
 
 .like-btn {
@@ -77,4 +104,9 @@
  .map {
   height: 300px;
   width: 400px;
+}
+
+.search_form {
+  background-color: rgba(86, 86, 86, 0.6);
+  color: white;
 }
