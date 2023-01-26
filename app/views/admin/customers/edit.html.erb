@@ -6,23 +6,23 @@
       <table class="table">
         <tbody>
           <tr>
-            <td>会員ID</td>
-            <td><%= @customer.id %></td>
+            <td><%= f.label "会員ID", class: "admin_customer" %></td>
+            <td class="admin_customer"><%= @customer.id %></td>
           </tr>
           <tr>
-            <td><%= f.label "ニックネーム" %></td>
+            <td><%= f.label "ニックネーム", class: "admin_customer" %></td>
             <td><%= f.text_field :name %></td>
           </tr>
           <tr>
-            <td><%= f.label "メールアドレス" %></td>
+            <td><%= f.label "メールアドレス", class: "admin_customer" %></td>
             <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
           </tr>
           <tr>
-            <td><%= f.label :"年齢" %></td>
+            <td><%= f.label "年齢", class: "admin_customer" %></td>
             <td></td>
           </tr>
           <tr>
-            <td><%= f.label :"性別" %></td>
+            <td><%= f.label "性別", class: "admin_customer" %></td>
             <td>
               <%= f.radio_button :sex_method, Customer.sex_methods.key(0) %>
               <%= f.label :sex_men, Customer.sex_methods_i18n[:men] %>
@@ -31,17 +31,17 @@
             </td>
           </tr>
           <tr>
-            <td><%= f.label :"居住地" %></td>
+            <td><%= f.label "居住地", class: "admin_customer" %></td>
             <td>
                <%= f.select :prefecture, Customer.residences.keys, {} %>
             </td>
           </tr>
           <tr>
-            <td><%= f.label :"コメント" %></td>
+            <td><%= f.label "コメント", class: "admin_customer" %></td>
             <td><%= f.text_area :comment, autofocus: true %></td>
           </tr>
           <tr>
-            <td><%= f.label "会員ステータス" %></td>
+            <td><%= f.label "会員ステータス", class: "admin_customer" %></td>
             <td>
               <%= f.radio_button :is_deleted, false %>
               <%= f.label :is_deleted, "有効" %>

@@ -20,15 +20,6 @@
         <%= search_form_for @q, url: search_admin_posts_path do |f| %>
         <ul>
           <li class="search-nav-content">
-            <p><%= f.label "営業日" %></p>
-            <span class="checkbox-inline">
-              <% weekly_columns.each_with_index do |day,i| %>
-                <%#= f.check_box "#{day}".to_sym, {checked: params[:q]["#{day}".to_sym] ? true : false}, "true", nil%>
-                <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
-              <% end %>
-            </span>
-          </li>
-          <li class="search-nav-content">
             <p><%= f.label "ジャンル" %></p>
             <%= f.collection_check_boxes :post_tags_tag_id_in, Tag.all, :id, :genre, {} do |c| %>
               <%= c.label {c.check_box + c.text} %>

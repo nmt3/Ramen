@@ -1,97 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h4>投稿者：
-        <%= link_to admin_customer_path(@post.id) do %>
-          <%= @post.customer.name  %>さん
-        <% end %>
-      </h4>
-      <p><%= link_to "投稿編集・削除", edit_admin_post_path(@post.id), class: "btn btn-success" %></p>
-        <!--</div>-->
-      <p>
-        <% if @post.image.attached? %>
-          <%=link_to @post.image,  "data-lightbox": @post.image do %>
-            <%= image_tag @post.image, size: "150x150" %>
-          <% end %>
-        <% else %>
-          <%= image_tag "no_image", size: "150x150" %>
-        <% end %>
-      </p>
-      <table class="post_show">
-        <tbody>
-          <tr>
-            <td style="width: 30%">店名</td>
-            <td><%= @post.store_name %></td>
-          </tr>
-          <tr>
-            <td>営業日</td>
-            <td>
-              <%  weekly_columns.each_with_index do |day,i| %>
-                <% if @post[day] == true %>
-                 <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>営業時間</td>
-            <td><%= @post.business_time %></td>
-          </tr>
-          <tr>
-            <td>定休日</td>
-            <td><%= @post.holiday %></td>
-          </tr>
-          <tr>
-            <td>ジャンル</td>
-            <td>
-              <% @post.tags.each do |tag| %>
-                <%= tag.genre %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>コメント</td>
-            <td><%= @post.post_comment %></td>
-          </tr>
-          <tr>
-            <td>所在地</td>
-            <td><%= @post.address %></td>
-          </tr>
-        </tbody>
-      </table>
+    <%= render 'public/posts/show', posts: @posts %>
 
-      <div id='map'></div>
 
-      <style>
-      #map {
-        height: 250px;
-        width: 80%;
-      }
-      </style>
-
-      <!-- js部分 -->
-      <script>
-      //初期マップの設定
-      let map
-      let marker
-      function initMap(){
-        geocoder = new google.maps.Geocoder()
-
-        map = new google.maps.Map(document.getElementById('map'), {
-          center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
-          zoom: 15,
-        });
-
-         marker = new google.maps.Marker({
-          position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
-          map: map
-        });
-      }
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
-
-    </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="title">
         <h4>レビュー一覧</h4>
       </div>
@@ -107,20 +19,29 @@
           <%= r.customer.name %>
         <% end %>
 
-        <script>
-          $('#star').empty();
-          var elem = document.getElementById("star");
-          var opt = {
-            size: 36,
-            starOff: "<%= asset_path('star-off.png') %>",
-            starOn: "<%= asset_path('star-on.png') %>",
-            readOnly: true,   # 読み取り専用
-            score: <%= r.star %>,   # 星評価の表示
-          });
-        </script>
-        <%= r.star %>
-
         <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %><br>
+
+          <div id="star_<%= r.id %>"></div>
+
+          <script>
+            $('#star_<%= r.id %>').empty();
+            // var elem = document.getElementById("star_<%= r.id %>");
+            // var opt = {
+            //   // size: 36,
+            //   starOff: "<%= asset_path('star-off.png') %>",
+            //   starOn: "<%= asset_path('star-on.png') %>",
+            //   readOnly: true, // 読み知り専用
+            //   score: <%= r.star %>, // score
+            // };
+            raty(document.getElementById("star_<%= r.id %>"), // 表示する場所のid
+              {
+                starOff: "<%= asset_path('star-off.png') %>", // 星OFFの画像パス
+                starOn: "<%= asset_path('star-on.png') %>", // 星ONの画像パス
+                readOnly: true, // 読み知り専用
+                score: <%= r.star %>, // 表示する星の数
+              }
+            )
+          </script>
 
         <% if r.image.attached? %>
           <%= link_to r.image, "data-lightbox": r.image do %>

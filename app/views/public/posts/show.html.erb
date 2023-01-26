@@ -1,152 +1,52 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h4>投稿者：
-        <%= link_to list_customer_path(@post.customer.id) do %>
-          <%= @post.customer.name  %>さん
+    <% if @review.errors.any? %>
+      <%= @review.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
-      </h4>
-      <% if @post.customer == current_customer %>
-        <%= link_to "投稿編集", edit_post_path(@post.id), class: "btn btn-success" %>
-      <% end %>
-      <!--<div class="bookmark">-->
-        <% if @post.bookmarked_by?(current_customer) %>
-          <td>
-            <%= link_to post_bookmark_path(@post), method: :delete do %>
-             <i class="fas fa-heart unlike-btn"></i>
-            <% end %>
-          </td>
-        <% else %>
-          <td>
-            <%= link_to post_bookmarks_path(@post), method: :post do %>
-              <i class="far fa-heart like-btn" ></i>
-            <% end %>
-          </td>
-        <% end %>
-        <%= @bookmarks_count %>件のいいね！
-        <!--</div>-->
-      <p>
-        <% if @post.image.attached? %>
-          <%=link_to @post.image,  "data-lightbox": @post.image do %>
-            <%= image_tag @post.image, size: "150x150" %>
+      </ul>
+    <% end %>
+    <!--<div class="col-md-4">-->
+      <%= render 'show', posts: @posts %>
+    <!--</div>-->
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>口コミ投稿</h4>
+          <%= form_with model: @review, local: :true do |f| %>
+          <!--ここからが星レビュー機能-->
+            <%= f.label "写真を追加" %>
+            <%= f.file_field :image, accept: "image/*" %><br>
+            <%= f.label :star, "評価" %>
+            <div class="form-group" id="star">
+              <%= f.hidden_field :star, id: :review_star %>
+            </div>
+            <script>
+              $('#star').empty();
+              var elem = document.getElementById("star");
+              var opt = {
+                size : 36,
+                starOff: "<%= asset_path('star-off.png') %>",
+                starOn: "<%= asset_path('star-on.png') %>",
+                scoreName: 'review[star]',
+                half: false,
+              };
+              raty(elem, opt)
+            </script>
+          <!--ここまでが星レビュー機能-->
+            <%= f.label :review_comment, "口コミ内容" %><br>
+            <%= f.text_area :review_comment, size: "25%x10%" %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.submit "送信" %>
           <% end %>
-        <% else %>
-          <%= image_tag "no_image", size: "150x150" %>
-        <% end %>
-      </p>
-      <table class="post_show">
-        <tbody>
-          <tr>
-            <td style="width: 30%">店名</td>
-            <td><%= @post.store_name %></td>
-          </tr>
-          <tr>
-            <td>営業日</td>
-            <td>
-              <%  weekly_columns.each_with_index do |day,i| %>
-                <% if @post[day] == true %>
-                 <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>営業時間</td>
-            <td><%= @post.business_time %></td>
-          </tr>
-          <tr>
-            <td>定休日</td>
-            <td><%= @post.holiday %></td>
-          </tr>
-          <tr>
-            <td>ジャンル</td>
-            <td>
-              <% @post.tags.each do |tag| %>
-                <%= tag.genre %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>コメント</td>
-            <td><%= @post.post_comment %></td>
-          </tr>
-          <tr>
-            <td>所在地</td>
-            <td><%= @post.address %></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div id='map'></div>
-
-      <style>
-      #map {
-        height: 250px;
-        width: 80%;
-      }
-      </style>
-
-      <!-- js部分 -->
-      <script>
-      //初期マップの設定
-      let map
-      let marker
-      function initMap(){
-        geocoder = new google.maps.Geocoder()
-
-        map = new google.maps.Map(document.getElementById('map'), {
-          center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
-          zoom: 15,
-        });
-
-         marker = new google.maps.Marker({
-          position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
-          map: map
-        });
-      }
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
-
-    </div>
-
-    <div class="col-md-8">
-      <% if @review.errors.any? %>
-        <%= @review.errors.count %>件のエラーが発生しました
-        <ul>
-          <% @review.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-      <h4>レビュー投稿</h4>
-      <%= form_with model: @review, local: :true do |f| %>
-      <!--ここからが星レビュー機能-->
-        <%= f.label "写真を追加" %>
-        <%= f.file_field :image, accept: "image/*" %><br>
-        <%= f.label :star, "評価" %>
-        <div class="form-group" id="star">
-          <%= f.hidden_field :star, id: :review_star %>
         </div>
-        <script>
-          $('#star').empty();
-          var elem = document.getElementById("star");
-          var opt = {
-            size : 36,
-            starOff: "<%= asset_path('star-off.png') %>",
-            starOn: "<%= asset_path('star-on.png') %>",
-            scoreName: 'review[star]',
-            half: false,
-          };
-          raty(elem, opt)
-        </script>
-      <!--ここまでが星レビュー機能-->
-        <%= f.label :review_comment, "口コミ内容" %><br>
-        <%= f.text_area :review_comment, size: "50%x2" %>
-        <%= f.hidden_field :post_id, value: @post.id %>
-        <%= f.submit "送信" %>
-      <% end %>
-      <div class="title">
-        <h4>レビュー一覧</h4>
+
+        <div class="col-md-8">
+               <div class="title">
+        <h4>口コミ一覧</h4>
+        <%= link_to "画像一覧", reviews_path(id: @post.id) %>
       </div>
       <% @reviews.each do |r| %>
         <div class="border border-dark">
@@ -198,6 +98,9 @@
           <%= r.review_comment %>
         </div>
       <% end %>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

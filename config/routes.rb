@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    resources :reviews, only: [:create, :update, :destroy]
+    resources :reviews, only: [:index, :create, :update, :destroy]
     resources :customers, only: [:show, :edit, :update] do
       collection do
         get :quit
@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:show, :edit, :create, :update, :destroy] do
       collection do
         get 'search'
+        get 'image'
       end
     end
     resources :customers, only: [:index, :show, :edit, :update] do

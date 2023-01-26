@@ -3,7 +3,7 @@ class Admin::PostsController < ApplicationController
   before_action :set_q, only: [:index, :search]
   def show
     @post = Post.find(params[:id])
-    @reviews = @post.reviews
+    @reviews = @post.reviews.order(created_at: :desc)
   end
 
   def edit

@@ -6,7 +6,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order(created_at: :desc)
 
     @q = Post.ransack(params[:q])
     # @posts = @q.result(distinct: true)
@@ -15,8 +15,12 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @review = Review.new
-    @reviews = @post.reviews
+    @reviews = @post.reviews.order(created_at: :desc)
     @bookmarks_count = Bookmark.where(post_id: @post.id).count
+  end
+
+  def image
+    @post = Post.find(params[:id])
   end
 
   def edit
@@ -46,22 +50,8 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    # group = {
-    #       "0" => {
-    #               m: "or",
-    #               activity_monday_eq: params[:q][:activity_monday],
-    #               activity_tuesday_eq: params[:q][:activity_tuesday],
-    #               activity_wednesday_eq: params[:q][:activity_wednesday],
-    #               activity_thursday_eq: params[:q][:activity_thursday],
-    #               activity_friday_eq: params[:q][:activity_friday],
-    #               activity_saturday_eq: params[:q][:activity_saturday],
-    #               activity_sunday_eq: params[:q][:activity_sunday],
-    #             }
-    #     }
-    # @q = Post.ransack(q: params[:q], g: group)
     @q = Post.ransack(params[:q])
     @results = @q.result
-
   end
 
   private

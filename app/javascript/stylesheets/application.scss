@@ -18,12 +18,13 @@ body {
   background-size: cover;
 
   /* 背景画像が読み込まれる前に表示される背景のカラー */
-  background-color: #464646;
+  background-color: #464243;
 }
 
 .shadow { //ヘッダー
   background-color: rgba(86, 86, 86, 0.6);
   color: yellow;
+  width: 100%;
 }
 
 .footer {
@@ -35,6 +36,7 @@ body {
 
 .container {
   padding-top: 30px;
+  color: white;
 }
 
 .notice {
@@ -54,6 +56,10 @@ body {
 
 .title_name {
   font-size: 2em;
+}
+
+.title { //見出し
+  color: yellow;
 }
 
 .collapse {
@@ -108,5 +114,10 @@ body {
 
 .search_form {
   background-color: rgba(86, 86, 86, 0.6);
+  color: white;
+}
+
+// 管理者
+.table {
   color: white;
 }

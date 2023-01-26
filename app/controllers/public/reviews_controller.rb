@@ -1,5 +1,13 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_customer!
+
+  def index
+    # binding.pry
+  
+    @post = Post.find(params[:id])
+    @reviews = Review.all
+  end
+
   def create
     @review = Review.new(review_params)
     @review.customer_id = current_customer.id
