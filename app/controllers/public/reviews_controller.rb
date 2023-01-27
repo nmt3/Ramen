@@ -3,7 +3,7 @@ class Public::ReviewsController < ApplicationController
 
   def index
     # binding.pry
-  
+
     @post = Post.find(params[:id])
     @reviews = Review.all
   end
@@ -32,6 +32,6 @@ class Public::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:post_id, :image, :star, :review_comment)
+    params.require(:review).permit(:post_id, :star, :review_comment, :image)
   end
 end

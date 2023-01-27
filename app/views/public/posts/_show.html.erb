@@ -25,11 +25,11 @@
         <%= @bookmarks_count %>件のいいね！
       </h4>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-2">
       <p>
         <% if @post.image.attached? %>
           <%=link_to @post.image,  "data-lightbox": @post.image do %>
-            <%= image_tag @post.image, size: "150x150" %>
+            <%= image_tag @post.image, size: "350x350" %>
           <% end %>
         <% else %>
           <%= image_tag "no_image", size: "150x150" %>
@@ -37,11 +37,11 @@
       </p>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
       <table class="post_show">
         <tbody>
           <tr>
-            <td style="width: 50%">店名</td>
+            <td style="width: 30%">店名</td>
             <td><%= @post.store_name %></td>
           </tr>
           <tr>

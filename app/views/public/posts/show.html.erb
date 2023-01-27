@@ -13,7 +13,7 @@
     <!--</div>-->
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h4>口コミ投稿</h4>
           <%= form_with model: @review, local: :true do |f| %>
           <!--ここからが星レビュー機能-->
@@ -38,66 +38,67 @@
           <!--ここまでが星レビュー機能-->
             <%= f.label :review_comment, "口コミ内容" %><br>
             <%= f.text_area :review_comment, size: "25%x10%" %>
-            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.hidden_field :post_id, value: @post.id %><br>
             <%= f.submit "送信" %>
           <% end %>
         </div>
 
-        <div class="col-md-8">
-               <div class="title">
-        <h4>口コミ一覧</h4>
-        <%= link_to "画像一覧", reviews_path(id: @post.id) %>
-      </div>
-      <% @reviews.each do |r| %>
-        <div class="border border-dark">
-          投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
-          <% if r.customer.image.attached? %>
-            <%= image_tag r.customer.image, size: "50x50" %>
-          <% else %>
-            <%= image_tag "no_image", size: "50x50" %>
+        <div class="col-md-9">
+          <div class="title">
+            <h4>
+              口コミ一覧
+              <%= link_to "画像一覧", reviews_path(id: @post.id) %>
+            </h4>
+          </div>
+          <% @reviews.each do |r| %>
+            <div class="border border-dark">
+              投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
+              <% if r.customer.image.attached? %>
+                <%= image_tag r.customer.image, size: "50x50" %>
+              <% else %>
+                <%= image_tag "no_image", size: "50x50" %>
+              <% end %>
+              <%= link_to list_customer_path(r.customer.id) do %>
+                <%= r.customer.name %>
+              <% end %>
+              <% if r.customer == current_customer %>
+                <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %>
+              <% end %><br>
+
+              <%#= r.star %>
+
+              <div id="star_<%= r.id %>"></div>
+
+              <script>
+                $('#star_<%= r.id %>').empty();
+                // var elem = document.getElementById("star_<%= r.id %>");
+                // var opt = {
+                //   // size: 36,
+                //   starOff: "<%= asset_path('star-off.png') %>",
+                //   starOn: "<%= asset_path('star-on.png') %>",
+                //   readOnly: true, // 読み知り専用
+                //   score: <%= r.star %>, // score
+                // };
+                raty(document.getElementById("star_<%= r.id %>"), // 表示する場所のid
+                  {
+                    starOff: "<%= asset_path('star-off.png') %>", // 星OFFの画像パス
+                    starOn: "<%= asset_path('star-on.png') %>", // 星ONの画像パス
+                    readOnly: true, // 読み知り専用
+                    score: <%= r.star %>, // 表示する星の数
+                  }
+                )
+              </script>
+
+              <% if r.image.attached? %>
+                <%= link_to r.image, "data-lightbox": r.image do %>
+                  <%= image_tag r.image, size: "80x80" %>
+                <% end %>
+              <% else %>
+                <%= image_tag "no_image", size: "80x80" %>
+              <% end %>
+              <%= r.review_comment %>
+            </div>
           <% end %>
-          <%= link_to list_customer_path(r.customer.id) do %>
-            <%= r.customer.name %>
-          <% end %>
-
-          <%#= r.star %>
-
-          <div id="star_<%= r.id %>"></div>
-
-          <script>
-            $('#star_<%= r.id %>').empty();
-            // var elem = document.getElementById("star_<%= r.id %>");
-            // var opt = {
-            //   // size: 36,
-            //   starOff: "<%= asset_path('star-off.png') %>",
-            //   starOn: "<%= asset_path('star-on.png') %>",
-            //   readOnly: true, // 読み知り専用
-            //   score: <%= r.star %>, // score
-            // };
-            raty(document.getElementById("star_<%= r.id %>"), // 表示する場所のid
-              {
-                starOff: "<%= asset_path('star-off.png') %>", // 星OFFの画像パス
-                starOn: "<%= asset_path('star-on.png') %>", // 星ONの画像パス
-                readOnly: true, // 読み知り専用
-                score: <%= r.star %>, // 表示する星の数
-              }
-            )
-          </script>
-
-          <% if r.customer == current_customer %>
-            <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %>
-          <% end %><br>
-
-          <% if r.image.attached? %>
-            <%= link_to r.image, "data-lightbox": r.image do %>
-              <%= image_tag r.image, size: "80x80" %>
-            <% end %>
-          <% else %>
-            <%= image_tag "no_image", size: "80x80" %>
-          <% end %>
-          <%= r.review_comment %>
-        </div>
-      <% end %>
         </div>
       </div>
 

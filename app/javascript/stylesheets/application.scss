@@ -58,10 +58,6 @@ body {
   font-size: 2em;
 }
 
-.title { //見出し
-  color: yellow;
-}
-
 .collapse {
   margin-right: 40%;
 }
@@ -89,6 +85,10 @@ body {
 
 .post_list {
   margin-top: 10px;
+}
+
+.post_show {
+  margin: 10px;
 }
 
 .like-btn {

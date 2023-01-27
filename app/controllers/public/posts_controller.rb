@@ -19,10 +19,6 @@ class Public::PostsController < ApplicationController
     @bookmarks_count = Bookmark.where(post_id: @post.id).count
   end
 
-  def image
-    @post = Post.find(params[:id])
-  end
-
   def edit
     @post = Post.find(params[:id])
   end
