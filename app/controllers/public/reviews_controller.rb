@@ -5,7 +5,10 @@ class Public::ReviewsController < ApplicationController
     # binding.pry
 
     @post = Post.find(params[:id])
-    @reviews = Review.all
+    # @reviews = Review.where(post_id: @post.id)
+    @reviews = @post.reviews
+    # @bookmarks_count = Bookmark.where(post_id: @post.id).count
+    @bookmarks_count = @post.bookmarks.count
   end
 
   def create

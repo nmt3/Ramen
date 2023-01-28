@@ -11,7 +11,7 @@
       <!--<div class="bookmark">-->
         <% if @post.bookmarked_by?(current_customer) %>
           <td>
-            <%= link_to post_bookmark_path(@post), method: :delete do %>
+            <%= link_to post_bookmark_path(@post, @post.bookmarks.first), method: :delete do %>
              <i class="fas fa-heart unlike-btn"></i>
             <% end %>
           </td>
@@ -29,15 +29,15 @@
       <p>
         <% if @post.image.attached? %>
           <%=link_to @post.image,  "data-lightbox": @post.image do %>
-            <%= image_tag @post.image, size: "350x350" %>
+            <%= image_tag @post.image, size: "180x180" %>
           <% end %>
         <% else %>
-          <%= image_tag "no_image", size: "150x150" %>
+          <%= image_tag "no_image", size: "180x180" %>
         <% end %>
       </p>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
       <table class="post_show">
         <tbody>
           <tr>
@@ -83,7 +83,7 @@
     </div>
 
 
-    <div class="col-md-4">
+    <div class="col-md-6">
 
       <div id='map'></div>
 

@@ -5,18 +5,20 @@
     <!--</div>-->
 
     <div class="col-md-8">
-      <h4>
-        <%= link_to "口コミ一覧", post_path(@post.id) %>
-        画像一覧
-      </h4>
-      <div class="row">
-          <% @reviews.each do |review| %>
-            <div class="col-md-2">
-              <% if review.image.attached? %>
-                <%= image_tag review.image, size: "100x100" %>
-              <% end %>
-            </div>
-          <% end %>
+      <div class="review">
+        <h4>
+          <%= link_to "口コミ一覧", post_path(@post.id) %>
+          画像一覧
+        </h4>
+        <div class="row">
+            <% @reviews.each do |review| %>
+              <div class="col-md-2">
+                <% if review.image.attached? %>
+                  <%= image_tag review.image, size: "100x100" %>
+                <% end %>
+              </div>
+            <% end %>
+        </div>
       </div>
     </div>
   </div>
