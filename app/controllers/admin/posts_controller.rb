@@ -4,6 +4,7 @@ class Admin::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @reviews = @post.reviews.order(created_at: :desc)
+    @bookmarks_count = @post.bookmarks.count
   end
 
   def edit
@@ -24,7 +25,7 @@ class Admin::PostsController < ApplicationController
 
   def search
     @q = Post.ransack(params[:q])
-    @results = @q.result
+    @results = @q.result.order(created_at: :desc)
 
   end
 

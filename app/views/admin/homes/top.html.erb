@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= form_tag admin_path, method: :get, class: "boards_searchForm" do %>
         <%= select_tag :tag_id,
             options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
@@ -41,11 +41,11 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-8 col-sm-8 col-12">
+    <div class="col-md-9 col-12">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
           <% @posts.each do |post| %>
-            <div class="col-md-3 col-sm-3 col-5">
+            <div class="col-md-3 col-5">
               <div class="post_list">
                 <%= link_to admin_post_path(post.id) do %>
                   <% if post.image.attached? %>
@@ -56,7 +56,7 @@
                 <% end %>
               </div>
             </div>
-            <div class="col-md-9 col-sm-9 col-7">
+            <div class="col-md-9 col-7">
               <div class="post_list">
                 <table>
                   <tbody>
@@ -94,7 +94,13 @@
                     </tr>
                     <tr>
                       <th>評価平均:</th>
-                      <td></td>
+                      <td>
+                        <% if post.reviews.exists? %>
+                          <%= post.reviews.average(:star) %>
+                        <%else%>
+                          ー
+                        <% end %>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

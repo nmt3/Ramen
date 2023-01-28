@@ -50,7 +50,7 @@
             <div class="title">
               <h4>
                 口コミ一覧
-                <%= link_to "画像一覧", reviews_path(id: @post.id) %>
+                <%= link_to "画像一覧", reviews_path(@post.id) %>
               </h4>
             </div>
             <% @reviews.each do |r| %>

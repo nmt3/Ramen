@@ -40,11 +40,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/" => "homes#top"
 
-    get "search"
+    # get "search"
     resources :posts, only: [:show, :edit, :create, :update, :destroy] do
       collection do
         get 'search'
-        get 'image'
       end
     end
     resources :customers, only: [:index, :show, :edit, :update] do
