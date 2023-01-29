@@ -18,21 +18,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 
-    <style>
-    .main {
-      background-image: url("<%= asset_path('23423604.jpg') %>");
-      height: 100%;
-      width: 100%;
-      background-size: cover;
-      background-color: rgba( 255, 255, 255, 1);
-    }
-    </style>
-
   </head>
 
   <body class="d-flex flex-column vh-100">
     <header class="shadow">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-dark">
         <!--<div class="container">-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,25 +32,25 @@
             <ul class="navbar-nav ml-auto">
               <% if customer_signed_in? %>
               <li>
-                <%= link_to root_path, class: "nav-link text-light" do %>
+                <%= link_to root_path, class: "nav-link text-dark" do %>
                   <i class="fa-solid fa-house"></i>
                   HOME
                 <% end %>
               </li>
               <li>
-                <%= link_to customer_path(current_customer), class: "nav-link text-light" do %>
+                <%= link_to customer_path(current_customer), class: "nav-link text-dark" do %>
                   <i class="fa-solid fa-user"></i>
                   MY PAGE
                 <% end %>
               </li>
               <li>
-                <%= link_to posts_path, class: "nav-link text-light" do  %>
+                <%= link_to posts_path, class: "nav-link text-dark" do  %>
                   <i class="fa-solid fa-list-ul"></i>
                   投稿一覧
                 <% end %>
               </li>
               <li>
-                <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do  %>
+                <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-dark" do  %>
                   <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
                   ログアウト
                 <% end %>
@@ -68,19 +58,19 @@
 
               <% elsif admin_signed_in? %>
               <li>
-                <%= link_to admin_path, class: "nav-link text-light" do %>
+                <%= link_to admin_path, class: "nav-link text-dark" do %>
                   <i class="fa-solid fa-list-ul"></i>
                   投稿一覧
                 <% end %>
               </li>
               <li>
-                <%= link_to admin_customers_path, class: "nav-link text-light" do %>
+                <%= link_to admin_customers_path, class: "nav-link text-dark" do %>
                   <i class="fa-solid fa-users"></i>
                       会員一覧
                     <% end %>
               </li>
               <li>
-                <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do  %>
+                <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-dark" do  %>
                   <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
                   ログアウト
                 <% end %>
@@ -88,19 +78,19 @@
 
               <% else %>
               <li>
-                <%= link_to root_path, class: "nav-link text-light" do %>
+                <%= link_to root_path, class: "nav-link text-dark" do %>
                   <i class="fa-solid fa-house"></i>
                   HOME
                 <% end %>
               </li>
               <li>
-                <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
+                <%= link_to new_customer_registration_path, class: "nav-link text-dark" do %>
                   <i class="fa-solid fa-user-plus"></i>
                   新規登録
                 <% end %>
               </li>
               <li>
-                <%= link_to new_customer_session_path, class: "nav-link text-light" do  %>
+                <%= link_to new_customer_session_path, class: "nav-link text-dark" do  %>
                   <i class="fa-solid fa-right-to-bracket"></i>
                   ログイン
                 <% end %>

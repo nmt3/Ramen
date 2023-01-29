@@ -3,7 +3,7 @@
 
 body {
   /* 画像ファイルの指定 */
-  background-image: url("../images/joshua-ryder-I51a7Yy7mQA-unsplash.jpg") !important;
+  background-image: url("../images/jakub.jpg") !important;
 
   /* 画像を常に天地左右の中央に配置 */
   background-position: center center;
@@ -18,13 +18,11 @@ body {
   background-size: cover;
 
   /* 背景画像が読み込まれる前に表示される背景のカラー */
-  background-color: #464243;
+  // background-color: #464243;
 }
 
 .shadow { //ヘッダー
   background-color: rgba(86, 86, 86, 0.6);
-  color: yellow;
-  width: 100%;
 }
 
 .footer {
@@ -36,7 +34,7 @@ body {
 
 .container {
   padding-top: 30px;
-  color: white;
+  // color: white;
 }
 
 .notice {
@@ -46,7 +44,7 @@ body {
 }
 
 .welcome {
-  color: white;
+  // color: white;
 }
 
 .top-text {
@@ -60,6 +58,11 @@ body {
 
 .collapse {
   margin-right: 40%;
+}
+
+.customer_action {
+  padding: 10px 10px;
+  margin: auto;
 }
 
 .tag_check {
@@ -83,8 +86,12 @@ body {
   padding: 10px;
 }
 
-.post_list {
-  margin-top: 10px;
+.post {
+  border-collapse: separate;
+}
+
+.submit {
+  margin-top: 40px;
 }
 
 .post_show {
@@ -116,12 +123,42 @@ body {
   width: 400px;
 }
 
+.image_list {
+  padding: 10px;
+}
+
 .search_form {
-  background-color: rgba(86, 86, 86, 0.6);
-  color: white;
+  // background-color: rgba(86, 86, 86, 0.6);
+  // color: white;
 }
 
 // 管理者
-.table {
-  color: white;
+.review_box {
+  border: 2px solid #000000;
+	width: 100%;
+	padding: 10px;
+	word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+post_th {
+  width: 30%;
+}
+
+td {
+  // padding: 0px 10px;
+}
+
+table.followers th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  background: #3f3f3f;
+  color: #ffffff;
+}
+table.followers td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
 }

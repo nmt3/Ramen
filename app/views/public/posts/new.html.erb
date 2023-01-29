@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-12">
+    <div class="col-md-12 col-sm-12">
       <h3 class="title">新規投稿</h3>
     </div>
-    <div class="col-md-5 col-sm-6 col-12">
-      <!--<div class="new_post">-->
+    <div class="col-md-6 col-sm-12">
         <% if @post.errors.any? %>
           <%= @post.errors.count %>件のエラーが発生しました
           <ul>
@@ -21,7 +20,7 @@
             </tr>
             <tr>
               <td><%= f.label "店名" %></td>
-              <td><%= f.text_field :store_name, placeholder: "らーめん街道１号店", :size=>"40" %></td>
+              <td><%= f.text_field :store_name, placeholder: "らーめん街道１号店", :size=>"30" %></td>
             </tr>
             <tr>
               <td><%= f.label "営業日" %></td>
@@ -37,13 +36,13 @@
             <tr>
               <td><%= f.label "営業時間" %></td>
               <td>
-                <%= f.text_field :business_time, placeholder: "11:00~15:30, 17:00~23:30", :size=>"40" %>
+                <%= f.text_field :business_time, placeholder: "11:00~15:30, 17:00~23:30", :size=>"30" %>
               </td>
             </tr>
             <tr>
               <td><%= f.label "定休日" %></td>
               <td>
-                <%= f.text_field :holiday, placeholder: "例: 毎週月曜日, 第三月曜日", :size=>"40" %>
+                <%= f.text_field :holiday, placeholder: "例: 毎週月曜日, 第三月曜日", :size=>"30" %>
               </td>
             </tr>
             <tr>
@@ -65,12 +64,11 @@
             </tr>
             <tr>
               <td><%= f.label "コメント" %></td>
-              <td><%= f.text_area :post_comment, :size=>"40x5" %></td>
+              <td><%= f.text_area :post_comment, :size=>"30x5" %></td>
             </tr>
           </table>
-        <!--</div>-->
       </div>
-      <div class="col-md-7 col-sm-6 col-12">
+      <div class="col-md-6 col-sm-12">
         <div class="actions">
           <%= f.label '住所' %>
           <input id="address" type="textbox" placeholder="住所を入力してください">
@@ -88,7 +86,7 @@
         <style>
           #map {
             height: 300px;
-            width: 400px;
+            width: 300px;
           }
         </style>
 
@@ -148,7 +146,9 @@
 
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap" async defer></script>
-        <%= f.submit "投稿する", class: "btn btn-success mb-4", data: { turbo: false } %>
+        <div class="submit">
+          <%= f.submit "投稿する", class: "btn btn-success mb-4", data: { turbo: false } %>
+        </div>
       </div>
     <% end %>
   </div>

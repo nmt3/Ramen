@@ -64,8 +64,8 @@ class Public::PostsController < ApplicationController
     :address, :lat, :lng, tag_ids: [])
   end
 
-  def review_params
-    params.require(:review).permit(:customer_id, :post_id, :image, :star, :review_comment)
-  end
+  # def review_params
+  #   params.require(:review).permit(:customer_id, :post_id, :star, :review_comment, image: [])
+  # end
 
 end

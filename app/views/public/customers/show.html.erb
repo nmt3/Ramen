@@ -1,21 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-12">
       <h3>マイページ</h3>
       <p>
         登録情報
         <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-success" %>
       </p>
+      <% if @customer.image.attached? %>
+        <%= image_tag current_customer.image %>
+      <% else %>
+        <%= image_tag "no_image", size: "150x150" %>
+      <% end %>
       <table class="profile">
         <tbody>
-          <tr>
-            <td>
-              <% if @customer.image.attached? %>
-                <%= image_tag current_customer.image %>
-              <% else %>
-                <%= image_tag "no_image", size: "150x150" %>
-              <% end %>
-            </td>
           <tr>
             <td>ニックネーム</td>
             <td>
@@ -43,10 +40,12 @@
           </tr>
         </tbody>
       </table>
-      <%= link_to "ブックマーク一覧", bookmark_customer_path(@customer.id), class: "btn btn-link" %><br>
-      <%= link_to "フォロー一覧", customer_followings_path(@customer.id), class: "btn btn-link" %>
+      <div class="customer_action">
+        <%= link_to "ブックマーク一覧", bookmark_customer_path(@customer.id), class: "btn btn-dark" %>
+        <%= link_to "フォロー一覧", customer_followings_path(@customer.id), class: "btn btn-dark" %>
+      </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 col-12">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
           <% @posts.each do |post| %>
@@ -62,7 +61,7 @@
                 <% end %>
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 col-12">
                 <table>
                   <tbody>
                     <tr>

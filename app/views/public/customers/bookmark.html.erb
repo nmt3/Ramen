@@ -1,11 +1,11 @@
 <div class="container">
   <di class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 col-12">
       <h3>ブックマーク一覧</h3>
       <div class="row">
         <% if @bookmark_list.present? %>
           <% @bookmark_list.each do |b| %>
-            <div class="col-md-2">
+            <div class="col-md-2 col-6">
               <div class="bookmark_list">
                 <p class="text-center">
                   <%= link_to post_path(b.id) do %>

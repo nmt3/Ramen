@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-12">
       <%= form_tag admin_path, method: :get, class: "boards_searchForm" do %>
         <%= select_tag :tag_id,
             options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
@@ -12,17 +12,9 @@
       <% end %>
 
      <div class="search_form">
-        <%= search_form_for @q, url: search_admin_posts_path do |f| %>
+      <h4>複数項目で絞り込み</h4>
+      <%= search_form_for @q, url: search_admin_posts_path do |f| %>
         <ul>
-          <!--<li class="search-nav-content">-->
-          <!--  <p><%#= f.label "営業日" %></p>-->
-          <!--  <span class="checkbox-inline">-->
-              <%# weekly_columns.each_with_index do |day,i| %>
-                <%#= f.check_box day.to_sym, {}, "true", "false" %>
-                <%#= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
-              <%# end %>
-          <!--  </span>-->
-          <!--</li>-->
           <li class="search-nav-content">
             <p><%= f.label "ジャンル" %></p>
             <% Tag.all.each do |label| %>
@@ -41,11 +33,11 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-9 col-12">
+    <div class="col-md-9 col-sm-12">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
           <% @posts.each do |post| %>
-            <div class="col-md-3 col-5">
+            <div class="col-md-3 col-sm-2">
               <div class="post_list">
                 <%= link_to admin_post_path(post.id) do %>
                   <% if post.image.attached? %>
@@ -56,16 +48,16 @@
                 <% end %>
               </div>
             </div>
-            <div class="col-md-9 col-7">
+            <div class="col-md-9 col-sm-12">
               <div class="post_list">
                 <table>
                   <tbody>
                     <tr>
-                      <th>店名:</th>
+                      <th class="post_th">店名:</th>
                       <td><%= post.store_name %></td>
                     </tr>
                     <tr>
-                      <th>営業日:</th>
+                      <th class="post_th">営業日:</th>
                       <td>
                         <%  weekly_columns.each_with_index do |day,i| %>
                           <% if post[day] == true %>
@@ -75,11 +67,11 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>営業時間</th>
+                      <th class="post_th">営業時間</th>
                       <td><%= post.business_time %></td>
                     </tr>
                     <tr>
-                      <th>ジャンル:</th>
+                      <th class="post_th">ジャンル:</th>
                       <td>
                         <!--ジャンル-->
                         <% post.tags.each do |tag| %>
@@ -89,14 +81,14 @@
                       <td>
                     </tr>
                     <tr>
-                      <th>所在地:</th>
+                      <th class="post_th">所在地:</th>
                       <td><%= post.address %></td>
                     </tr>
                     <tr>
-                      <th>評価平均:</th>
+                      <th class="post_th">評価平均:</th>
                       <td>
                         <% if post.reviews.exists? %>
-                          <%= post.reviews.average(:star) %>
+                          <%= post.reviews.average(:star).floor(1) %>
                         <%else%>
                           ー
                         <% end %>

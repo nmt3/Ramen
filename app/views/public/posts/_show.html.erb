@@ -1,14 +1,13 @@
 <div class="col-md-12">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 col-12">
       <h4>投稿者：
         <%= link_to list_customer_path(@post.customer.id) do %>
           <%= @post.customer.name  %>さん
         <% end %>
-      <% if @post.customer == current_customer %>
-        <%= link_to "投稿編集", edit_post_path(@post.id), class: "btn btn-success" %>
-      <% end %>
-      <!--<div class="bookmark">-->
+        <% if @post.customer == current_customer %>
+          <%= link_to "投稿編集", edit_post_path(@post.id), class: "btn btn-success" %>
+        <% end %><br>
         <% if @post.bookmarked_by?(current_customer) %>
           <td>
             <%= link_to post_bookmark_path(@post, @post.bookmarks.first), method: :delete do %>
@@ -25,10 +24,10 @@
         <%= @bookmarks_count %>件のいいね！
       </h4>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-12">
       <p>
         <% if @post.image.attached? %>
-          <%=link_to @post.image,  "data-lightbox": @post.image do %>
+          <%=link_to @post.image, "data-lightbox": @post.image do %>
             <%= image_tag @post.image, size: "180x180" %>
           <% end %>
         <% else %>
@@ -37,7 +36,7 @@
       </p>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-5 col-12">
       <table class="post_show">
         <tbody>
           <tr>
@@ -83,13 +82,13 @@
     </div>
 
 
-    <div class="col-md-6">
+    <div class="col-md-5 col-12">
 
       <div id='map'></div>
 
       <style>
       #map {
-        height: 250px;
+        height: 200px;
         width: 80%;
       }
       </style>

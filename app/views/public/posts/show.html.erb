@@ -11,15 +11,16 @@
     <!--<div class="col-md-4">-->
       <%= render 'show', posts: @posts %>
     <!--</div>-->
-    <div class="col-md-12">
+    <div class="col-md-12 col-12">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 col-12">
           <div class="review">
             <h4>口コミ投稿</h4>
             <%= form_with model: @review, local: :true do |f| %>
             <!--ここからが星レビュー機能-->
               <%= f.label "写真を追加" %>
-              <%= f.file_field :image, accept: "image/*" %><br>
+              <%#= f.file_field :image, accept: "image/*" %><br>
+              <%= f.file_field :images, multiple: true %><br>
               <%= f.label :star, "評価" %>
               <div class="form-group" id="star">
                 <%= f.hidden_field :star, id: :review_star %>
@@ -45,16 +46,16 @@
           </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 col-12">
           <div class="review">
             <div class="title">
               <h4>
                 口コミ一覧
-                <%= link_to "画像一覧", reviews_path(@post.id) %>
+                <%= link_to "画像一覧", reviews_path(id: @post.id) %>
               </h4>
             </div>
             <% @reviews.each do |r| %>
-              <div class="border border-dark">
+              <div class="review_box">
                 投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
                 <% if r.customer.image.attached? %>
                   <%= image_tag r.customer.image, size: "50x50" %>
@@ -64,6 +65,7 @@
                 <%= link_to list_customer_path(r.customer.id) do %>
                   <%= r.customer.name %>
                 <% end %>
+
                 <% if r.customer == current_customer %>
                   <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %>
                 <% end %><br>
@@ -92,14 +94,16 @@
                   )
                 </script>
 
-                <% if r.image.attached? %>
-                  <%= link_to r.image, "data-lightbox": r.image do %>
-                    <%= image_tag r.image, size: "80x80" %>
+                <% if r.images.attached? %>
+                  <% r.images.each do |image| %>
+                    <%=link_to image, "data-lightbox": image do %>
+                      <%= image_tag image, size: '80x80' %>
+                    <% end %>
                   <% end %>
-                <% else %>
-                  <%= image_tag "no_image", size: "80x80" %>
                 <% end %>
-                <%= r.review_comment %>
+                <div class="review_comment">
+                  <%= r.review_comment %>
+                </div>
               </div>
             <% end %>
           </div>

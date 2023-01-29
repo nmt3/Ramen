@@ -2,26 +2,28 @@
   <div class="row">
     <%= render 'admin/posts/show', posts: @posts %>
   </div>
-    <div class="col-md-12">
-      <div class="title">
-        <h4>
-          口コミ一覧
-          <%= link_to "画像一覧", admin_reviews_path(id: @post.id) %>
-        </h4>
-      </div>
-      <% @reviews.each do |r| %>
-      <div class="border border-dark">
-        投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
-        <% if r.customer.image.attached? %>
-          <%= image_tag r.customer.image, size: "50x50" %>
-        <% else %>
-          <%= image_tag "no_image", size: "50x50" %>
-        <% end %>
-        <%= link_to list_customer_path(r.customer.id) do %>
-          <%= r.customer.name %>
-        <% end %>
 
-        <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %><br>
+    <div class="col-md-12 col-sm-12">
+      <div class="review">
+        <div class="title">
+          <h4>
+            口コミ一覧
+            <%= link_to "画像一覧", admin_reviews_path(id: @post.id) %>
+          </h4>
+        </div>
+        <% @reviews.each do |r| %>
+        <div class="review_box">
+          投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
+          <% if r.customer.image.attached? %>
+            <%= image_tag r.customer.image, size: "50x50" %>
+          <% else %>
+            <%= image_tag "no_image", size: "50x50" %>
+          <% end %>
+          <%= link_to list_customer_path(r.customer.id) do %>
+            <%= r.customer.name %>
+          <% end %>
+
+          <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger" %><br>
 
           <div id="star_<%= r.id %>"></div>
 
@@ -45,19 +47,19 @@
             )
           </script>
 
-        <% if r.image.attached? %>
-          <%= link_to r.image, "data-lightbox": r.image do %>
-            <%= image_tag r.image, size: "80x80" %>
+          <% if r.images.attached? %>
+            <% r.images.each do |image| %>
+              <%=link_to image, "data-lightbox": image do %>
+                <%= image_tag image, size: '80x80' %>
+              <% end %>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= image_tag "no_image", size: "80x80" %>
+          <div class="review_comment">
+            <%= r.review_comment %>
+          </div>
         <% end %>
-        <%= r.review_comment %>
       </div>
-      <% end %>
-      </table>
     </div>
-  </div>
 </div>
 
 

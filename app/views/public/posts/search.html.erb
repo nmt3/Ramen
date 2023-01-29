@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-12">
       <h5><%= link_to "新規投稿", new_post_path, class: "fa-solid fa-square-plus" %></h5>
       <p>
         ジャンルで絞り込む
@@ -48,7 +48,7 @@
 <!--ここまで-->
 
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9 col-sm-9">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
           <% @results.each do |post| %>
@@ -63,7 +63,7 @@
                 <% end %>
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 col-sm-12">
               <div class="post_list">
                 <table>
                   <tbody>
@@ -101,7 +101,13 @@
                     </tr>
                     <tr>
                       <th>評価平均:</th>
-                      <td></td>
+                      <td>
+                        <% if post.reviews.exists? %>
+                          <%= post.reviews.average(:star).floor(1) %>
+                        <%else%>
+                          ー
+                        <% end %>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
