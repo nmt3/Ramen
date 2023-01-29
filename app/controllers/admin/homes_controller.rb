@@ -5,7 +5,7 @@ class Admin::HomesController < ApplicationController
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
 
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).order(created_at: :desc)
+    @posts = @q.result(distinct: true).page(params[:page]).per(10).order(created_at: :desc)
   end
 
 end
