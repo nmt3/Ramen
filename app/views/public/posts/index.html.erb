@@ -42,6 +42,7 @@
     </div>
     <div class="col-md-9 col-sm-12">
       <h3 class="title">投稿一覧</h3>
+      <%= paginate @posts %>
         <div class="row">
           <% @posts.each do |post| %>
             <div class="col-md-3 col-sm-2">
@@ -107,6 +108,7 @@
             </div>
           <% end %>
       </div>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

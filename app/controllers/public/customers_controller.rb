@@ -9,7 +9,7 @@ class Public::CustomersController < ApplicationController
   def list
     # byebug
     @customer = Customer.find(params[:id])
-    @posts = Post.where(customer_id: params[:id])
+    @posts = Post.where(customer_id: params[:id]).page(params[:page]).per(10)
   end
 
   def bookmark

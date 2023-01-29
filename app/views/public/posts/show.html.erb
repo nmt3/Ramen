@@ -54,6 +54,7 @@
                 <%= link_to "画像一覧", reviews_path(id: @post.id) %>
               </h4>
             </div>
+            <%= paginate @reviews %>
             <% @reviews.each do |r| %>
               <div class="review_box">
                 投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
@@ -106,6 +107,7 @@
                 </div>
               </div>
             <% end %>
+            <%= paginate @reviews %>
           </div>
         </div>
       </div>

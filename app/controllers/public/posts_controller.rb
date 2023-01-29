@@ -6,7 +6,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order(created_at: :desc)
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.page(params[:page]).per(10).order(created_at: :desc)
 
     @q = Post.ransack(params[:q])
     # @posts = @q.result(distinct: true)
@@ -15,7 +15,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @review = Review.new
-    @reviews = @post.reviews.order(created_at: :desc)
+    @reviews = @post.reviews.page(params[:page]).per(15).order(created_at: :desc)
     @bookmarks_count = Bookmark.where(post_id: @post.id).count
   end
 
