@@ -1,44 +1,45 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h4>
-        <%= @customer.name %>さんの会員詳細<br>
-        <%= link_to "プロフィールを編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
-      </h4>
-      <table class="customer_profile">
-        <% if @customer.image.attached? %>
-          <%= image_tag @customer.image %>
-        <% else %>
-          <%= image_tag "no_image", size: "140x140" %>
-        <% end %>
+    <div class="col-md-4 col-sm-12">
+      <div class="customer_profile_image">
+        <h4>
+          <%= @customer.name %>さんの会員詳細<br>
+          <%= link_to "プロフィールを編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
+        </h4>
+          <% if @customer.image.attached? %>
+            <%= image_tag @customer.image %>
+          <% else %>
+            <%= image_tag "no_image", size: "140x140" %>
+          <% end %>
+        <table class="customer_profile">
           <tr>
-            <td style="width: 50%">会員ID</td>
+            <th class="post_th">会員ID</td>
             <td><%= @customer.id %></td>
           </tr>
-            <td>氏名</td>
+            <th class="post_th">氏名</td>
             <td><%= @customer.name %></td>
           </tr>
           <tr>
-            <td>メールアドレス</td>
+            <th class="post_th">メールアドレス</td>
             <td><%= @customer.email %></td>
           </tr>
-            <td>年齢</td>
+            <th class="post_th">年齢</td>
             <td><%= @customer.age %></td>
           </tr>
           <tr>
-            <td>性別</td>
+            <th class="post_th">性別</td>
             <td><%= @customer.sex_method_i18n %></td>
           </tr>
           <tr>
-            <td>居住地</td>
+            <th class="post_th">居住地</td>
             <td><%= @customer.residence %></td>
           </tr>
           <tr>
-            <td>コメント</td>
+            <th class="post_th">コメント</td>
             <td><%= @customer.comment %></td>
           </tr>
           <tr>
-            <td>会員ステータス</td>
+            <th class="post_th">会員ステータス</td>
             <td class="is_deleted">
               <% if @customer.is_deleted %>
                 退会
@@ -47,13 +48,14 @@
               <% end %>
             </td>
           </tr>
-      </table>
+        </table>
+      </div>
     </div>
-    <div class="col-md-8 col-sm-8 col-12">
+    <div class="col-md-8 col-sm-12">
       <h3 class="title">投稿一覧</h3>
         <div class="row">
           <% @posts.each do |post| %>
-            <div class="col-md-3 col-sm-3 col-5">
+            <div class="col-md-3 col-sm-5">
               <div class="post_list">
                 <%= link_to admin_post_path(post.id) do %>
                   <% if post.image.attached? %>
@@ -64,16 +66,16 @@
                 <% end %>
               </div>
             </div>
-            <div class="col-md-9 col-sm-9 col-7">
+            <div class="col-md-9 col-sm-12">
               <div class="post_list">
                 <table>
                   <tbody>
                     <tr>
-                      <th>店名:</th>
+                      <th class="post_th">店名:</th>
                       <td><%= post.store_name %></td>
                     </tr>
                     <tr>
-                      <th>営業日:</th>
+                      <th class="post_th">営業日:</th>
                       <td>
                         <%  weekly_columns.each_with_index do |day,i| %>
                           <% if post[day] == true %>
@@ -83,11 +85,11 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>営業時間</th>
+                      <th class="post_th">営業時間</th>
                       <td><%= post.business_time %></td>
                     </tr>
                     <tr>
-                      <th>ジャンル:</th>
+                      <th class="post_th">ジャンル:</th>
                       <td>
                         <!--ジャンル-->
                         <% post.tags.each do |tag| %>
@@ -97,12 +99,18 @@
                       <td>
                     </tr>
                     <tr>
-                      <th>所在地:</th>
+                      <th class="post_th">所在地:</th>
                       <td><%= post.address %></td>
                     </tr>
                     <tr>
-                      <th>評価平均:</th>
-                      <td></td>
+                      <th class="post_th">評価平均:</th>
+                      <td>
+                        <% if post.reviews.exists? %>
+                          <%= post.reviews.average(:star).floor(1) %>
+                        <%else%>
+                          ー
+                        <% end %>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
