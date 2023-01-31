@@ -1,1 +1,20 @@
-<%= render 'follow_list', customers: @customers %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>フォローワー一覧</h3>
+        <table class="followers">
+          <thead>
+            <tr>
+              <th style="width: 25%">ユーザーネーム</th>
+              <th style="width: 25%">投稿数</th>
+              <th style="width: 25%">フォロー数</th>
+              <th style="width: 25%">フォロワー数</th>
+            </tr>
+          </thead>
+
+          <%= render 'follow_list', customers: @customers %>
+
+        </table>
+    </div>
+  </div>
+</div>
