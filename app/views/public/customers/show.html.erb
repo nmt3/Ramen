@@ -41,9 +41,13 @@
         </tbody>
       </table>
       <div class="customer_action">
-        <%= link_to "ブックマーク一覧", bookmark_customer_path(@customer.id), class: "btn btn-dark" %>
-        <%= link_to "フォロー一覧", customer_followings_path(@customer.id), class: "btn btn-dark" %>
-        <%= link_to "フォローワー一覧", customer_followers_path(@customer.id), class: "btn btn-dark" %>
+        <%= link_to "ブックマーク", bookmark_customer_path(@customer.id), class: "btn btn-dark" %>
+      </div>
+      <div class="customer_action">
+        <%= link_to "フォロー", customer_followings_path(@customer.id), class: "btn btn-dark" %>
+      </div>
+      <div class="customer_action">
+        <%= link_to "フォロワー", customer_followers_path(@customer.id), class: "btn btn-dark" %>
       </div>
     </div>
     <div class="col-md-8 col-12">
