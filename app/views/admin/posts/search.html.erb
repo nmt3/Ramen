@@ -1,10 +1,45 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <h5><%= link_to "新規投稿", new_post_path, class: "fa-solid fa-square-plus" %></h5>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        複数項目で絞り込む
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <%= search_form_for @q, url: search_admin_posts_path do |f| %>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">複数項目で絞り込む</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                <li class="search-nav-content">
+                  <p><%= f.label "ジャンル" %></p>
+                  <%= f.collection_check_boxes :post_tags_tag_id_in, Tag.all, :id, :genre, {} do |c| %>
+                    <%= c.label {c.check_box + c.text} %>
+                  <% end %>
+                </li>
+                <li class="search-nav-content">
+                  <p><%= f.label :address_start, "住所" %></p>
+                  <%= f.search_field :address_start, placeholder: "東京都" %>
+                </li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <%= f.submit '検索' %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
       <p>
-        ジャンルで絞り込む
-        <%= form_tag posts_path, method: :get, class: "boards_searchForm" do %>
+        <%= form_tag search_admin_posts_path, method: :get, class: "boards_searchForm" do %>
           <%= select_tag :tag_id,
               options_from_collection_for_select(Tag.all, :id, :genre, params[:tag_id]),
               {
@@ -14,27 +49,6 @@
           %>
         <% end %>
       </p>
-
-<!--検索ふぉーむ実装中-->
-      <div class="search_form">
-        <%= search_form_for @q, url: search_admin_posts_path do |f| %>
-        <ul>
-          <li class="search-nav-content">
-            <p><%= f.label "ジャンル" %></p>
-            <%= f.collection_check_boxes :post_tags_tag_id_in, Tag.all, :id, :genre, {} do |c| %>
-              <%= c.label {c.check_box + c.text} %>
-            <% end %>
-          </li>
-          <li class="search-nav-content">
-            <p><%= f.label :address_start, "所在地" %></p>
-            <%= f.search_field :address_start, placeholder: "東京都" %>
-          </li>
-        </ul>
-          <%= f.submit '検索' %>
-        <% end %>
-      </div>
-<!--ここまで-->
-
     </div>
     <div class="col-md-9">
       <h3 class="title">投稿一覧</h3>

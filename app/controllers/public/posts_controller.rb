@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.page(params[:page]).per(10).order(created_at: :desc)
 
     @q = Post.ransack(params[:q])
-    # @posts = @q.result(distinct: true)
+    # @posts = @q.result(distinct: true).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def show
@@ -47,7 +47,7 @@ class Public::PostsController < ApplicationController
 
   def search
     @q = Post.ransack(params[:q])
-    @results = @q.result
+    @results = @q.result.page(params[:page]).per(10).order(created_at: :desc)
   end
 
   private

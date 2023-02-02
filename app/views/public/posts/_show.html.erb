@@ -6,7 +6,7 @@
           <%= @post.customer.name  %>さん
         <% end %>
         <% if @post.customer == current_customer %>
-          <%= link_to "投稿編集", edit_post_path(@post.id), class: "btn btn-success" %>
+          <%= link_to "投稿編集", edit_post_path(@post.id), class: "btn btn-primary" %>
         <% end %><br>
         <% if @post.bookmarked_by?(current_customer) %>
           <td>
