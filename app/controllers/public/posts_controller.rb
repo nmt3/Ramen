@@ -46,7 +46,12 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @q = Post.ransack(params[:q])
+    if params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @q = @tag.posts.ransack(params[:q])
+    else
+      @q = Post.ransack(params[:q])
+    end
     @results = @q.result.page(params[:page]).per(10).order(created_at: :desc)
   end
 
