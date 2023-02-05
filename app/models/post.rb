@@ -12,6 +12,8 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
 
   validates :store_name, presence: true
+  validates :tag_ids, presence: true
+  validates :address, presence: true
 
   def bookmarked_by?(customer)
     bookmarks.where(customer_id: customer).exists?

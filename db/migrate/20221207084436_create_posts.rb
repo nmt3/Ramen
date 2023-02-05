@@ -13,8 +13,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.boolean :activity_sunday, null: false
       t.string :holiday
       t.string :business_time
-      t.string :address
-      # t.string :genre
+      t.string :address, null: false
       t.string :post_comment
       t.float :lat
       t.float :lng

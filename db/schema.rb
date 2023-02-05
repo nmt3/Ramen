@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2022_12_18_224924) do
     t.boolean "activity_sunday", null: false
     t.string "holiday"
     t.string "business_time"
-    t.string "address"
+    t.string "address", null: false
     t.string "post_comment"
     t.float "lat"
     t.float "lng"

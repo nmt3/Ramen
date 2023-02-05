@@ -56,7 +56,7 @@
           <% @results.each do |post| %>
             <div class="col-md-3">
               <div class="post_list">
-                <%= link_to post_path(post.id) do %>
+                <%= link_to admin_post_path(post.id) do %>
                   <% if post.image.attached? %>
                     <%= image_tag post.image, size: "140x140" %>
                   <% else %>
