@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 col-12">
+    <div class="col-md-12 col-sm-12">
       <h3 class="title">投稿編集</h3>
     </div>
-    <div class="col-md-6 col-sm-6 col-12">
-    <%= form_with model: @post, local: :true do |f| %>
+    <div class="col-md-6 col-sm-12">
+      <%= form_with model: @post, local: :true do |f| %>
       <table class="post">
         <tr>
           <td><%= f.label "画像" %></td>
@@ -60,7 +60,7 @@
         </tr>
       </table>
     </div>
-    <div class="col-md-6 col-sm-6 col-12">
+    <div class="col-md-6 col-sm-6">
       <div class="actions">
         <input id="address" type="textbox", placeholder="住所を入力してください">
         <input type="button" value="検索" onclick="codeAddress()"><br>

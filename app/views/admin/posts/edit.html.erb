@@ -1,145 +1,143 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h3>投稿編集画面</h3>
-        <div class="edit_post">
-          <%= form_with model: @post, url: admin_post_path(@post.id), local: true  do |f| %>
-            <table class="post">
-              <tr>
-                <td><%= f.label "画像" %></td>
-                <td><%= f.file_field :image, accept: "image/*" %></td>
-              </tr>
-              <tr>
-                <td><%= f.label "店名" %></td>
-                <td><%= f.text_field :store_name %></td>
-              </tr>
-              <tr>
-                <td><%= f.label "営業日" %></td>
-                <td>
-                  <span class="checkbox-inline">
-                    <% weekly_columns.each_with_index do |day,i| %>
-                      <%= f.check_box day.to_sym, {}, "true", "false" %>
-                      <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
-                    <% end %>
-                  </span>
-                </td>
-              </tr>
-           <tr>
-              <td><%= f.label "営業時間" %></td>
-              <td><%= f.text_field :business_time, placeholder: "11:00~15:30, 17:00~23:30", :size=>"40" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label "定休日" %></td>
-              <td><%= f.text_field :holiday, placeholder: "例: 毎週月曜日, 第三月曜日", :size=>"40" %></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <div class="actions">
-                  <input id="address" type="textbox">
-                  <input type="button" value="検索" onclick="codeAddress()">
-                  <%= f.label :address,"店舗所在地" %>
-                  <%= f.text_field :address %>
-                  <%= f.label :lat,"緯度" %>
-                  <%= f.text_field :lat, id: :lat %>
-                  <%= f.label :lng,"経度" %>
-                  <%= f.text_field :lng, id: :lng %>
-                </div>
-                <p>マーカーをドラック＆ドロップで位置の調整ができます。<p>
-                <div id='map'></div>
-                  <style>
-                  #map {
-                    height: 600px;
-                    width: 600px;
-                  }
-                  </style>
-
-                  <script>
-                  //初期マップの設定
-                  let map
-                  let marker
-                  function initMap(){
-                    geocoder = new google.maps.Geocoder()
-
-                    map = new google.maps.Map(document.getElementById('map'), {
-                      center:  {lat: <%= @post.lat %>, lng:<%= @post.lng %>},  //東京
-                      zoom: 15,
-
-                    });
-                  }
-
-                  //検索後のマップ作成
-                  let geocoder
-                  let aft
-                  function codeAddress(){
-                    let inputAddress = document.getElementById('address').value;
-                    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-                      if (status == 'OK') {
-                          //マーカーが複数できないようにする
-                          if (aft == true){
-                              marker.setMap(null);
-                          }
-
-                          //新しくマーカーを作成する
-                          map.setCenter(results[0].geometry.location);
-                              marker = new google.maps.Marker({
-                              map: map,
-                              position: results[0].geometry.location,
-                              draggable: true	// ドラッグ可能にする
-                          });
-
-                          //二度目以降か判断
-                          aft = true
-
-                          //検索した時に緯度経度を入力する
-                          document.getElementById('lat').value = results[0].geometry.location.lat();
-                          document.getElementById('lng').value = results[0].geometry.location.lng();
-                          document.getElementById('post_address').value = document.getElementById('address').value;
-
-                          // マーカーのドロップ（ドラッグ終了）時のイベント
-                          google.maps.event.addListener( marker, 'dragend', function(ev){
-                              // イベントの引数evの、プロパティ.latLngが緯度経度
-                              document.getElementById('lat').value = ev.latLng.lat();
-                              document.getElementById('lng').value = ev.latLng.lng();
-                          });
-                      } else {
-                        alert('該当する結果がありませんでした：' + status);
-                      }
-                    });
-                  }
-
-                  </script>
-                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= f.label 'ジャンル' %>
-              </td>
-              <td>
-                <div class="check_box">
-                  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
-                   <div>
-                      <%= tag.label do %>
-                        <%= tag.check_box %>
-                        <%= tag.text %>
-                      <% end %>
-                    </div>
-                   <% end %>
-                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td><%= f.label "コメント" %></td>
-              <td><%= f.text_area :post_comment, :size=>"40x5" %></td>
-            </tr>
-            <tr>
-              <td><%= f.submit "変更する", class: "btn btn-success" %></td>
-              <td><%= link_to "削除する", admin_post_path(@post.id), method: :delete, class: "btn btn-danger" %></td>
-            </tr>
-          </table>
-        <% end %>
-      </div>
+    <div class="col-md-12 col-sm-12">
+      <h3 class="title">投稿編集画面</h3>
     </div>
+    <div class="col-md-6 col-sm-12">
+      <%= form_with model: @post, url: admin_post_path(@post.id), local: true  do |f| %>
+        <table class="post">
+          <tr>
+            <td><%= f.label "画像" %></td>
+            <td><%= f.file_field :image, accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "店名" %></td>
+            <td><%= f.text_field :store_name %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "営業日" %></td>
+            <td>
+              <span class="checkbox-inline">
+                <% weekly_columns.each_with_index do |day,i| %>
+                  <%= f.check_box day.to_sym, {}, "true", "false" %>
+                  <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
+                <% end %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td><%= f.label "営業時間" %></td>
+            <td><%= f.text_field :business_time, placeholder: "11:00~15:30, 17:00~23:30", :size=>"30" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "定休日" %></td>
+            <td><%= f.text_field :holiday, placeholder: "例: 毎週月曜日, 第三月曜日", :size=>"30" %></td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label 'ジャンル' %>
+            </td>
+            <td>
+              <div class="check_box">
+                <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
+                 <div class="tag_check">
+                    <%= tag.label do %>
+                      <%= tag.check_box %>
+                      <%= tag.text %>
+                    <% end %>
+                  </div>
+                 <% end %>
+               </div>
+            </td>
+          </tr>
+          <tr>
+            <td><%= f.label "コメント" %></td>
+            <td><%= f.text_area :post_comment, :size=>"30x5" %></td>
+          </tr>
+        <tr>
+      </table>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="actions">
+        <input id="address" type="textbox">
+        <input type="button" value="検索" onclick="codeAddress()">
+        <%= f.label :address,"店舗所在地" %>
+        <%= f.text_field :address %><br>
+        <%= f.label :lat,"緯度" %>
+        <%= f.text_field :lat, id: :lat %><br>
+        <%= f.label :lng,"経度" %>
+        <%= f.text_field :lng, id: :lng %>
+      </div>
+      <p>マーカーをドラック＆ドロップで位置の調整ができます。<p>
+      <div id='map'></div>
+        <style>
+        #map {
+          height: 300px;
+          width: 300px;
+        }
+        </style>
+
+        <script>
+        //初期マップの設定
+        let map
+        let marker
+        function initMap(){
+          geocoder = new google.maps.Geocoder()
+
+          map = new google.maps.Map(document.getElementById('map'), {
+            center:  {lat: <%= @post.lat %>, lng:<%= @post.lng %>},  //東京
+            zoom: 15,
+
+          });
+        }
+
+        //検索後のマップ作成
+        let geocoder
+        let aft
+        function codeAddress(){
+          let inputAddress = document.getElementById('address').value;
+          geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+            if (status == 'OK') {
+                //マーカーが複数できないようにする
+                if (aft == true){
+                    marker.setMap(null);
+                }
+
+                //新しくマーカーを作成する
+                map.setCenter(results[0].geometry.location);
+                    marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    draggable: true	// ドラッグ可能にする
+                });
+
+                //二度目以降か判断
+                aft = true
+
+                //検索した時に緯度経度を入力する
+                document.getElementById('lat').value = results[0].geometry.location.lat();
+                document.getElementById('lng').value = results[0].geometry.location.lng();
+                document.getElementById('post_address').value = document.getElementById('address').value;
+
+                // マーカーのドロップ（ドラッグ終了）時のイベント
+                google.maps.event.addListener( marker, 'dragend', function(ev){
+                    // イベントの引数evの、プロパティ.latLngが緯度経度
+                    document.getElementById('lat').value = ev.latLng.lat();
+                    document.getElementById('lng').value = ev.latLng.lng();
+                });
+            } else {
+              alert('該当する結果がありませんでした：' + status);
+            }
+          });
+        }
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
+        <div class="submit">
+          <%= f.submit "変更する", class: "btn btn-success" %>
+          <%= link_to "削除する", admin_post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
