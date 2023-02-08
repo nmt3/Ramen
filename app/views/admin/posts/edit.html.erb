@@ -135,7 +135,8 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
         <div class="submit">
           <%= f.submit "変更する", class: "btn btn-success" %>
-          <%= link_to "削除する", admin_post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+          <%= link_to "削除する", admin_post_path(@post.id), method: :delete,
+              "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
         </div>
       </div>
     <% end %>

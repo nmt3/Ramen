@@ -4,3 +4,20 @@ ja:
       sex_method:
         men: "男性"
         women: "女性"
+  activerecord:
+    models:
+      customer: ユーザー
+    attributes:
+        customer:
+          name: "ニックネーム"
+          email: "メールアドレス"
+          password: "パスワード"
+          password_confirmation: "パスワード確認"
+        post:
+          store_name: "店名"
+          tag_ids: "ジャンル"
+          address: "住所"
+        review:
+          images: "画像"
+          star: "星評価"
+          review_comment: "口コミ"

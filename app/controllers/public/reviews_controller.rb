@@ -14,8 +14,14 @@ class Public::ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.customer_id = current_customer.id
-    @review.save
-    redirect_to post_path(@review.post_id)
+    if @review.save
+      redirect_to post_path(@review.post_id)
+    else
+      @post = Post.find(@review.post_id)
+      @reviews = @post.reviews.page(params[:page]).per(15).order(created_at: :desc)
+      @bookmarks_count = Bookmark.where(post_id: @post.id).count
+      render "public/posts/show"
+    end
   end
 
   # def update
