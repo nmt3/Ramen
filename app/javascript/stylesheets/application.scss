@@ -3,7 +3,7 @@
 
 body {
   /* 画像ファイルの指定 */
-  background-image: url("../images/jakub.jpg") !important;
+  background-image: url("../images/unsplash.jpg") !important;
 
   /* 画像を常に天地左右の中央に配置 */
   background-position: center center;
@@ -18,7 +18,9 @@ body {
   background-size: cover;
 
   /* 背景画像が読み込まれる前に表示される背景のカラー */
-  // background-color: #464243;
+  background-color: rgba(86, 86, 86, 0.6);
+
+  color: white;
 }
 
 .shadow { //ヘッダー
@@ -43,8 +45,8 @@ body {
   background-color: rgba(180, 180, 180, 15);
 }
 
-.welcome {
-  // color: white;
+.welcome .customer{
+  color: white;
 }
 
 .top-text, .quit {
@@ -90,6 +92,18 @@ body {
   border-collapse: separate;
 }
 
+.post_list {
+  padding: 10px 0;
+}
+
+.modal-title{
+  color: black;
+}
+
+.search-nav-content {
+  color: black;
+}
+
 .submit {
   margin-top: 40px;
 }
@@ -127,11 +141,6 @@ body {
   padding: 10px;
 }
 
-.search_form {
-  // background-color: rgba(86, 86, 86, 0.6);
-  // color: white;
-}
-
 // 管理者
 .review_box {
   border: 2px solid #000000;
@@ -141,8 +150,9 @@ body {
   overflow-wrap: break-word;
 }
 
-post_th {
-  width: 30%;
+
+.post_th {
+  width: 25%;
 }
 
 td {
@@ -161,4 +171,8 @@ table.followers td {
   width: 350px;
   padding: 10px;
   vertical-align: top;
+}
+
+table {
+  background-color: rgba(86, 86, 86, 0.6);
 }

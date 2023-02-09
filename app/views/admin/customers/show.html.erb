@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-3 col-sm-12">
       <div class="customer_profile_image">
         <h4>
           <%= @customer.name %>さんの会員詳細<br>
@@ -11,7 +11,7 @@
           <% else %>
             <%= image_tag "no_image", size: "140x140" %>
           <% end %>
-        <table class="customer_profile">
+        <table border="1" style="border-collapse: collapse">
           <tr>
             <th class="post_th">会員ID</td>
             <td><%= @customer.id %></td>
@@ -51,7 +51,7 @@
         </table>
       </div>
     </div>
-    <div class="col-md-8 col-sm-12">
+    <div class="col-md-9 col-sm-12">
       <h3 class="title">投稿一覧</h3>
       <%= paginate @posts %>
       <div class="row">
@@ -60,9 +60,9 @@
             <div class="post_list">
               <%= link_to admin_post_path(post.id) do %>
                 <% if post.image.attached? %>
-                  <%= image_tag post.image, size: "140x140" %>
+                  <%= image_tag post.image, size: "150x150" %>
                 <% else %>
-                  <%= image_tag 'no_image', size: "140x140" %>
+                  <%= image_tag 'no_image', size: "150x150" %>
                 <% end %>
               <% end %>
             </div>

@@ -32,25 +32,25 @@
             <ul class="navbar-nav ml-auto">
               <% if customer_signed_in? %>
               <li>
-                <%= link_to root_path, class: "nav-link text-dark" do %>
+                <%= link_to root_path, class: "nav-link text-light" do %>
                   <i class="fa-solid fa-house"></i>
                   HOME
                 <% end %>
               </li>
               <li>
-                <%= link_to customer_path(current_customer), class: "nav-link text-dark" do %>
+                <%= link_to customer_path(current_customer), class: "nav-link text-light" do %>
                   <i class="fa-solid fa-user"></i>
                   MY PAGE
                 <% end %>
               </li>
               <li>
-                <%= link_to posts_path, class: "nav-link text-dark" do  %>
+                <%= link_to posts_path, class: "nav-link text-light" do  %>
                   <i class="fa-solid fa-list-ul"></i>
                   投稿一覧
                 <% end %>
               </li>
               <li>
-                <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-dark" do  %>
+                <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do  %>
                   <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
                   ログアウト
                 <% end %>
@@ -58,19 +58,19 @@
 
               <% elsif admin_signed_in? %>
               <li>
-                <%= link_to admin_path, class: "nav-link text-dark" do %>
+                <%= link_to admin_path, class: "nav-link text-light" do %>
                   <i class="fa-solid fa-list-ul"></i>
                   投稿一覧
                 <% end %>
               </li>
               <li>
-                <%= link_to admin_customers_path, class: "nav-link text-dark" do %>
+                <%= link_to admin_customers_path, class: "nav-link text-light" do %>
                   <i class="fa-solid fa-users"></i>
                   会員一覧
                 <% end %>
               </li>
               <li>
-                <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-dark" do  %>
+                <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do  %>
                   <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
                   ログアウト
                 <% end %>
@@ -78,19 +78,19 @@
 
               <% else %>
               <li>
-                <%= link_to root_path, class: "nav-link text-dark" do %>
+                <%= link_to root_path, class: "nav-link text-light" do %>
                   <i class="fa-solid fa-house"></i>
                   HOME
                 <% end %>
               </li>
               <li>
-                <%= link_to new_customer_registration_path, class: "nav-link text-dark" do %>
+                <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
                   <i class="fa-solid fa-user-plus"></i>
                   新規登録
                 <% end %>
               </li>
               <li>
-                <%= link_to new_customer_session_path, class: "nav-link text-dark" do  %>
+                <%= link_to new_customer_session_path, class: "nav-link text-light" do  %>
                   <i class="fa-solid fa-right-to-bracket"></i>
                   ログイン
                 <% end %>

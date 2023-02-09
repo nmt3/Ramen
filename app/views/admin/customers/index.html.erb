@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>会員一覧</h3>
+      <h3 class="title">会員一覧</h3>
       <%= paginate @customers %>
-      <table class="table">
+      <table align="center" border="1" class="customer">
         <thead>
           <tr>
-            <th style="width: 25%">会員ID</th>
+            <th style="width: 25%" class="customer">会員ID</th>
             <th style="width: 25%">ニックネーム</th>
             <th style="width: 25%">メールアドレス</th>
             <th style="width: 25%">ステータス</th>
@@ -15,14 +15,14 @@
         <tbody>
         <% @customers.each do |customer| %>
           <tr>
-            <td><%= customer.id %></td>
-            <td>
+            <td class="customers"><%= customer.id %></td>
+            <td class="customers">
               <%= link_to admin_customer_path(customer.id) do %>
                 <%= customer.name %>
               <% end %>
             </td>
-            <td><%= customer.email %></td>
-            <td>
+            <td class="customers"><%= customer.email %></td>
+            <td class="customers">
               <div class="is_deleted">
                 <% if customer.is_deleted %>
                   退会

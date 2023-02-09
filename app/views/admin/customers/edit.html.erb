@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-sm-12 col-md-7 col-lg-7 px-5 px-sm-0 mx-auto">
       <%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
-      <h3><%= @customer.name %>さんの会員情報編集</h3>
-      <table class="table">
+      <h3 align="center"><%= @customer.name %>さんの会員情報編集</h3>
+      <table align="center" border="0" class="customer">
         <tbody>
           <tr>
             <td><%= f.label "会員ID", class: "admin_customer" %></td>

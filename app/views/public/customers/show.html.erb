@@ -12,7 +12,7 @@
       <% else %>
         <%= image_tag "no_image", size: "150x150" %>
       <% end %>
-      <table class="profile">
+      <table border="1" style="border-collapse: collapse">
         <tbody>
           <tr>
             <td>ニックネーム</td>
@@ -71,11 +71,11 @@
                 <table>
                   <tbody>
                     <tr>
-                      <th>店名:</th>
+                      <th class="post_th">店名:</th>
                       <td><%= post.store_name %></td>
                     </tr>
                     <tr>
-                      <th>営業日:</th>
+                      <th class="post_th">営業日:</th>
                       <td>
                         <%  weekly_columns.each_with_index do |day,i| %>
                           <% if post[day] == true %>
@@ -85,11 +85,11 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>営業時間</th>
+                      <th class="post_th">営業時間</th>
                       <td><%= post.business_time %></td>
                     </tr>
                     <tr>
-                      <th>ジャンル:</th>
+                      <th class="post_th">ジャンル:</th>
                       <td>
                         <!--ジャンル-->
                         <% post.tags.each do |tag| %>
@@ -99,12 +99,18 @@
                       <td>
                     </tr>
                     <tr>
-                      <th>所在地:</th>
+                      <th class="post_th">所在地:</th>
                       <td><%= post.address %></td>
                     </tr>
                     <tr>
-                      <th>評価平均:</th>
-                      <td></td>
+                      <th class="post_th">評価平均:</th>
+                      <td>
+                        <% if post.reviews.exists? %>
+                          <%= post.reviews.average(:star).floor(1) %>
+                        <%else%>
+                          ー
+                        <% end %>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

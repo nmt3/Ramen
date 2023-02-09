@@ -40,11 +40,11 @@
       <table class="post_show">
         <tbody>
           <tr>
-            <td>店名</td>
+            <th class="post_th">店名</td>
             <td><%= @post.store_name %></td>
           </tr>
           <tr>
-            <td>営業日</td>
+            <th class="post_th">営業日</td>
             <td>
               <%  weekly_columns.each_with_index do |day,i| %>
                 <% if @post[day] == true %>
@@ -54,15 +54,15 @@
             </td>
           </tr>
           <tr>
-            <td>営業時間</td>
+            <th class="post_th">営業時間</td>
             <td><%= @post.business_time %></td>
           </tr>
           <tr>
-            <td>定休日</td>
+            <th class="post_th">定休日</td>
             <td><%= @post.holiday %></td>
           </tr>
           <tr>
-            <td>ジャンル</td>
+            <th class="post_th">ジャンル</td>
             <td>
               <% @post.tags.each do |tag| %>
                 <%= tag.genre %>
@@ -70,11 +70,11 @@
             </td>
           </tr>
           <tr>
-            <td>コメント</td>
+            <th class="post_th">コメント</td>
             <td><%= @post.post_comment %></td>
           </tr>
           <tr>
-            <td>所在地</td>
+            <th class="post_th">所在地</td>
             <td><%= @post.address %></td>
           </tr>
         </tbody>
