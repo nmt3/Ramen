@@ -19,7 +19,7 @@
             <% else %>
               <%= image_tag "no_image", size: "50x50" %>
             <% end %>
-            <%= link_to list_customer_path(r.customer.id) do %>
+            <%= link_to admin_customer_path(r.customer.id) do %>
               <%= r.customer.name %>
             <% end %>
 
