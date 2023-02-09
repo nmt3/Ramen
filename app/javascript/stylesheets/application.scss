@@ -155,6 +155,10 @@ body {
   width: 25%;
 }
 
+.customer_th {
+  width: 40%;
+}
+
 td {
   // padding: 0px 10px;
 }
@@ -175,4 +179,16 @@ table.followers td {
 
 table {
   background-color: rgba(86, 86, 86, 0.6);
+}
+
+.error_messages {
+  background-color: #FFF6D1;
+  color: red;
+  width: 50%;
+  height: auto;
+  margin: 0 25%;
+}
+
+ul {
+  list-style: none;
 }
