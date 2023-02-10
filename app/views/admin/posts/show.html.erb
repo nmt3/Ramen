@@ -1,6 +1,105 @@
 <div class="container">
   <div class="row">
-    <%= render 'admin/posts/show', posts: @posts %>
+    <div class="col-md-12">
+      <h4>投稿者：
+        <%= link_to admin_customer_path(@post.customer.id) do %>
+          <%= @post.customer.name  %>さん
+        <% end %>
+      </h4>
+      <p>
+        <%= link_to "編集・削除", edit_admin_post_path(@post.id), class: "btn btn-success" %>
+        <%= @bookmarks_count %>件のいいね！
+      </p>
+    </div>
+    <div class="col-md-7">
+      <div class="post_list">
+        <table border="1" width="100%" class="store">
+          <tbody>
+            <tr>
+              <td rowspan="8" width="25%" align="center">
+                <% if @post.image.attached? %>
+                  <%=link_to @post.image,  "data-lightbox": @post.image do %>
+                    <%= image_tag @post.image, size: "150x150" %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag "no_image", size: "150x150" %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th class="post_th">店名</td>
+              <td><%= @post.store_name %></td>
+            </tr>
+            <tr>
+              <th class="post_th">営業日</td>
+              <td>
+                <%  weekly_columns.each_with_index do |day,i| %>
+                  <% if @post[day] == true %>
+                   <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th class="post_th">営業時間</td>
+              <td><%= @post.business_time %></td>
+            </tr>
+            <tr>
+              <th class="post_th">定休日</td>
+              <td><%= @post.holiday %></td>
+            </tr>
+            <tr>
+              <th class="post_th">ジャンル</td>
+              <td>
+                <% @post.tags.each do |tag| %>
+                  <%= tag.genre %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th class="post_th">コメント</td>
+              <td><%= @post.post_comment %></td>
+            </tr>
+            <tr>
+              <th class="post_th">所在地</td>
+              <td><%= @post.address %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div id='map'></div>
+
+      <style>
+      #map {
+        height: 250px;
+        width: 80%;
+      }
+      </style>
+
+       js部分
+      <script>
+      //初期マップの設定
+      let map
+      let marker
+      function initMap(){
+        geocoder = new google.maps.Geocoder()
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          zoom: 15,
+        });
+
+         marker = new google.maps.Marker({
+          position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          map: map
+        });
+      }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
+    </div>
 
     <div class="col-md-12 col-sm-12">
       <div class="review">

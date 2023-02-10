@@ -55,74 +55,7 @@
     </div>
 
     <div class="col-md-9 col-sm-12">
-      <h3 class="title">投稿一覧</h3>
-      <%= paginate @posts %>
-        <div class="row">
-          <% @posts.each do |post| %>
-            <div class="col-md-3 col-sm-2">
-              <div class="post_list">
-                <%= link_to admin_post_path(post.id) do %>
-                  <% if post.image.attached? %>
-                    <%= image_tag post.image, size: "140x140" %>
-                  <% else %>
-                    <%= image_tag 'no_image', size: "140x140" %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-            <div class="col-md-9 col-sm-12">
-              <div class="post_list">
-                <table>
-                  <tbody>
-                    <tr>
-                      <th class="post_th">店名:</th>
-                      <td><%= post.store_name %></td>
-                    </tr>
-                    <tr>
-                      <th class="post_th">営業日:</th>
-                      <td>
-                        <%  weekly_columns.each_with_index do |day,i| %>
-                          <% if post[day] == true %>
-                           <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-                          <% end %>
-                        <% end %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="post_th">営業時間</th>
-                      <td><%= post.business_time %></td>
-                    </tr>
-                    <tr>
-                      <th class="post_th">ジャンル:</th>
-                      <td>
-                        <!--ジャンル-->
-                        <% post.tags.each do |tag| %>
-                          <%= tag.genre %>
-                        <% end %>
-                        <!--ジャンル-->
-                      <td>
-                    </tr>
-                    <tr>
-                      <th class="post_th">所在地:</th>
-                      <td><%= post.address %></td>
-                    </tr>
-                    <tr>
-                      <th class="post_th">評価平均:</th>
-                      <td>
-                        <% if post.reviews.exists? %>
-                          <%= post.reviews.average(:star).floor(1) %>
-                        <%else%>
-                          ー
-                        <% end %>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <%= paginate @posts %>
+      <%= render 'admin/posts/list', posts: @posts %>
     </div>
   </div>
 </div>
