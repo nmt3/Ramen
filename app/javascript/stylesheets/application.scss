@@ -36,7 +36,6 @@ body {
 
 .container {
   padding-top: 30px;
-  // color: white;
 }
 
 .notice {
@@ -88,12 +87,20 @@ body {
   padding: 10px;
 }
 
-.post {
-  border-collapse: separate;
+// .post {
+//   border-collapse: separate;
+// }
+
+.post_image .post_detail {
+  background-color: rgba(86, 86, 86, 0.6);
 }
 
 .post_list {
   padding: 10px 0;
+}
+
+.post_th {
+  width: 20%;
 }
 
 .modal-title{
@@ -137,6 +144,10 @@ body {
   width: 400px;
 }
 
+.label {
+  color: black;
+}
+
 .image_list {
   padding: 10px;
 }
@@ -148,11 +159,6 @@ body {
 	padding: 10px;
 	word-wrap: break-word;
   overflow-wrap: break-word;
-}
-
-
-.post_th {
-  width: 25%;
 }
 
 .customer_th {
@@ -177,9 +183,9 @@ table.followers td {
   vertical-align: top;
 }
 
-table {
-  background-color: rgba(86, 86, 86, 0.6);
-}
+// table {
+//   background-color: rgba(86, 86, 86, 0.6);
+// }
 
 .error_messages {
   background-color: #FFF6D1;
