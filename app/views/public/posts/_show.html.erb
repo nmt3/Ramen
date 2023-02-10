@@ -1,119 +1,117 @@
-<!--<div class="col-md-12">-->
-<!--  <div class="row">-->
-<!--    <div class="col-md-12 col-12">-->
-<!--      <h4>投稿者：-->
-<!--        <%= link_to list_customer_path(@post.customer.id) do %>-->
-<!--          <%= @post.customer.name  %>さん-->
-<!--        <% end %>-->
-<!--        <% if @post.customer == current_customer %>-->
-<!--          <%= link_to "投稿編集", edit_post_path(@post.id), class: "btn btn-primary" %>-->
-<!--        <% end %><br>-->
-<!--        <% if @post.bookmarked_by?(current_customer) %>-->
-<!--          <td>-->
-<!--            <%= link_to post_bookmark_path(@post, @post.bookmarks.first), method: :delete do %>-->
-<!--             <i class="fas fa-heart unlike-btn"></i>-->
-<!--            <% end %>-->
-<!--          </td>-->
-<!--        <% else %>-->
-<!--          <td>-->
-<!--            <%= link_to post_bookmarks_path(@post), method: :post do %>-->
-<!--              <i class="far fa-heart like-btn" ></i>-->
-<!--            <% end %>-->
-<!--          </td>-->
-<!--        <% end %>-->
-<!--        <%= @bookmarks_count %>件のいいね！-->
-<!--      </h4>-->
-<!--    </div>-->
-<!--    <div class="col-md-2 col-12">-->
-<!--      <p>-->
-<!--        <% if @post.image.attached? %>-->
-<!--          <%=link_to @post.image, "data-lightbox": @post.image do %>-->
-<!--            <%= image_tag @post.image, size: "180x180" %>-->
-<!--          <% end %>-->
-<!--        <% else %>-->
-<!--          <%= image_tag "no_image", size: "180x180" %>-->
-<!--        <% end %>-->
-<!--      </p>-->
-<!--    </div>-->
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12 col-12">
+      <h4>投稿者：
+        <%= link_to list_customer_path(@post.customer.id) do %>
+          <%= @post.customer.name  %>さん
+        <% end %>
+        <% if @post.customer == current_customer %>
+          <%= link_to "投稿編集", edit_post_path(@post.id), class: "btn btn-primary" %>
+        <% end %><br>
+        <% if @post.bookmarked_by?(current_customer) %>
+          <td>
+            <%= link_to post_bookmark_path(@post, @post.bookmarks.first), method: :delete do %>
+             <i class="fas fa-heart unlike-btn"></i>
+            <% end %>
+          </td>
+        <% else %>
+          <td>
+            <%= link_to post_bookmarks_path(@post), method: :post do %>
+              <i class="far fa-heart like-btn" ></i>
+            <% end %>
+          </td>
+        <% end %>
+        <%= @bookmarks_count %>件のいいね！
+      </h4>
+    </div>
+    <div class="col-md-7 col-12">
+      <table border="1" width="100%" class="store">
+        <tbody>
+          <tr>
+            <td rowspan="8" width="25%" align="center">
+              <% if @post.image.attached? %>
+                <%=link_to @post.image, "data-lightbox": @post.image do %>
+                  <%= image_tag @post.image, size: "140x140" %>
+                <% end %>
+              <% else %>
+                <%= image_tag "no_image", size: "140x140" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th width="15%">店名</td>
+            <td><%= @post.store_name %></td>
+          </tr>
+          <tr>
+            <th>営業日</td>
+            <td>
+              <%  weekly_columns.each_with_index do |day,i| %>
+                <% if @post[day] == true %>
+                 <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>営業時間</td>
+            <td><%= @post.business_time %></td>
+          </tr>
+          <tr>
+            <th>定休日</td>
+            <td><%= @post.holiday %></td>
+          </tr>
+          <tr>
+            <th>ジャンル</td>
+            <td>
+              <% @post.tags.each do |tag| %>
+                <%= tag.genre %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>コメント</td>
+            <td><%= @post.post_comment %></td>
+          </tr>
+          <tr>
+            <th>所在地</td>
+            <td><%= @post.address %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<!--    <div class="col-md-5 col-12">-->
-<!--      <table class="post_show">-->
-<!--        <tbody>-->
-<!--          <tr>-->
-<!--            <th class="post_th">店名</td>-->
-<!--            <td><%= @post.store_name %></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <th class="post_th">営業日</td>-->
-<!--            <td>-->
-<!--              <%  weekly_columns.each_with_index do |day,i| %>-->
-<!--                <% if @post[day] == true %>-->
-<!--                 <a><%= ["月","火","水","木","金","土","日"][i] %></a>-->
-<!--                <% end %>-->
-<!--              <% end %>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <th class="post_th">営業時間</td>-->
-<!--            <td><%= @post.business_time %></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <th class="post_th">定休日</td>-->
-<!--            <td><%= @post.holiday %></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <th class="post_th">ジャンル</td>-->
-<!--            <td>-->
-<!--              <% @post.tags.each do |tag| %>-->
-<!--                <%= tag.genre %>-->
-<!--              <% end %>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <th class="post_th">コメント</td>-->
-<!--            <td><%= @post.post_comment %></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <th class="post_th">所在地</td>-->
-<!--            <td><%= @post.address %></td>-->
-<!--          </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
-<!--    </div>-->
 
+    <div class="col-md-5 col-12">
 
-<!--    <div class="col-md-5 col-12">-->
+      <div id='map'></div>
 
-<!--      <div id='map'></div>-->
+      <style>
+      #map {
+        height: 200px;
+        width: 80%;
+      }
+      </style>
 
-<!--      <style>-->
-<!--      #map {-->
-<!--        height: 200px;-->
-<!--        width: 80%;-->
-<!--      }-->
-<!--      </style>-->
-
-<!--       js部分-->
-<!--      <script>-->
+       <!--js部分-->
+      <script>
       //初期マップの設定
-<!--      let map-->
-<!--      let marker-->
-<!--      function initMap(){-->
-<!--        geocoder = new google.maps.Geocoder()-->
+      let map
+      let marker
+      function initMap(){
+        geocoder = new google.maps.Geocoder()
 
-<!--        map = new google.maps.Map(document.getElementById('map'), {-->
-<!--          center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},-->
-<!--          zoom: 15,-->
-<!--        });-->
+        map = new google.maps.Map(document.getElementById('map'), {
+          center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          zoom: 15,
+        });
 
-<!--         marker = new google.maps.Marker({-->
-<!--          position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},-->
-<!--          map: map-->
-<!--        });-->
-<!--      }-->
-<!--      </script>-->
-<!--      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
+         marker = new google.maps.Marker({
+          position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+          map: map
+        });
+      }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
+    </div>
+  </div>
+</div>
