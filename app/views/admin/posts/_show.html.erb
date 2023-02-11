@@ -1,5 +1,5 @@
 <!--レビュー付きの投稿詳細画面で使用-->
-<div class="col-md-12">
+<div class="col-md-12 col-sm-12">
   <h4>投稿者：
     <%= link_to admin_customer_path(@post.customer.id) do %>
       <%= @post.customer.name  %>さん
@@ -10,9 +10,9 @@
     <%= @bookmarks_count %>件のいいね！
   </p>
 </div>
-<div class="col-md-7">
+<div class="col-md-7 col-sm-12">
   <div class="post_list">
-    <table border="1" width="100%" class="store">
+    <table class="post" border="1">
       <tbody>
         <tr>
           <td rowspan="8" width="25%" align="center">
@@ -26,11 +26,11 @@
           </td>
         </tr>
         <tr>
-          <th class="post_th">店名</td>
+          <td>店名</td>
           <td><%= @post.store_name %></td>
         </tr>
         <tr>
-          <th class="post_th">営業日</td>
+          <th>営業日</td>
           <td>
             <%  weekly_columns.each_with_index do |day,i| %>
               <% if @post[day] == true %>
@@ -40,15 +40,15 @@
           </td>
         </tr>
         <tr>
-          <th class="post_th">営業時間</td>
+          <th>営業時間</td>
           <td><%= @post.business_time %></td>
         </tr>
         <tr>
-          <th class="post_th">定休日</td>
+          <th>定休日</td>
           <td><%= @post.holiday %></td>
         </tr>
         <tr>
-          <th class="post_th">ジャンル</td>
+          <th>ジャンル</td>
           <td>
             <% @post.tags.each do |tag| %>
               <%= tag.genre %>
@@ -56,11 +56,11 @@
           </td>
         </tr>
         <tr>
-          <th class="post_th">コメント</td>
+          <th>コメント</td>
           <td><%= @post.post_comment %></td>
         </tr>
         <tr>
-          <th class="post_th">所在地</td>
+          <th>所在地</td>
           <td><%= @post.address %></td>
         </tr>
       </tbody>
@@ -68,7 +68,7 @@
   </div>
 </div>
 
-<div class="col-md-5">
+<div class="col-md-5 col-sm-12">
   <div id='map'></div>
 
   <style>
@@ -78,7 +78,7 @@
   }
   </style>
 
-   js部分
+   <!--js部分-->
   <script>
   //初期マップの設定
   let map

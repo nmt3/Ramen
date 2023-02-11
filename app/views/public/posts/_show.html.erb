@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <div class="row">
-    <div class="col-md-12 col-12">
+    <div class="col-md-12 col-sm-12">
       <h4>投稿者：
         <%= link_to list_customer_path(@post.customer.id) do %>
           <%= @post.customer.name  %>さん
@@ -25,7 +25,7 @@
       </h4>
     </div>
     <div class="col-md-7 col-12">
-      <table border="1" width="100%" class="store">
+      <table class="post" border="1">
         <tbody>
           <tr>
             <td rowspan="8" width="25%" align="center">
@@ -81,7 +81,7 @@
     </div>
 
 
-    <div class="col-md-5 col-12">
+    <div class="col-md-5 col-sm-12">
 
       <div id='map'></div>
 

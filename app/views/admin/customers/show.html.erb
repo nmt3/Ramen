@@ -6,40 +6,45 @@
           <%= @customer.name %>さんの会員詳細<br>
           <%= link_to "プロフィールを編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
         </h4>
-          <% if @customer.image.attached? %>
-            <%= image_tag @customer.image %>
-          <% else %>
-            <%= image_tag "no_image", size: "140x140" %>
-          <% end %>
-        <table border="1" style="border-collapse: collapse">
+        <table class="customer" border="1">
+          <tbody>
+            <tr>
+              <td colspan="2" align="center">
+                <% if @customer.image.attached? %>
+                  <%= image_tag @customer.image %>
+                <% else %>
+                  <%= image_tag "no_image", size: "140x140" %>
+                <% end %>
+              </td>
           <tr>
-            <th class="customer_th">会員ID</td>
+          <tr>
+            <th>会員ID</td>
             <td><%= @customer.id %></td>
           </tr>
-            <th class="customer_th">氏名</td>
+            <th>氏名</td>
             <td><%= @customer.name %></td>
           </tr>
           <tr>
-            <th class="customer_th">メールアドレス</td>
+            <th>メールアドレス</td>
             <td><%= @customer.email %></td>
           </tr>
-            <th class="customer_th">年齢</td>
+            <th>年齢</td>
             <td><%= @customer.age %></td>
           </tr>
           <tr>
-            <th class="customer_th">性別</td>
+            <th>性別</td>
             <td><%= @customer.sex_method_i18n %></td>
           </tr>
           <tr>
-            <th class="customer_th">居住地</td>
+            <th>居住地</td>
             <td><%= @customer.residence %></td>
           </tr>
           <tr>
-            <th class="customer_th">コメント</td>
+            <th>コメント</td>
             <td><%= @customer.comment %></td>
           </tr>
           <tr>
-            <th class="customer_th">会員ステータス</td>
+            <th>会員ステータス</td>
             <td class="is_deleted">
               <% if @customer.is_deleted %>
                 退会

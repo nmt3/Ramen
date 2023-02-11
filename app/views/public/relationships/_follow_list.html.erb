@@ -1,6 +1,6 @@
 <% if customers.exists? %>
   <% customers.each do |customer| %>
-    <tbody>
+    <tbody class="customer" border="1">
       <tr>
         <td>
           <%= link_to list_customer_path(customer.id) do %>

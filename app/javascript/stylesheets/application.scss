@@ -27,7 +27,7 @@ body {
   background-color: rgba(86, 86, 86, 0.6);
 }
 
-.footer {
+.footer { //フッター
   background-color: rgba(86, 86, 86, 0.6);
   color: yellow;
   font-family: Comic Sans MS;
@@ -51,11 +51,27 @@ body {
   display: contents;
 }
 
-.customer .post_image .post_detail .review_box {
-  background-color: #565656;
+.new-customer {
+  background-color: rgba(86, 86, 86, 0.6);
+  width: 60%;
+}
+.customer {
+  background-color: rgba(86, 86, 86, 0.6);
+  width: 80%;
 }
 
+.post {
+  background-color: rgba(86, 86, 86, 0.6);
+  width: 100%;
+}
 
+.post_list {
+  padding-top: 10px;
+}
+
+.maps {
+  background-color: rgba(86, 86, 86, 0.6);
+}
 
 .review_box {
   background-color: rgba(86, 86, 86, 0.6);
@@ -98,22 +114,6 @@ body {
 
 .field {
   padding: 10px;
-}
-
-// .post {
-//   border-collapse: separate;
-// }
-
-.post_list {
-  padding: 10px 0;
-}
-
-.post_th {
-  width: 20%;
-}
-
-.store {
-  background-color: rgba(86, 86, 86, 0.6);
 }
 
 .modal-title{
@@ -178,16 +178,12 @@ body {
   width: 40%;
 }
 
-td {
-  // padding: 0px 10px;
-}
-
 table.followers th {
   width: 150px;
   padding: 10px;
   font-weight: bold;
   vertical-align: top;
-  background: #3f3f3f;
+  background: #217b4a;
   color: #ffffff;
 }
 table.followers td {
@@ -195,10 +191,6 @@ table.followers td {
   padding: 10px;
   vertical-align: top;
 }
-
-// table {
-//   background-color: rgba(86, 86, 86, 0.6);
-// }
 
 .error_messages {
   background-color: #FFF6D1;

@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h3 class="title">会員一覧</h3>
+    <div class="col-md-12 col-sm-12">
+      <h3 class="title" align="center">会員一覧</h3>
       <%= paginate @customers %>
-      <% @customers.each do |customer| %>
-      <table align="center" border="1" class="store">
+      <table class="customer" align="center" border="1">
         <thead>
           <tr>
             <th>会員ID</th>
@@ -14,6 +13,7 @@
           </tr>
         </thead>
         <tbody>
+          <% @customers.each do |customer| %>
           <tr>
             <td><%= customer.id %></td>
             <td>
@@ -32,14 +32,10 @@
               </div>
             </td>
           </tr>
+          <% end %>
         </tbody>
       </table>
-      <% end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <%#= paginate @customers %>
+      <%= paginate @customers %>
     </div>
   </div>
 </div>
