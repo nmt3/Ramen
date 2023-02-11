@@ -47,9 +47,15 @@ body {
   background-color: rgba(86, 86, 86, 0.6);
 }
 
-.customer .post_image .post_detail .review_box {
-  background-color: rgba(86, 86, 86, 0.6);
+.field_with_errors {
+  display: contents;
 }
+
+.customer .post_image .post_detail .review_box {
+  background-color: #565656;
+}
+
+
 
 .review_box {
   background-color: rgba(86, 86, 86, 0.6);
