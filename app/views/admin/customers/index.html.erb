@@ -3,26 +3,26 @@
     <div class="col-md-12">
       <h3 class="title">会員一覧</h3>
       <%= paginate @customers %>
-      <table align="center" border="1" class="customer">
+      <% @customers.each do |customer| %>
+      <table align="center" border="1" class="store">
         <thead>
           <tr>
-            <th style="width: 25%" class="customer">会員ID</th>
-            <th style="width: 25%">ニックネーム</th>
-            <th style="width: 25%">メールアドレス</th>
-            <th style="width: 25%">ステータス</th>
+            <th>会員ID</th>
+            <th>ニックネーム</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
           </tr>
         </thead>
         <tbody>
-        <% @customers.each do |customer| %>
           <tr>
-            <td class="customers"><%= customer.id %></td>
-            <td class="customers">
+            <td><%= customer.id %></td>
+            <td>
               <%= link_to admin_customer_path(customer.id) do %>
                 <%= customer.name %>
               <% end %>
             </td>
-            <td class="customers"><%= customer.email %></td>
-            <td class="customers">
+            <td><%= customer.email %></td>
+            <td>
               <div class="is_deleted">
                 <% if customer.is_deleted %>
                   退会
@@ -32,9 +32,9 @@
               </div>
             </td>
           </tr>
-        <% end %>
         </tbody>
       </table>
+      <% end %>
     </div>
   </div>
   <div class="row">

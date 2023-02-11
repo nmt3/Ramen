@@ -31,7 +31,8 @@ body {
   background-color: rgba(86, 86, 86, 0.6);
   color: yellow;
   font-family: Comic Sans MS;
-  margin-top: auto
+  margin-top: auto;
+  width: 100%;
 }
 
 .container {
@@ -39,13 +40,19 @@ body {
 }
 
 .notice {
-  width: auto;
-  color: red;
-  background-color: rgba(180, 180, 180, 15);
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  color: #DBFF71;
+  background-color: rgba(86, 86, 86, 0.6);
 }
 
-.welcome .customer{
-  color: white;
+.customer .post_image .post_detail .review_box {
+  background-color: rgba(86, 86, 86, 0.6);
+}
+
+.review_box {
+  background-color: rgba(86, 86, 86, 0.6);
 }
 
 .top-text, .quit {
@@ -90,10 +97,6 @@ body {
 // .post {
 //   border-collapse: separate;
 // }
-
-.post_image .post_detail {
-  background-color: rgba(86, 86, 86, 0.6);
-}
 
 .post_list {
   padding: 10px 0;

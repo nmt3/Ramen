@@ -7,13 +7,17 @@
         登録情報
         <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-success" %>
       </p>
-      <% if @customer.image.attached? %>
-        <%= image_tag current_customer.image %>
-      <% else %>
-        <%= image_tag "no_image", size: "150x150" %>
-      <% end %>
-      <table border="1" style="border-collapse: collapse">
+      <table border="1" class="store">
         <tbody>
+          <tr>
+            <td colspan="2" align="center">
+              <% if @customer.image.attached? %>
+                <%= image_tag current_customer.image %>
+              <% else %>
+                <%= image_tag "no_image", size: "150x150" %>
+              <% end %>
+            </td>
+          </tr>
           <tr>
             <td>ニックネーム</td>
             <td>
