@@ -30,7 +30,7 @@ class Admin::PostsController < ApplicationController
     else
       @q = Post.ransack(params[:q])
     end
-    @results = @q.result.order(created_at: :desc)
+    @results = @q.result.page(params[:page]).per(10).order(created_at: :desc)
   end
 
   private
