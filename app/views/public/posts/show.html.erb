@@ -74,7 +74,8 @@
   </div>
   <div class="row">
     <div class="col-md-12 col-sm-12">
-        <%= paginate @reviews %>
+      <%= paginate @reviews %>
+      <div class="review_all">
         <% @reviews.each do |r| %>
           <div class="review_box">
             投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
@@ -127,7 +128,8 @@
             </div>
           </div>
         <% end %>
-        <%= paginate @reviews %>
+      </div>
+      <%= paginate @reviews %>
     </div>
   </div>
 </div>

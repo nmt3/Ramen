@@ -3,9 +3,9 @@
     <div class="col-md-12 col-sm-12">
       <h3>投稿編集</h3>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 post_screen">
       <%= form_with model: @post, local: :true do |f| %>
-      <table class="post">
+      <table>
         <tr>
           <td><%= f.label "画像" %></td>
           <td><%= f.file_field :image, accept: "image/*" %></td>
@@ -60,7 +60,7 @@
         </tr>
       </table>
     </div>
-    <div class="col-md-6 col-sm-6">
+    <div class="col-md-6 col-sm-12 post_screen">
       <div class="actions">
         <input id="address" type="textbox", placeholder="住所を入力してください">
         <input type="button" value="検索" onclick="codeAddress()"><br>

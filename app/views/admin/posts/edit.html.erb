@@ -3,9 +3,9 @@
     <div class="col-md-12 col-sm-12">
       <h3 class="title">投稿編集画面</h3>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 post_screen">
       <%= form_with model: @post, url: admin_post_path(@post.id), local: true  do |f| %>
-        <table class="post">
+        <table>
           <tr>
             <td><%= f.label "画像" %></td>
             <td><%= f.file_field :image, accept: "image/*" %></td>
@@ -57,7 +57,7 @@
         <tr>
       </table>
     </div>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 post_screen">
       <div class="maps">
       <div class="actions">
         <input id="address" type="textbox">
