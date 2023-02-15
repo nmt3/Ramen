@@ -3,7 +3,6 @@ class Public::ReviewsController < ApplicationController
 
   def index
     # binding.pry
-
     @post = Post.find(params[:id])
     # @reviews = Review.where(post_id: @post.id)
     @reviews = @post.reviews
@@ -24,16 +23,8 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
-  # def update
-  #   review = Review.find(params[:id])
-  #   review.update(review_params)
-  #   redirect_to post_path(post.id)
-  # end
-
   def destroy
-    # binding.pry
     @review = Review.find(params[:id])
-    # @review.customer_id = current_customer.id
     @review.destroy
     redirect_to post_path(@review.post_id)
   end

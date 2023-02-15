@@ -4,8 +4,10 @@
       <div class="col-md-6 col-sm-12">
         <h3 class="title_name">ログイン</h3>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>
+            <div class="error_messages">
+              <p class="notice"><%= notice %></p>
+              <p class="alert"><%= alert %></p>
+            </div>
             <div class="field">
               <%= f.label :email %><br>
               <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

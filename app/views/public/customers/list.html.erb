@@ -18,7 +18,7 @@
             <td colspan="2" align="center">
               <% if not @customer.id == current_customer.id %>
                 <% if current_customer.following?(@customer) %>
-                  <%= link_to "フォロー外す", customer_relationships_path(@customer.id), method: :delete, class: "btn btn-secondary" %>
+                  <%= link_to "フォローを外す", customer_relationships_path(@customer.id), method: :delete, class: "btn btn-secondary" %>
                 <% else %>
                   <%= link_to "フォローする", customer_relationships_path(@customer.id), method: :post, class: "btn btn-primary" %>
                 <% end %>
