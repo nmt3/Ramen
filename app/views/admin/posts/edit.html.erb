@@ -59,16 +59,16 @@
     </div>
     <div class="col-md-6 col-sm-12 post_screen">
       <div class="maps">
-      <div class="actions">
-        <input id="address" type="textbox">
-        <input type="button" value="検索" onclick="codeAddress()"><br>
-        <%= f.label :address,"店舗所在地" %>
-        <%= f.text_field :address %><br>
-        <%= f.label :lat,"緯度" %>
-        <%= f.text_field :lat, id: :lat %><br>
-        <%= f.label :lng,"経度" %>
-        <%= f.text_field :lng, id: :lng %>
-      </div>
+        <div class="actions">
+          <input id="address" type="textbox">
+          <input type="button" value="検索" onclick="codeAddress()"><br>
+          <%= f.label :address,"店舗所在地" %>
+          <%= f.text_field :address %><br>
+          <%= f.label :lat,"緯度" %>
+          <%= f.text_field :lat, id: :lat %><br>
+          <%= f.label :lng,"経度" %>
+          <%= f.text_field :lng, id: :lng %>
+        </div>
       <p>マーカーをドラック＆ドロップで位置の調整ができます。<p>
       <div id='map'></div>
         <style>

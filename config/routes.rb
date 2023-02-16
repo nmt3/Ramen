@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
+    # get "bookmark"
     resources :reviews, only: [:index, :create, :update, :destroy]
     resources :customers, only: [:show, :edit, :update] do
       collection do
