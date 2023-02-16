@@ -12,15 +12,6 @@ class Public::CustomersController < ApplicationController
     @posts = Post.where(customer_id: params[:id]).page(params[:page]).per(10)
   end
 
-  def bookmark
-    @customer = Customer.find(params[:id])
-    @posts = @customer.posts
-
-    bookmarks = Bookmark.where(customer_id: current_customer.id).pluck(:post_id)
-    @bookmark_list = Post.find(bookmarks).sort_by(&:created_at)
-    byebug
-  end
-
   def edit
     @customer = Customer.find(params[:id])
   end

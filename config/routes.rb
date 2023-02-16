@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    # get "bookmark"
     resources :reviews, only: [:index, :create, :update, :destroy]
     resources :customers, only: [:show, :edit, :update] do
       collection do
@@ -19,7 +18,6 @@ Rails.application.routes.draw do
       end
       member do
         get :list
-        get :bookmark
       end
       resource :relationships, only: [:create, :destroy]
         get 'followings' => 'relationships#followings', as: 'followings'
@@ -30,7 +28,7 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
-      resources :bookmarks, only: [:create, :destroy]
+      resources :bookmarks, only: [:index, :create, :destroy]
     end
   end
 
