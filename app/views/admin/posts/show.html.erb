@@ -12,57 +12,57 @@
         </div>
         <%= paginate @reviews %>
         <div class="review_all">
-        <% @reviews.each do |r| %>
-          <div class="review_box">
-            投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
-            <% if r.customer.image.attached? %>
-              <%= image_tag r.customer.image, size: "50x50" %>
-            <% else %>
-              <%= image_tag "no_image", size: "50x50" %>
-            <% end %>
-            <%= link_to admin_customer_path(r.customer.id) do %>
-              <%= r.customer.name %>
-            <% end %>
+          <% @reviews.each do |r| %>
+            <div class="review_box">
+              投稿日時:<%= r.created_at.strftime("%Y/%m/%d %H:%M") %>
+              <% if r.customer.image.attached? %>
+                <%= image_tag r.customer.image, size: "50x50" %>
+              <% else %>
+                <%= image_tag "no_image", size: "50x50" %>
+              <% end %>
+              <%= link_to admin_customer_path(r.customer.id) do %>
+                <%= r.customer.name %>
+              <% end %>
 
-            <%= link_to "削除", admin_review_path(r.id), method: :delete,
-                "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %><br>
+              <%= link_to "削除", admin_review_path(r.id), method: :delete,
+                  "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %><br>
 
-            <div id="star_<%= r.id %>"></div>
+              <div id="star_<%= r.id %>"></div>
 
-            <script>
-              $('#star_<%= r.id %>').empty();
-              // var elem = document.getElementById("star_<%= r.id %>");
-              // var opt = {
-              //   // size: 36,
-              //   starOff: "<%= asset_path('star-off.png') %>",
-              //   starOn: "<%= asset_path('star-on.png') %>",
-              //   readOnly: true, // 読み知り専用
-              //   score: <%= r.star %>, // score
-              // };
-              raty(document.getElementById("star_<%= r.id %>"), // 表示する場所のid
-                {
-                  starOff: "<%= asset_path('star-off.png') %>", // 星OFFの画像パス
-                  starOn: "<%= asset_path('star-on.png') %>", // 星ONの画像パス
-                  readOnly: true, // 読み知り専用
-                  score: <%= r.star %>, // 表示する星の数
-                }
-              )
-            </script>
+              <script>
+                $('#star_<%= r.id %>').empty();
+                // var elem = document.getElementById("star_<%= r.id %>");
+                // var opt = {
+                //   // size: 36,
+                //   starOff: "<%= asset_path('star-off.png') %>",
+                //   starOn: "<%= asset_path('star-on.png') %>",
+                //   readOnly: true, // 読み知り専用
+                //   score: <%= r.star %>, // score
+                // };
+                raty(document.getElementById("star_<%= r.id %>"), // 表示する場所のid
+                  {
+                    starOff: "<%= asset_path('star-off.png') %>", // 星OFFの画像パス
+                    starOn: "<%= asset_path('star-on.png') %>", // 星ONの画像パス
+                    readOnly: true, // 読み知り専用
+                    score: <%= r.star %>, // 表示する星の数
+                  }
+                )
+              </script>
 
-            <% if r.images.attached? %>
-              <% r.images.each do |image| %>
-                <%=link_to image, "data-lightbox": image do %>
-                  <%= image_tag image, size: '80x80' %>
+              <% if r.images.attached? %>
+                <% r.images.each do |image| %>
+                  <%=link_to image, "data-lightbox": image do %>
+                    <%= image_tag image, size: '80x80' %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-            <div class="review_comment">
-              <%= r.review_comment %>
+              <div class="review_comment">
+                <%= r.review_comment %>
+              </div>
             </div>
-          </div>
-        <% end %>
-        <%= paginate @reviews %>
+          <% end %>
         </div>
+        <%= paginate @reviews %>
       </div>
     </div>
   </div>

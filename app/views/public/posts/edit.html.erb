@@ -136,10 +136,12 @@
 
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
-        <div class="submit">
-          <%= f.submit "投稿する", class: "btn btn-success" %>
-          <%= link_to "削除する", post_path, method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
-        </div>
+        <table class="submit">
+          <tr>
+            <td><%= f.submit "投稿する", class: "btn btn-success" %></td>
+            <td><%= link_to "削除する", post_path, method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %></td>
+          </tr>
+        </table>
       </div>
     <% end %>
   </div>

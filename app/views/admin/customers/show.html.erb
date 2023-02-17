@@ -7,15 +7,14 @@
           <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
         </h4>
         <table class="customer" border="1">
-          <tbody>
-            <tr>
-              <td colspan="2" align="center">
-                <% if @customer.image.attached? %>
-                  <%= image_tag @customer.image %>
-                <% else %>
-                  <%= image_tag "no_image", size: "140x140" %>
-                <% end %>
-              </td>
+          <tr>
+            <td colspan="2" align="center">
+              <% if @customer.image.attached? %>
+                <%= image_tag @customer.image %>
+              <% else %>
+                <%= image_tag "no_image", size: "140x140" %>
+              <% end %>
+            </td>
           <tr>
           <tr>
             <th>会員ID</td>

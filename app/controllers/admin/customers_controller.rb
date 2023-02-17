@@ -8,11 +8,6 @@ class Admin::CustomersController < ApplicationController
     @posts = Post.where(customer_id: params[:id]).page(params[:page]).per(15).order(created_at: :desc)
   end
 
-  # def list
-  #   # byebug
-  #   @customer = Customer.find(params[:id])
-  # end
-
   def edit
     @customer = Customer.find(params[:id])
   end
@@ -26,7 +21,6 @@ class Admin::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:image, :name, :email,
-    :name, :age, :sex, :residence, :comment, :is_deleted)
+    params.require(:customer).permit(:image, :name, :email, :name, :age, :sex, :residence, :comment, :is_deleted)
   end
 end

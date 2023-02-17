@@ -9,7 +9,6 @@ class Public::PostsController < ApplicationController
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.page(params[:page]).per(10).order(created_at: :desc)
 
     @q = Post.ransack(params[:q])
-    # @posts = @q.result(distinct: true).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def show
@@ -55,10 +54,10 @@ class Public::PostsController < ApplicationController
     @results = @q.result.page(params[:page]).per(10).order(created_at: :desc).distinct
   end
 
-  def multiple
-    @multiple_params = reservation_multiple_params  #検索結果の画面で、フォームに検索した値を表示するために、paramsの値をビューで使えるようにする
-    @reservations = Reservation.multiple(@multiple_params).joins(:post)  #Reservationモデルのsearchを呼び出し、引数としてparamsを渡している。
-  end
+  # def multiple
+  #   @multiple_params = reservation_multiple_params  #検索結果の画面で、フォームに検索した値を表示するために、paramsの値をビューで使えるようにする
+  #   @reservations = Reservation.multiple(@multiple_params).joins(:post)  #Reservationモデルのsearchを呼び出し、引数としてparamsを渡している。
+  # end
 
   private
 
@@ -69,15 +68,16 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,
-    :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
-    :activity_saturday, :activity_sunday, :holiday, :business_time, :post_comment,
-    :address, :lat, :lng, tag_ids: [])
+      :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
+      :activity_saturday, :activity_sunday, :holiday, :business_time, :post_comment,
+      :address, :lat, :lng, tag_ids: [])
   end
 
-  def reservation_multiple_params
-    params.fetch(:multiple, {}).permit(:address, tag_ids: [])
-    #fetch(:search, {})と記述することで、検索フォームに値がない場合はnilを返し、エラーが起こらなくなる
-    #ここでの:searchには、フォームから送られてくるparamsの値が入っている
-  end
+  # ランサックしようせずに絞り込み用
+  # def reservation_multiple_params
+  #   params.fetch(:multiple, {}).permit(:address, tag_ids: [])
+  #   #fetch(:search, {})と記述することで、検索フォームに値がない場合はnilを返し、エラーが起こらなくなる
+  #   #ここでの:searchには、フォームから送られてくるparamsの値が入っている
+  # end
 
 end

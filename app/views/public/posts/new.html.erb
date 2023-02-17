@@ -14,61 +14,61 @@
       <h3 class="title">新規投稿</h3>
     </div>
     <div class="col-md-6 col-sm-12 post_screen">
-        <%= form_with model: @post, local: :true do |f| %>
-          <table>
-            <tr>
-              <td><%= f.label "画像" %></td>
-              <td><%= f.file_field :image, accept: "image/*" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label "店名" %></td>
-              <td><%= f.text_field :store_name, placeholder: "らーめん街道１号店", :size=>"30" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label "営業日" %></td>
-              <td>
-                <span class="checkbox-inline">
-                  <% weekly_columns.each_with_index do |day,i| %>
-                    <%= f.check_box day.to_sym, {}, "true", "false" %>
-                    <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
-                  <% end %>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td><%= f.label "営業時間" %></td>
-              <td>
-                <%= f.text_field :business_time, placeholder: "11:00~15:30, 17:00~23:30", :size=>"30" %>
-              </td>
-            </tr>
-            <tr>
-              <td><%= f.label "定休日" %></td>
-              <td>
-                <%= f.text_field :holiday, placeholder: "例: 毎週月曜日, 第三月曜日", :size=>"30" %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= f.label 'ジャンル' %>
-              </td>
-              <td>
-                <div class="check_box">
-                  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
-                   <div class="tag_check">
-                      <%= tag.label do %>
-                        <%= tag.check_box %>
-                        <%= tag.text %>
-                      <% end %>
-                    </div>
-                  <% end %>
-                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td><%= f.label "コメント" %></td>
-              <td><%= f.text_area :post_comment, :size=>"30x5" %></td>
-            </tr>
-          </table>
+      <%= form_with model: @post, local: :true do |f| %>
+        <table>
+          <tr>
+            <td><%= f.label "画像" %></td>
+            <td><%= f.file_field :image, accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "店名" %></td>
+            <td><%= f.text_field :store_name, placeholder: "らーめん街道１号店", :size=>"30" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label "営業日" %></td>
+            <td>
+              <span class="checkbox-inline">
+                <% weekly_columns.each_with_index do |day,i| %>
+                  <%= f.check_box day.to_sym, {}, "true", "false" %>
+                  <%= f.label day.to_sym, ["月", "火", "水", "木", "金", "土", "日"][i] %>
+                <% end %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td><%= f.label "営業時間" %></td>
+            <td>
+              <%= f.text_field :business_time, placeholder: "11:00~15:30, 17:00~23:30", :size=>"30" %>
+            </td>
+          </tr>
+          <tr>
+            <td><%= f.label "定休日" %></td>
+            <td>
+              <%= f.text_field :holiday, placeholder: "例: 毎週月曜日, 第三月曜日", :size=>"30" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label 'ジャンル' %>
+            </td>
+            <td>
+              <div class="check_box">
+                <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :genre) do |tag| %>
+                 <div class="tag_check">
+                    <%= tag.label do %>
+                      <%= tag.check_box %>
+                      <%= tag.text %>
+                    <% end %>
+                  </div>
+                <% end %>
+               </div>
+            </td>
+          </tr>
+          <tr>
+            <td><%= f.label "コメント" %></td>
+            <td><%= f.text_area :post_comment, :size=>"30x5" %></td>
+          </tr>
+        </table>
       </div>
       <div class="col-md-6 col-sm-12 post_screen">
         <div class="actions">

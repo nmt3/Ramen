@@ -42,9 +42,9 @@ class Admin::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:customer_id, :image, :store_name, :activity_monday,
-    :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
-    :activity_saturday, :activity_sunday, :holiday, :business_time, :post_comment,
-    :lat, :lng, :address, tag_ids: [])
+      :activity_tuesday, :activity_wednesday, :activity_thursday, :activity_friday,
+      :activity_saturday, :activity_sunday, :holiday, :business_time, :post_comment,
+      :lat, :lng, :address, tag_ids: [])
   end
 
 end

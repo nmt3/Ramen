@@ -36,8 +36,7 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:image, :name, :email,
-    :name, :age, :sex_method, :residence, :comment)
+    params.require(:customer).permit(:image, :name, :email, :name, :age, :sex_method, :residence, :comment)
   end
 
 end

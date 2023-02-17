@@ -11,10 +11,10 @@ class Post < ApplicationRecord
   has_many :reviews
   has_many :bookmarks, dependent: :destroy
 
-  scope :multiple, -> (multiple_params) do      #scopeでsearchメソッドを定義。(search_params)は引数
-    return if multiple_params.blank?      #検索フォームに値がなければ以下の手順は行わない
+  # scope :multiple, -> (multiple_params) do      #scopeでsearchメソッドを定義。(search_params)は引数
+  #   return if multiple_params.blank?      #検索フォームに値がなければ以下の手順は行わない
 
-  end
+  # end
 
   validates :store_name, presence: true
   validates :tag_ids, presence: true

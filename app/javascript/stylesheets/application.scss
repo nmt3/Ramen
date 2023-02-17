@@ -72,6 +72,7 @@ body {
   background-color: #F5F5F5;
   width: 100%;
   color: #333;
+  padding: 20px;
 }
 
 .review_box {
@@ -127,7 +128,8 @@ body {
 }
 
 .submit {
-  margin-top: 40px;
+  margin-top: 20px;
+  text-align: center;
 }
 
 .post_show {
@@ -168,7 +170,6 @@ body {
   padding: 10px;
 }
 
-// 管理者
 .review_box {
   border: 2px solid #000000;
 	width: 100%;
