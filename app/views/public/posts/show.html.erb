@@ -82,7 +82,7 @@
             <% if r.customer.image.attached? %>
               <%= image_tag r.customer.image, size: "50x50" %>
             <% else %>
-              <%= image_tag "no_image", size: "50x50" %>
+              <%= image_tag asset_path"no_image.jpg", size: "50x50" %>
             <% end %>
             <%= link_to list_customer_path(r.customer.id) do %>
               <%= r.customer.name %>
