@@ -20,7 +20,7 @@
                 <%= image_tag @post.image, size: "150x150" %>
               <% end %>
             <% else %>
-              <%= image_tag "no_image", size: "150x150" %>
+              <%= image_tag asset_path("no_image.jpg"), size: "150x150" %>
             <% end %>
           </td>
         </tr>
