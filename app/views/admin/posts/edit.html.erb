@@ -132,7 +132,7 @@
           }
 
           </script>
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa1owy4YYR6jSHTGE21g4W8vO0wOS95SU&callback=initMap" async defer></script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap" async defer></script>
           <div class="submit">
             <%= f.submit "変更する", class: "btn btn-success" %>
             <%= link_to "削除する", admin_post_path(@post.id), method: :delete,
