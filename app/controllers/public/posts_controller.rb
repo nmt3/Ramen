@@ -13,6 +13,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+
     @review = Review.new
     @reviews = @post.reviews.page(params[:page]).per(15).order(created_at: :desc)
     @bookmarks_count = Bookmark.where(post_id: @post.id).count

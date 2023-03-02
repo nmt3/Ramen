@@ -59,7 +59,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
-gem 'net-smtp'
+# gem 'net-smtp'
 gem 'enum_help'
 gem 'kaminari','~> 1.2.1'
 gem 'gmaps4rails'
@@ -69,7 +69,7 @@ gem "ransack"
 
 gem 'rails-i18n'
 
-gem 'dotenv-rails'
+# gem 'dotenv-rails'
 
 group :development do
   gem 'better_errors'
