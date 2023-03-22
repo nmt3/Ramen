@@ -1,5 +1,5 @@
 class Admin::ReviewsController < ApplicationController
-
+  before_action :authenticate_admin!
   def index
     @post = Post.find(params[:id])
     @reviews = @post.reviews
